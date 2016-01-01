@@ -124,7 +124,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a>
+						<a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 20px;">Netty</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
 					</div>
 				</section>
 				
@@ -233,6 +233,457 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-maven内置隐式变量" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/01/maven内置隐式变量/" class="article-date">
+  	<time datetime="2016-01-01T14:24:14.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Maven提供了三个隐式的变量可以用来访环境变量，POM信息，和Maven Settings</p>
+<h3 id="1-_env"><a href="#1-_env" class="headerlink" title="1. env"></a>1. env</h3><p>env变量，暴露了你操作系统或者shell的环境变量。便 如在Maven POM中一个对<code>${env.PATH}</code>的引用将会被<code>${PATH}</code>环境变量替换，在Windows中为%PATH%.</p>
+<h3 id="2-_projet"><a href="#2-_projet" class="headerlink" title="2. projet"></a>2. projet</h3><p>project变量暴露了POM。可以使用点标记(.)的路径来引用POM元素的值。例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 项目根目录</span><br><span class="line">$&#123;project.build.directory&#125; 构建目录，缺省为target</span><br><span class="line">$&#123;project.build.outputDirectory&#125; 构建过程输出目录，缺省为target/classes</span><br><span class="line">$&#123;project.build.finalName&#125; 产出物名称，缺省为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br><span class="line">$&#123;project.packaging&#125; 打包类型，缺省为jar</span><br><span class="line">$&#123;project.xxx&#125; 当前pom文件的任意节点的内容</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-_settings"><a href="#3-_settings" class="headerlink" title="3. settings"></a>3. settings</h3><p>settings变量暴露了Maven settings信息。可以使用点标记(.)的路径来引用settings.xml文件中元素的值。例如${settings.offline}会引用~/.m2/settings.xml文件中offline元素的值。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
+  
+    <article id="post-常用Maven插件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/01/常用Maven插件/" class="article-date">
+  	<time datetime="2016-01-01T14:22:02.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/01/常用Maven插件/">常用Maven插件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-maven-compiler-plugin"><a href="#1-maven-compiler-plugin" class="headerlink" title="1.maven-compiler-plugin"></a>1.maven-compiler-plugin</h3><p>作用：编译项目源码<br>使用举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">         <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">source</span>&gt;</span>1.6<span class="tag">&lt;/<span class="title">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">target</span>&gt;</span>1.6<span class="tag">&lt;/<span class="title">target</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">encoding</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>官方文档：<a href="http://maven.apache.org/plugins/maven-compiler-plugin/" target="_blank" rel="external">点击这里</a></p>
+<h3 id="2-maven-resources-plugin"><a href="#2-maven-resources-plugin" class="headerlink" title="2.maven-resources-plugin"></a>2.maven-resources-plugin</h3><p>作用:用于将项目的资源拷贝到输出目录中。有两种资源：main resources 和 test resources,区别在于main资源是和程序主代码相关的，而test资源是与测试代码相关的。<br>使用举例：<br>Step 1. 声明该资源<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">         <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">encoding</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Setp2.指定拷贝资源信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">resource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="title">directory</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">resource</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">resource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">directory</span>&gt;</span>$&#123;profile.dir&#125;<span class="tag">&lt;/<span class="title">directory</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="title">filtering</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">targetPath</span>&gt;</span>$&#123;project.build.directory&#125;/conf<span class="tag">&lt;/<span class="title">targetPath</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">resource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">resources</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>官方文档：<a href="http://maven.apache.org/plugins/maven-resources-plugin/" target="_blank" rel="external">点击这里</a></p>
+<h3 id="3-maven-assembly-plugin"><a href="#3-maven-assembly-plugin" class="headerlink" title="3.maven-assembly-plugin"></a>3.maven-assembly-plugin</h3><p>作用：主要用来将项目的输出文件与项目依赖的jar包，模块，网站文档以及其他文件集中到一个单独的压缩文件中，比如tar.gz,zip等。<br>使用举例：</p>
+<ol>
+<li><p>首先需要在pom文件中添加配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">descriptor</span>&gt;</span>src/main/assembly/assembly.xml<span class="tag">&lt;/<span class="title">descriptor</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">executions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">execution</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">id</span>&gt;</span>make-assembly<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="title">phase</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">goals</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">goal</span>&gt;</span>single<span class="tag">&lt;/<span class="title">goal</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">goals</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">execution</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要提供一个assembly.xml配置文件，到上面配置的路径:src/main/assembly/下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">assembly</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">formats</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">format</span>&gt;</span>tar.gz<span class="tag">&lt;/<span class="title">format</span>&gt;</span><span class="comment">&lt;!-- 项目打包成tar.gz格式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">format</span>&gt;</span>dir<span class="tag">&lt;/<span class="title">format</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">formats</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">includeBaseDirectory</span>&gt;</span>false<span class="tag">&lt;/<span class="title">includeBaseDirectory</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">fileSets</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">fileSet</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">directory</span>&gt;</span>$&#123;profile.dir&#125;<span class="tag">&lt;/<span class="title">directory</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">outputDirectory</span>&gt;</span>conf<span class="tag">&lt;/<span class="title">outputDirectory</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">fileMode</span>&gt;</span>0644<span class="tag">&lt;/<span class="title">fileMode</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">fileSet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">fileSet</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">directory</span>&gt;</span>src/main/assembly/bin<span class="tag">&lt;/<span class="title">directory</span>&gt;</span> <span class="comment">&lt;!-- bin目录下存放start.sh等启动脚本 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">outputDirectory</span>&gt;</span>bin<span class="tag">&lt;/<span class="title">outputDirectory</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">fileMode</span>&gt;</span>0755<span class="tag">&lt;/<span class="title">fileMode</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">fileSet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">fileSets</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencySets</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependencySet</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">outputDirectory</span>&gt;</span>lib<span class="tag">&lt;/<span class="title">outputDirectory</span>&gt;</span>  <span class="comment">&lt;!-- 项目本身jar包以及依赖的jar包打包到bin目录下 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependencySet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencySets</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">assembly</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>配置上面的信息之后，通过maven package命令打包，打成的tar.gz包解压出来的目录格式就是：<br>bin: 存放启动，关闭脚本（start.sh,shutdown.sh)<br>conf:存放配置文件<br>lib:存放项目本身jar包以及依赖的其他jar包</p>
+<p>官方文档：<a href="http://maven.apache.org/plugins/maven-assembly-plugin/index.html" target="_blank" rel="external">点击这里</a></p>
+<h3 id="4-_tomcat_maven_u63D2_u4EF6"><a href="#4-_tomcat_maven_u63D2_u4EF6" class="headerlink" title="4. tomcat maven插件"></a>4. tomcat maven插件</h3><p>作用：web项目使用<br>说明：目前存在两个版本，tomcat6和tomcat7两个版本的插件。<br>使用举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">url</span>&gt;</span>http://www.mydomain.com:1234/mymanager<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>tomcat-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">path</span>&gt;</span>/<span class="tag">&lt;/<span class="title">path</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">port</span>&gt;</span>80<span class="tag">&lt;/<span class="title">port</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">uriEncoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">url</span>&gt;</span>http://localhost/manager/text<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">server</span>&gt;</span>tomcat6<span class="tag">&lt;/<span class="title">server</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这里一般会将两个版本都配置上。<br>官方文档:<a href="http://tomcat.apache.org/maven-plugin-2.0-beta-1/index.html" target="_blank" rel="external">点击这里</a>，<a href="http://tomcat.apache.org/maven-plugin-2.0/" target="_blank" rel="external">这里</a></p>
+<h3 id="5-_u8BF4_u660E_uFF1A"><a href="#5-_u8BF4_u660E_uFF1A" class="headerlink" title="5.说明："></a>5.说明：</h3><p>可以看到，上面的例子中用到了好多变量，这里面好多都是maven的内置变量。<br>关于内置变量，请参考<a href="https://www.zybuluo.com/939958749/note/239028" target="_blank" rel="external">maven内置隐世变量</a>.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
+  
+    <article id="post-如何区分一个类是wait-timeout-还是notify唤醒的" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/" class="article-date">
+  	<time datetime="2016-01-01T14:19:32.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>问题</strong> 怎么判断wait是超时返回还是其他线程通知返回的呢？<br><a href="http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify" target="_blank" rel="external">http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify</a></p>
+<p>两种方式：<br>1.记录一个时间，当唤醒之后，比较一下唤醒时间与开始时间，判断是否大于设置的timeout时间<br>2.使用java 提供的 Condition.await(timeout,TimeUnit),该方法返回true表示是超时唤醒</p>
+<p>需求:与服务端进行连接，返回连接结果，如果在指定时间内连接成功，返回true，否则，返回false<br>场景：org.I0Itec.ckclient.ZkClient中有个waitForKeeperState方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">waitForKeeperState</span><span class="params">(KeeperState keeperState, <span class="keyword">long</span> time, TimeUnit timeUnit)</span> <span class="keyword">throws</span> ZkInterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_zookeeperEventThread != <span class="keyword">null</span> &amp;&amp; Thread.currentThread() == _zookeeperEventThread) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Must not be done in the zookeeper event thread."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//设置超时时间</span></span><br><span class="line">        Date timeout = <span class="keyword">new</span> Date(System.currentTimeMillis() + timeUnit.toMillis(time));</span><br><span class="line"></span><br><span class="line">        LOG.debug(<span class="string">"Waiting for keeper state "</span> + keeperState);</span><br><span class="line">        acquireEventLock(); <span class="comment">//这里要首先获取都锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//设置是否继续等待标志</span></span><br><span class="line">			<span class="keyword">boolean</span> stillWaiting = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">			<span class="comment">//如果当前zk状态不是想要的状态，则继续等待</span></span><br><span class="line">            <span class="keyword">while</span> (_currentState != keeperState) &#123;</span><br><span class="line">				<span class="comment">//如果stillWaiting为false，则表示到达超时时间，而不是连接成功，返回false</span></span><br><span class="line">                <span class="keyword">if</span> (!stillWaiting) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">				<span class="comment">//否则，继续等待</span></span><br><span class="line">				<span class="comment">//这里的getEventLock().getStateChangedCondition()会返回一个ReentrantLock,</span></span><br><span class="line">				<span class="comment">//所以这里用的是ReentrantLock中实现的Condition接口的awaitUntil方法</span></span><br><span class="line">                stillWaiting = getEventLock().getStateChangedCondition().awaitUntil(timeout);</span><br><span class="line">				<span class="comment">//awaitUntil方法如果是由于超时而返回的，false，如果是其他原因返回的，返回true，所以，stillWaiting标志位如果是true就继续等待，直到_currentState等于参数中的state</span></span><br><span class="line">            &#125;</span><br><span class="line">            LOG.debug(<span class="string">"State is "</span> + _currentState);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ZkInterruptedException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            getEventLock().unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>该方法的作用就是，判断当前zk状态是否与参数传过来的keeperState状态一致，如果不一致就一直等待，直到状态一致。</p>
+<p>[参考资料]   </p>
+<ol>
+<li><a href="http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify" target="_blank" rel="external">http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify</a></li>
+<li><a href="http://stackoverflow.com/questions/3397722/how-to-differentiate-when-waitlong-timeout-exit-for-notify-or-timeout" target="_blank" rel="external">http://stackoverflow.com/questions/3397722/how-to-differentiate-when-waitlong-timeout-exit-for-notify-or-timeout</a></li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
+  
+    <article id="post-Netty中的Buffer" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/01/Netty中的Buffer/" class="article-date">
+  	<time datetime="2016-01-01T14:17:15.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/01/Netty中的Buffer/">Netty中的Buffer</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>一 Buffer<br>1.Heap Buffer<br>数据存储在JVM堆内存中<br>数据放在一个backing array中排序存放。<br>当不使用池的时候，分配和释放很快</p>
+<p>2.Direct Buffer<br>数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。<br>此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题</p>
+<p>3.Composite Buffer<br>类似于一个列表，其中可以包含各种不同类型的ByteBuf，它提供了它所包含数据的一个视图</p>
+<p>二 Buffer的操作<br>1.随机存取<br>与java中的byte数组类似，ByteBuf也是从下标从0开始，我们可以根据下标来获取每一个byte，但需要注意的是，下标的值不能超过readerIndex或者writerIndex.<br>2.顺序存取<br>ByteBuf提供了两个指针来支持顺序的读和写，readerIndex用于读取，writerIndex用于写入<br>他们之间的关系：<br>0&lt;=readerIndex&lt;=writerIndex&lt;=capacity<br><img src="http://static.zybuluo.com/939958749/fylr2i1ds1mg0nhkkmk0c01j/bytebuf1.png" alt="bytebuf1.png-67.5kB"></p>
+<p>3.可丢弃的字节<br>可丢弃的字节指的是已经通过read操作被读取过的字节，因此可以被丢弃了。<br>初始大小为0，大小会随着reader操作而不断增大。只有read操作，get操作不会修改readerIndex的位置。<br>可以通过调用discardReadBytes()方法丢弃这些字节而获取新的存储空间。<br>下面两张图表示的是调用discardReadBytes方法之前和之后的情况：<br><img src="http://static.zybuluo.com/939958749/fdnv05wzx90qbv9hvqd755uf/bytebuf2.png" alt="bytebuf2.png-50.1kB"><br><img src="http://static.zybuluo.com/939958749/y8i2d78nvdlkmjshk1vj1qm1/bytebuf3.png" alt="bytebuf3.png-44.7kB"></p>
+<p>可以看到，调用discardReadBytes会造成数据拷贝，因为要将可读部分的数据移动到数组开始位置。所以如果经常调用该方法，可能会影响性能。</p>
+<p>4.可读字节<br>5.可写字节</p>
+<p>6.清空buffer index</p>
+<p>7.检索操作</p>
+<p>三 ByteBufHolder<br>就像Http响应一样，除了状态码，headers，还有response body,ByteBufHolder就能提供这样的功能。</p>
+<p>四 ByteBufAllocator<br>Netty提供了两种Allocator：<br>一种是基于池的，这种的好处是减小了分配和释放的开销，同时能够减少内存碎片的数量。它的实现采用了jemalloc还有与很多操作系统类似的高效的内存分配算法。<br>另一种是不使用池的。</p>
+<p>关于jemalloc，可以参考：<a href="http://club.alibabatech.org/article_detail.htm?articleId=36" target="_blank" rel="external">http://club.alibabatech.org/article_detail.htm?articleId=36</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/">Netty</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
+  
+    <article id="post-Netty中的几个关键概念" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/01/Netty中的几个关键概念/" class="article-date">
+  	<time datetime="2016-01-01T14:14:55.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/01/Netty中的几个关键概念/">Netty中的几个关键概念</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-Channel_uFF0CEvent_u548CIO"><a href="#1-Channel_uFF0CEvent_u548CIO" class="headerlink" title="1.Channel，Event和IO"></a>1.Channel，Event和IO</h3><p>Netty是一个非阻塞的，事件驱动的网络框架，Netty是如何实现非阻塞的呢？<br><img src="http://static.zybuluo.com/939958749/zfcjzr5q5f9mc2gyk5tf9yv9/000.png" alt="000.png-64.6kB"><br>上图是Netty处理收到请求的结构图。<br>可以看到，Netty使用的是EventLoopGroup，每次有请求过来的时候，会从Group中拿一个EventLoop，将这个EventLoop与Channel绑定，然后由这个EventLoop来执行Channel中需要做的工作。每一个请求进来，都有一个EventLoop与之对应，这就是Netty非阻塞的原因。</p>
+<p>下图是EvnetLoop和EventLoopGroup的类结构关系：<br><img src="http://static.zybuluo.com/939958749/rnpy83qdcc4mddqkp4svfzlv/12.png" alt="12.png-68.5kB"><br>可以看到，其实它们都是Executor的实现类。</p>
+<h3 id="2-Bootstrap_u548CServerBotstrap"><a href="#2-Bootstrap_u548CServerBotstrap" class="headerlink" title="2.Bootstrap和ServerBotstrap"></a>2.Bootstrap和ServerBotstrap</h3><p>Bootstrap的主要作用就是处理程序启动时候的逻辑，通过它你可以配置你的应用。你可以使用Bootstrap连接到某个客户端的ip和port，或者将服务端绑定到某个端口上。</p>
+<p>Bootstrap是为客户端准备的，ServerBootstrap是为服务端准备的。</p>
+<p>使用Bootstrap还是ServerBootstrap与你使用的协议没有任何关系，只与你的目的有关：你是想创建一个客户端还是服务端。</p>
+<p>两者的不同点：<br><img src="http://static.zybuluo.com/939958749/gj5v9pz7hx9b3thypqqsvqyc/1111.png" alt="1111.png-45.2kB"></p>
+<p>两者除了使用场景不同之外，还有一个很关键的不同:客户端Bootstrap使用一个EventLoopGroup，而服务端的使用的是两个。</p>
+<p>服务端可以看成是包含两组Channel，一组只包含一个ServerChannel，它表示服务端自己绑定到本地端口的套接字；另一组则包含了很多Channel，它们代表服务端所收到的所有的连接。</p>
+<p>下图是服务端两个EventLoopGroup的协作流程：<br><img src="http://static.zybuluo.com/939958749/92lde9kl97wngb1gwhfzxazd/22222.png" alt="22222.png-60.6kB"></p>
+<p>上图中，GroupA的主要目的是：接收外部连接请求，然后将连接转移给GroupB，而GroupB负责这些请求建立的通道的处理。</p>
+<p>为什么ServerBootstrap需要两个EventLoopGroup?<br>因为在请求量很大的情况下，如果只有一个EventLoopGroup，而这个Group中的EventLoop都忙于处理已经收到的请求，而在合理的时间内不能接收新的请求，那么有些连接请求就会超时而得不到处理。用两个Group，一个负责接收请求，而另一个负责处理请求，两个Group中的EventLoop不共享，这样所有的请求都可以被接收。</p>
+<p>当然也可以只使用一个EventLoopGroup，对于大多数应用来说这样也没问题，如果只有一个EventLoopGroup，程序的处理是这样的：<br><img src="http://static.zybuluo.com/939958749/dqjzamcknvw3t8rnwhwc9wla/33333.png" alt="33333.png-63.3kB"></p>
+<h4 id="EventLoopGroup_u548CEventLoop"><a href="#EventLoopGroup_u548CEventLoop" class="headerlink" title="EventLoopGroup和EventLoop"></a>EventLoopGroup和EventLoop</h4><p>Group中可以包含一个或多个EventLoop，每一个Channel创建之后就会与一个EventLoop绑定，由于一个Group中包含的Loop数量通常都会比创建的Channel数量少，所以很多Channel将会公用同一个EventLoop，这意味着如果一个EventLoop忙于处理某个Channel，那么它就无法处理其他Channel，所以，我们在任何情况下都不能阻塞某个EventLoop。</p>
+<h3 id="3-ChannelHandler_u548CChannelPipeline"><a href="#3-ChannelHandler_u548CChannelPipeline" class="headerlink" title="3.ChannelHandler和ChannelPipeline"></a>3.ChannelHandler和ChannelPipeline</h3><p>ChannelHandler可以看作是用于处理在ChannelPipeline中传输的数据的工具。但它们的作用远不止这些。<br>ChannelPipeline的作用就是合理安排这些ChannelHandler去工作。<br>如下图：<br><img src="http://static.zybuluo.com/939958749/zfcun96d8xfus8rvowmdjom8/2323.png" alt="2323.png-73.7kB"></p>
+<ol>
+<li><p>Netty中有两种方式可以发送消息：直接写到Channel中，或者写到ChannelHandlerContext中。<br>两种方式的区别在于：<br>直接写入Channel会让消息从ChannelPipeline的末尾开始<br>写入contedxtObject会让消息从ChannelPipeline中的下一个Handler开始</p>
+</li>
+<li><p>在ChannelPipeline中，每一个handler都要负责将Netty事件传递给下一个handler，为此，Netty提供了<em>Adapter抽象类来提供这些传递功能，这样我们在使用的时候就可以只实现我们感兴趣的方法（事件）。除此之外，</em>Adapter还提供了其他功能，例如：对于消息的编码和解码。<br>Netty中提供的几个Adapter：</p>
+</li>
+</ol>
+<ul>
+<li>ChannelHandlerAdapter</li>
+<li>ChannelInboundHandlerAdapter</li>
+<li>ChannelOutboundHandlerAdapter</li>
+<li>ChannelDuplexHandlerAdapter</li>
+</ul>
+<ol>
+<li><p>编码器与解码器<br>用于将消息转换成字节码或者将字节码转换成消息。</p>
+</li>
+<li><p>Netty中，实现自己业务逻辑的时候不能阻塞当前线程， 虽然Netty是多线程，但是在高并发的情况下仍然会有问题。因为总的线程数是有限的，每阻塞一个就会减弱并发性。<br>但是Netty提供了一种比较好的方式来解决此问题：当我们向ChannelPipeline中添加Handler的时候，你可以指定一个EventExecutorGroup，这个EventExecutorGroup可以提供一个 EventExecutor，而这个 EventExecutor将用于执行该handler中所有的方法， EventExecutor将会使用一个单独的线程来处理，这样就将EventLoop给解放出来了。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/">Netty</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   

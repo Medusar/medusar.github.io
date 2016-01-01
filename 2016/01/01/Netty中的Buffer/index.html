@@ -3,39 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的书单 | Medusar&#39;s playground</title>
+  <title>Netty中的Buffer | Medusar&#39;s playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我的书单1&amp;#20070;&amp;#20013;&amp;#33258;&amp;#30001;&amp;#40644;&amp;#37329;&amp;#23627;&amp;#65292;&amp;#22810;&amp;#35835;&amp;#65292;&amp;#22810;&amp;#24819;&amp;#65281;
-PS:整理的有点乱，有些还在看
-2016年技术类
-《Netty权威指南(第二版)》
-
-2015年技术类纸质书
-《Java并发编程实战》（强烈推荐）
-《Java并发编">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的书单">
-<meta property="og:url" content="https://medusar.github.io/booklist/index.html">
+  <meta name="description" content="一 Buffer1.Heap Buffer数据存储在JVM堆内存中数据放在一个backing array中排序存放。当不使用池的时候，分配和释放很快
+2.Direct Buffer数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题
+3.Composite Buffer类似于一个列表，其中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty中的Buffer">
+<meta property="og:url" content="https://medusar.github.io/2016/01/01/Netty中的Buffer/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="我的书单1&amp;#20070;&amp;#20013;&amp;#33258;&amp;#30001;&amp;#40644;&amp;#37329;&amp;#23627;&amp;#65292;&amp;#22810;&amp;#35835;&amp;#65292;&amp;#22810;&amp;#24819;&amp;#65281;
-PS:整理的有点乱，有些还在看
-2016年技术类
-《Netty权威指南(第二版)》
-
-2015年技术类纸质书
-《Java并发编程实战》（强烈推荐）
-《Java并发编">
-<meta property="og:updated_time" content="2016-01-01T12:40:33.000Z">
+<meta property="og:description" content="一 Buffer1.Heap Buffer数据存储在JVM堆内存中数据放在一个backing array中排序存放。当不使用池的时候，分配和释放很快
+2.Direct Buffer数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题
+3.Composite Buffer类似于一个列表，其中">
+<meta property="og:image" content="http://static.zybuluo.com/939958749/fylr2i1ds1mg0nhkkmk0c01j/bytebuf1.png">
+<meta property="og:image" content="http://static.zybuluo.com/939958749/fdnv05wzx90qbv9hvqd755uf/bytebuf2.png">
+<meta property="og:image" content="http://static.zybuluo.com/939958749/y8i2d78nvdlkmjshk1vj1qm1/bytebuf3.png">
+<meta property="og:updated_time" content="2016-01-01T14:17:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的书单">
-<meta name="twitter:description" content="我的书单1&amp;#20070;&amp;#20013;&amp;#33258;&amp;#30001;&amp;#40644;&amp;#37329;&amp;#23627;&amp;#65292;&amp;#22810;&amp;#35835;&amp;#65292;&amp;#22810;&amp;#24819;&amp;#65281;
-PS:整理的有点乱，有些还在看
-2016年技术类
-《Netty权威指南(第二版)》
-
-2015年技术类纸质书
-《Java并发编程实战》（强烈推荐）
-《Java并发编">
+<meta name="twitter:title" content="Netty中的Buffer">
+<meta name="twitter:description" content="一 Buffer1.Heap Buffer数据存储在JVM堆内存中数据放在一个backing array中排序存放。当不使用池的时候，分配和释放很快
+2.Direct Buffer数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题
+3.Composite Buffer类似于一个列表，其中">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -251,11 +239,11 @@ PS:整理的有点乱，有些还在看
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Netty中的Buffer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/booklist/index.html" class="article-date">
-  	<time datetime="2016-01-01T11:45:55.000Z" itemprop="datePublished">2016-01-01</time>
+      <a href="/2016/01/01/Netty中的Buffer/" class="article-date">
+  	<time datetime="2016-01-01T14:17:15.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
   
@@ -268,7 +256,7 @@ PS:整理的有点乱，有些还在看
         
   
     <h1 class="article-title" itemprop="name">
-      我的书单
+      Netty中的Buffer
     </h1>
   
 
@@ -278,6 +266,10 @@ PS:整理的有点乱，有些还在看
         
 
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/">Netty</a></li></ul>
+	</div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -285,58 +277,18 @@ PS:整理的有点乱，有些还在看
     <div class="article-entry" itemprop="articleBody">
       
           
-              
-          
-        <h1 id="u6211_u7684_u4E66_u5355"><a href="#u6211_u7684_u4E66_u5355" class="headerlink" title="我的书单"></a>我的书单</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#20070;&#20013;&#33258;&#30001;&#40644;&#37329;&#23627;&#65292;&#22810;&#35835;&#65292;&#22810;&#24819;&#65281;</span><br></pre></td></tr></table></figure>
-<p>PS:整理的有点乱，有些还在看</p>
-<h2 id="2016_u5E74_u6280_u672F_u7C7B"><a href="#2016_u5E74_u6280_u672F_u7C7B" class="headerlink" title="2016年技术类"></a>2016年技术类</h2><ul>
-<li>《Netty权威指南(第二版)》</li>
-</ul>
-<h2 id="2015_u5E74_u6280_u672F_u7C7B"><a href="#2015_u5E74_u6280_u672F_u7C7B" class="headerlink" title="2015年技术类"></a>2015年技术类</h2><h3 id="u7EB8_u8D28_u4E66"><a href="#u7EB8_u8D28_u4E66" class="headerlink" title="纸质书"></a>纸质书</h3><ul>
-<li>《Java并发编程实战》（强烈推荐）</li>
-<li>《Java并发编程的艺术》（强烈推荐）</li>
-<li>《深入理解Java虚拟机（第二版）》</li>
-<li>《Netty权威指南（第二版）》</li>
-<li>《大型网站系统与Java中间件实践》（讲的很全面，非常不错）</li>
-<li>《大型分布式网站架构设计与实践》</li>
-<li>《构建高性能Web站点》</li>
-<li>《图解TCP/IP(第5版)》</li>
-<li>《高性能MySQL》</li>
-<li>《深入浅出MySQL 数据库开发优化与管理维护》<h3 id="u7535_u5B50_u4E66"><a href="#u7535_u5B50_u4E66" class="headerlink" title="电子书"></a>电子书</h3></li>
-<li>《Netty_in_Action_v5_MEAP》</li>
-<li>《代码整洁之道》</li>
-<li>《深入剖析Tomcat》<h2 id="2015_u5E74_u4EBA_u6587_u793E_u79D1_u7C7B"><a href="#2015_u5E74_u4EBA_u6587_u793E_u79D1_u7C7B" class="headerlink" title="2015年人文社科类"></a>2015年人文社科类</h2></li>
-<li>《浪潮之巅》上下两册</li>
-<li>《创京东》</li>
-<li>《互联网+ 小米案例版》</li>
-<li>《淘宝技术这十年》</li>
-<li>《京东技术揭秘》</li>
-<li>《沙漠之花》<h2 id="2014_u5E74_u6280_u672F_u7C7B"><a href="#2014_u5E74_u6280_u672F_u7C7B" class="headerlink" title="2014年技术类"></a>2014年技术类</h2></li>
-<li>《NoSQL精髓》</li>
-<li>《这就是搜索引擎 核心技术讲解》</li>
-<li>《Lucene实战》</li>
-<li>《Web前端黑客技术揭秘》</li>
-<li>《白帽子讲Web安全》</li>
-<li>《解密搜索引擎技术实战(第二版)》</li>
-<li>《Java程序性能优化》</li>
-<li>《深入分析Java Web》(阿里巴巴丛书)<h2 id="2014_u5E74_u4EBA_u6587_u793E_u79D1_u7C7B"><a href="#2014_u5E74_u4EBA_u6587_u793E_u79D1_u7C7B" class="headerlink" title="2014年人文社科类"></a>2014年人文社科类</h2></li>
-<li>《生命不息 折腾不止》（老罗）</li>
-<li>《怪诞行为xue》(老罗推荐)</li>
-<li>《大数据时代》</li>
-<li>《数学之美》<h2 id="2013_u5E74_u6280_u672F_u7C7B"><a href="#2013_u5E74_u6280_u672F_u7C7B" class="headerlink" title="2013年技术类"></a>2013年技术类</h2></li>
-<li>《编写高质量代码:改善Java程序的151个建议》（很不错）</li>
-<li>《Effective Java》（很不错）</li>
-<li>《Spring3就是这么简单》</li>
-<li>《Spring技术内幕》</li>
-<li>《JSP&amp;Servlet熊希笔记 第二版》（林信良）</li>
-<li>《疯狂Java程序员的基本修养》</li>
-<li>《Web之困》（当时作为奖品的一本书，至今没全部看懂）</li>
-<li>《SEO魔法书》（SEO入门）<h2 id="2013_u4EBA_u6587_u793E_u79D1_u7C7B"><a href="#2013_u4EBA_u6587_u793E_u79D1_u7C7B" class="headerlink" title="2013人文社科类"></a>2013人文社科类</h2></li>
-<li>《响聊聊职场》（李响）</li>
-<li>《生死疲劳》（莫言）</li>
-<li>《丰乳肥臀》（莫言）</li>
-<li>《经济学原理(英文版)》（至今没看完）</li>
-</ul>
+        <p>一 Buffer<br>1.Heap Buffer<br>数据存储在JVM堆内存中<br>数据放在一个backing array中排序存放。<br>当不使用池的时候，分配和释放很快</p>
+<p>2.Direct Buffer<br>数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。<br>此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题</p>
+<p>3.Composite Buffer<br>类似于一个列表，其中可以包含各种不同类型的ByteBuf，它提供了它所包含数据的一个视图</p>
+<p>二 Buffer的操作<br>1.随机存取<br>与java中的byte数组类似，ByteBuf也是从下标从0开始，我们可以根据下标来获取每一个byte，但需要注意的是，下标的值不能超过readerIndex或者writerIndex.<br>2.顺序存取<br>ByteBuf提供了两个指针来支持顺序的读和写，readerIndex用于读取，writerIndex用于写入<br>他们之间的关系：<br>0&lt;=readerIndex&lt;=writerIndex&lt;=capacity<br><img src="http://static.zybuluo.com/939958749/fylr2i1ds1mg0nhkkmk0c01j/bytebuf1.png" alt="bytebuf1.png-67.5kB"></p>
+<p>3.可丢弃的字节<br>可丢弃的字节指的是已经通过read操作被读取过的字节，因此可以被丢弃了。<br>初始大小为0，大小会随着reader操作而不断增大。只有read操作，get操作不会修改readerIndex的位置。<br>可以通过调用discardReadBytes()方法丢弃这些字节而获取新的存储空间。<br>下面两张图表示的是调用discardReadBytes方法之前和之后的情况：<br><img src="http://static.zybuluo.com/939958749/fdnv05wzx90qbv9hvqd755uf/bytebuf2.png" alt="bytebuf2.png-50.1kB"><br><img src="http://static.zybuluo.com/939958749/y8i2d78nvdlkmjshk1vj1qm1/bytebuf3.png" alt="bytebuf3.png-44.7kB"></p>
+<p>可以看到，调用discardReadBytes会造成数据拷贝，因为要将可读部分的数据移动到数组开始位置。所以如果经常调用该方法，可能会影响性能。</p>
+<p>4.可读字节<br>5.可写字节</p>
+<p>6.清空buffer index</p>
+<p>7.检索操作</p>
+<p>三 ByteBufHolder<br>就像Http响应一样，除了状态码，headers，还有response body,ByteBufHolder就能提供这样的功能。</p>
+<p>四 ByteBufAllocator<br>Netty提供了两种Allocator：<br>一种是基于池的，这种的好处是减小了分配和释放的开销，同时能够减少内存碎片的数量。它的实现采用了jemalloc还有与很多操作系统类似的高效的内存分配算法。<br>另一种是不使用池的。</p>
+<p>关于jemalloc，可以参考：<a href="http://club.alibabatech.org/article_detail.htm?articleId=36" target="_blank" rel="external">http://club.alibabatech.org/article_detail.htm?articleId=36</a></p>
 
       
     </div>
@@ -344,8 +296,71 @@ PS:整理的有点乱，有些还在看
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          如何区分一个类是wait timeout 还是notify唤醒的?
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/01/Netty中的几个关键概念/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Netty中的几个关键概念</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
 
 
 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#" class="bds_print" data-cmd="print" title="分享到打印"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
@@ -356,7 +371,7 @@ PS:整理的有点乱，有些还在看
 
     <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="booklist/index.html" data-title="我的书单" data-url="https://medusar.github.io/booklist/index.html"></div>
+    <div class="ds-thread" data-thread-key="2016/01/01/Netty中的Buffer/" data-title="Netty中的Buffer" data-url="https://medusar.github.io/2016/01/01/Netty中的Buffer/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -379,6 +394,41 @@ PS:整理的有点乱，有些还在看
 
 
 
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/" title="上一篇: 如何区分一个类是wait timeout 还是notify唤醒的?">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/01/01/Netty中的几个关键概念/" title="下一篇: Netty中的几个关键概念">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的几个关键概念/">Netty中的几个关键概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
 
     
         <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
@@ -388,7 +438,7 @@ PS:整理的有点乱，有些还在看
             mathjax: true,
             animate: true,
             isHome: false,
-            isPost: false,
+            isPost: true,
             isArchive: false,
             isTag: false,
             isCategory: false,
@@ -434,7 +484,7 @@ PS:整理的有点乱，有些还在看
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
