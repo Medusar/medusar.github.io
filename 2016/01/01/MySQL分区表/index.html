@@ -5,22 +5,16 @@
   
   <title>MySQL分区表 | Medusar&#39;s playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天统计数据的时候发现一张表使用了表分区，借此机会记录一下。
-1. 什么是表分区？表分区，是指根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。
-2. 表分区与分表的区别分表：指的是通过一定规则，将一张表分解成多张不同的表。比如将用户订单记录根据时间成多个表。分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表">
+  <meta name="description" content="MySQL分表分库是大家都知道的事情，分区可能是另外一种解决单表数据量多大的办法，本文介绍了MySQL中的分区表的概念以及如何创建和管理分区表。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL分区表">
 <meta property="og:url" content="https://medusar.github.io/2016/01/01/MySQL分区表/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="今天统计数据的时候发现一张表使用了表分区，借此机会记录一下。
-1. 什么是表分区？表分区，是指根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。
-2. 表分区与分表的区别分表：指的是通过一定规则，将一张表分解成多张不同的表。比如将用户订单记录根据时间成多个表。分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表">
-<meta property="og:updated_time" content="2016-01-01T11:42:19.000Z">
+<meta property="og:description" content="MySQL分表分库是大家都知道的事情，分区可能是另外一种解决单表数据量多大的办法，本文介绍了MySQL中的分区表的概念以及如何创建和管理分区表。">
+<meta property="og:updated_time" content="2016-01-03T09:36:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL分区表">
-<meta name="twitter:description" content="今天统计数据的时候发现一张表使用了表分区，借此机会记录一下。
-1. 什么是表分区？表分区，是指根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。
-2. 表分区与分表的区别分表：指的是通过一定规则，将一张表分解成多张不同的表。比如将用户订单记录根据时间成多个表。分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表">
+<meta name="twitter:description" content="MySQL分表分库是大家都知道的事情，分区可能是另外一种解决单表数据量多大的办法，本文介绍了MySQL中的分区表的概念以及如何创建和管理分区表。">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -356,6 +350,11 @@
     </a>
   
   
+    <a href="/2015/10/13/Netty中的Buffer/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Netty中的Buffer</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
 </nav>
 
   
@@ -447,11 +446,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2015/10/13/Netty中的Buffer/" title="下一篇: Netty中的Buffer">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的几个关键概念/">Netty中的几个关键概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/13/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/10/Netty中的几个关键概念/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

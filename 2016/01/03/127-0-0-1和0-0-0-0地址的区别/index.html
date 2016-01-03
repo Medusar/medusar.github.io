@@ -5,19 +5,16 @@
   
   <title>127.0.0.1和0.0.0.0地址的区别 | Medusar&#39;s playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
-2. IP地址分类2.1 IP地址表示IP地址由两个部分组成，net-id和host-i">
+  <meta name="description" content="127.0.0.1和0.0.0.0这两个IPV4地址是我们开发人员经常碰到的，但是仿佛有时候用的是127.0.0.1，有时候是0.0.0.0，那么这两个地址之间有什么区别和联系呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="127.0.0.1和0.0.0.0地址的区别">
 <meta property="og:url" content="https://medusar.github.io/2016/01/03/127-0-0-1和0-0-0-0地址的区别/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="1. 问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
-2. IP地址分类2.1 IP地址表示IP地址由两个部分组成，net-id和host-i">
-<meta property="og:updated_time" content="2016-01-03T06:04:54.000Z">
+<meta property="og:description" content="127.0.0.1和0.0.0.0这两个IPV4地址是我们开发人员经常碰到的，但是仿佛有时候用的是127.0.0.1，有时候是0.0.0.0，那么这两个地址之间有什么区别和联系呢？">
+<meta property="og:updated_time" content="2016-01-03T09:26:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="127.0.0.1和0.0.0.0地址的区别">
-<meta name="twitter:description" content="1. 问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
-2. IP地址分类2.1 IP地址表示IP地址由两个部分组成，net-id和host-i">
+<meta name="twitter:description" content="127.0.0.1和0.0.0.0这两个IPV4地址是我们开发人员经常碰到的，但是仿佛有时候用的是127.0.0.1，有时候是0.0.0.0，那么这两个地址之间有什么区别和联系呢？">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -447,7 +444,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的几个关键概念/">Netty中的几个关键概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/13/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/10/Netty中的几个关键概念/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

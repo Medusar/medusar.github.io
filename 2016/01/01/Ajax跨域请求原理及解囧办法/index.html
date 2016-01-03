@@ -5,24 +5,18 @@
   
   <title>Ajax跨域请求原理及解决办法 | Medusar&#39;s playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 什么是跨域（Cross-site)？想了解跨域，必须先了解一下“同源策略(same origin policy)”。
-1.1 同源策略它限制了某个域下的文档或者js与另一个域中的资源交互的方式，它提供了一种安全机制，这种安全机制可以避免来自恶意网站的攻击。同源策略要求浏览器允许来自某个网页上的js请求来自另一个网页的数据，当且仅当两个页面来自相同的域。
-1.2 什么是域(origin)？域是">
+  <meta name="description" content="ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ajax跨域请求原理及解决办法">
 <meta property="og:url" content="https://medusar.github.io/2016/01/01/Ajax跨域请求原理及解囧办法/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="1. 什么是跨域（Cross-site)？想了解跨域，必须先了解一下“同源策略(same origin policy)”。
-1.1 同源策略它限制了某个域下的文档或者js与另一个域中的资源交互的方式，它提供了一种安全机制，这种安全机制可以避免来自恶意网站的攻击。同源策略要求浏览器允许来自某个网页上的js请求来自另一个网页的数据，当且仅当两个页面来自相同的域。
-1.2 什么是域(origin)？域是">
+<meta property="og:description" content="ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？">
 <meta property="og:image" content="http://static.zybuluo.com/939958749/11z1efgco1p38598zd9z5g4s/QQ%E5%9B%BE%E7%89%8720151224163925.png">
 <meta property="og:image" content="http://static.zybuluo.com/939958749/52t678l8q0qe2adct67etjbt/QQ%E6%88%AA%E5%9B%BE20151224171533.png">
-<meta property="og:updated_time" content="2016-01-01T12:42:01.000Z">
+<meta property="og:updated_time" content="2016-01-03T09:33:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax跨域请求原理及解决办法">
-<meta name="twitter:description" content="1. 什么是跨域（Cross-site)？想了解跨域，必须先了解一下“同源策略(same origin policy)”。
-1.1 同源策略它限制了某个域下的文档或者js与另一个域中的资源交互的方式，它提供了一种安全机制，这种安全机制可以避免来自恶意网站的攻击。同源策略要求浏览器允许来自某个网页上的js请求来自另一个网页的数据，当且仅当两个页面来自相同的域。
-1.2 什么是域(origin)？域是">
+<meta name="twitter:description" content="ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -430,7 +424,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的几个关键概念/">Netty中的几个关键概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/13/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/10/Netty中的几个关键概念/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

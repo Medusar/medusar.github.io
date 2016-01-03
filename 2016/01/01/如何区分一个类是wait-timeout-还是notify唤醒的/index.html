@@ -5,19 +5,16 @@
   
   <title>如何区分一个类是wait timeout 还是notify唤醒的? | Medusar&#39;s playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题 怎么判断wait是超时返回还是其他线程通知返回的呢？http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify
-两种方式：1.记录一个时间，当唤醒之后，比较一下唤醒时间与开始时间，判断是否大于设置的timeout时间">
+  <meta name="description" content="我们知道java中Object的wait方法的作用是让线程进入等待状态，而它的唤醒是有两种方式的：一种就是wait设置的超时时间到了，另一种就是由其他线程调用了改线程的notiy或者notifyAll方法，但是，如果我们想判断线程是如何返回的，该如何判断呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何区分一个类是wait timeout 还是notify唤醒的?">
 <meta property="og:url" content="https://medusar.github.io/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="问题 怎么判断wait是超时返回还是其他线程通知返回的呢？http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify
-两种方式：1.记录一个时间，当唤醒之后，比较一下唤醒时间与开始时间，判断是否大于设置的timeout时间">
-<meta property="og:updated_time" content="2016-01-01T14:21:09.000Z">
+<meta property="og:description" content="我们知道java中Object的wait方法的作用是让线程进入等待状态，而它的唤醒是有两种方式的：一种就是wait设置的超时时间到了，另一种就是由其他线程调用了改线程的notiy或者notifyAll方法，但是，如果我们想判断线程是如何返回的，该如何判断呢？">
+<meta property="og:updated_time" content="2016-01-03T09:31:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何区分一个类是wait timeout 还是notify唤醒的?">
-<meta name="twitter:description" content="问题 怎么判断wait是超时返回还是其他线程通知返回的呢？http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify
-两种方式：1.记录一个时间，当唤醒之后，比较一下唤醒时间与开始时间，判断是否大于设置的timeout时间">
+<meta name="twitter:description" content="我们知道java中Object的wait方法的作用是让线程进入等待状态，而它的唤醒是有两种方式的：一种就是wait设置的超时时间到了，另一种就是由其他线程调用了改线程的notiy或者notifyAll方法，但是，如果我们想判断线程是如何返回的，该如何判断呢？">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -306,8 +303,8 @@
     </a>
   
   
-    <a href="/2016/01/01/Netty中的Buffer/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Netty中的Buffer</div>
+    <a href="/2016/01/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -402,13 +399,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/01/01/Netty中的Buffer/" title="下一篇: Netty中的Buffer">
+            <a href="/2016/01/01/hello-world/" title="下一篇: Hello World">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Netty中的几个关键概念/">Netty中的几个关键概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/13/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/10/Netty中的几个关键概念/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
