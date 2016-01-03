@@ -5,19 +5,19 @@
   
   <title>127.0.0.1和0.0.0.0地址的区别 | Medusar&#39;s playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
-IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id，即网络号和">
+  <meta name="description" content="1. 问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
+2. IP地址分类2.1 IP地址表示IP地址由两个部分组成，net-id和host-i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="127.0.0.1和0.0.0.0地址的区别">
 <meta property="og:url" content="https://medusar.github.io/2016/01/03/127-0-0-1和0-0-0-0地址的区别/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
-IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id，即网络号和">
-<meta property="og:updated_time" content="2016-01-03T06:01:27.000Z">
+<meta property="og:description" content="1. 问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
+2. IP地址分类2.1 IP地址表示IP地址由两个部分组成，net-id和host-i">
+<meta property="og:updated_time" content="2016-01-03T06:04:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="127.0.0.1和0.0.0.0地址的区别">
-<meta name="twitter:description" content="问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
-IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id，即网络号和">
+<meta name="twitter:description" content="1. 问题引入之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 hexo server命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。
+2. IP地址分类2.1 IP地址表示IP地址由两个部分组成，net-id和host-i">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -277,9 +277,9 @@ IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id�
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="u95EE_u9898_u5F15_u5165"><a href="#u95EE_u9898_u5F15_u5165" class="headerlink" title="问题引入"></a>问题引入</h2><p>之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 <code>hexo server</code>命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?<br>在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。</p>
-<h2 id="IP_u5730_u5740_u5206_u7C7B"><a href="#IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="IP地址分类"></a>IP地址分类</h2><h3 id="1-_IP_u5730_u5740_u8868_u793A"><a href="#1-_IP_u5730_u5740_u8868_u793A" class="headerlink" title="1. IP地址表示"></a>1. IP地址表示</h3><p>IP地址由两个部分组成，net-id和host-id，即网络号和主机号。<br>net-id:表示ip地址所在的网络号。<br>host-id：表示ip地址所在网络中的某个主机号码。<br>即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP-address ::=  &#123; &#60;Network-number&#62;, &#60;Host-number&#62; &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-_IP_u5730_u5740_u5206_u7C7B"><a href="#2-_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2. IP地址分类"></a>2. IP地址分类</h3><p>IP地址一共分为5类，即A～E，它们分类的依据是其net-id所占的字节长度以及网络号前几位。</p>
+        <h2 id="1-__u95EE_u9898_u5F15_u5165"><a href="#1-__u95EE_u9898_u5F15_u5165" class="headerlink" title="1. 问题引入"></a>1. 问题引入</h2><p>之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 <code>hexo server</code>命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?<br>在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。</p>
+<h2 id="2-_IP_u5730_u5740_u5206_u7C7B"><a href="#2-_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2. IP地址分类"></a>2. IP地址分类</h2><h3 id="2-1_IP_u5730_u5740_u8868_u793A"><a href="#2-1_IP_u5730_u5740_u8868_u793A" class="headerlink" title="2.1 IP地址表示"></a>2.1 IP地址表示</h3><p>IP地址由两个部分组成，net-id和host-id，即网络号和主机号。<br>net-id:表示ip地址所在的网络号。<br>host-id：表示ip地址所在网络中的某个主机号码。<br>即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP-address ::=  &#123; &#60;Network-number&#62;, &#60;Host-number&#62; &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2_IP_u5730_u5740_u5206_u7C7B"><a href="#2-2_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2.2 IP地址分类"></a>2.2 IP地址分类</h3><p>IP地址一共分为5类，即A～E，它们分类的依据是其net-id所占的字节长度以及网络号前几位。</p>
 <ul>
 <li>A类地址:网络号占1个字节。网络号的第一位固定为0。   </li>
 <li>B类地址：网络号占2个字节。网络号的前两位固定为10。</li>
@@ -287,7 +287,7 @@ IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id�
 <li>D类地址：前四位是1110，用于多播(multicast)，即一对多通信。</li>
 <li>E类地址：前四位是1111，保留为以后使用。<br>其中，ABC三类地址为单播地址（unicast),用于一对一通信，是最常用的。  </li>
 </ul>
-<h3 id="3-__u7279_u6B8AIP_u5730_u5740"><a href="#3-__u7279_u6B8AIP_u5730_u5740" class="headerlink" title="3. 特殊IP地址"></a>3. 特殊IP地址</h3><p>特殊IP地址就是用来做一些特殊的事情。RFC1700中定义了以下特殊IP地址。   </p>
+<h3 id="2-3__u7279_u6B8AIP_u5730_u5740"><a href="#2-3__u7279_u6B8AIP_u5730_u5740" class="headerlink" title="2.3 特殊IP地址"></a>2.3 特殊IP地址</h3><p>特殊IP地址就是用来做一些特殊的事情。RFC1700中定义了以下特殊IP地址。   </p>
 <ol>
 <li>{0,0}:网络号和主机号都全部为0，表示“本网络上的本主机”，只能用作源地址。</li>
 <li>{0，host-id}:本网络上的某台主机。只能用作源地址。</li>
@@ -297,14 +297,14 @@ IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id�
 <li>{net-id,-1,-1}:直接广播到指定网络的所有子网络上。只能用作目的地址。</li>
 <li>{127，<any>}:即网络号为127的任意ip地址。都是内部主机回环地址(loopback),永远都不能出现在主机外部的网络中。</any></li>
 </ol>
-<h3 id="4-__u95EE_u9898_u89E3_u7B54"><a href="#4-__u95EE_u9898_u89E3_u7B54" class="headerlink" title="4. 问题解答"></a>4. 问题解答</h3><p>接下来我们来看之前问过的问题：127.0.0.1和0.0.0.0地址的区别是什么？<br>我们先来看下共同点：   </p>
+<h2 id="3-__u95EE_u9898_u89E3_u7B54"><a href="#3-__u95EE_u9898_u89E3_u7B54" class="headerlink" title="3. 问题解答"></a>3. 问题解答</h2><p>接下来我们来看之前问过的问题：127.0.0.1和0.0.0.0地址的区别是什么？<br>我们先来看下共同点：   </p>
 <ol>
 <li>都属于特殊地址。</li>
 <li>都属于A类地址。</li>
 <li>都是IPV4地址。   </li>
 </ol>
 <p>接下来我们分别看下这两个地址：</p>
-<h4 id="4-1_0-0-0-0"><a href="#4-1_0-0-0-0" class="headerlink" title="4.1 0.0.0.0"></a>4.1 0.0.0.0</h4><p>IPV4中，0.0.0.0地址被用于表示一个无效的，未知的或者不可用的目标。   </p>
+<h3 id="3-1_0-0-0-0"><a href="#3-1_0-0-0-0" class="headerlink" title="3.1 0.0.0.0"></a>3.1 0.0.0.0</h3><p>IPV4中，0.0.0.0地址被用于表示一个无效的，未知的或者不可用的目标。   </p>
 <ul>
 <li>在服务器中，0.0.0.0指的是本机上的所有IPV4地址，如果一个主机有两个IP地址，192.168.1.1 和 10.1.2.1，并且该主机上的一个服务监听的地址是0.0.0.0,那么通过两个ip地址都能够访问该服务。</li>
 <li>在路由中，0.0.0.0表示的是默认路由，即当路由表中没有找到完全匹配的路由的时候所对应的路由。   </li>
@@ -316,17 +316,17 @@ IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id�
 <li>用来表示目标机器不可用。</li>
 <li>用作服务端，表示本机上的任意IPV4地址。</li>
 </ul>
-<h4 id="4-2_127-0-0-1"><a href="#4-2_127-0-0-1" class="headerlink" title="4.2 127.0.0.1"></a>4.2 127.0.0.1</h4><p>127.0.0.1属于{127,<any>}集合中的一个，而所有网络号为127的地址都被称之为回环地址，所以<code>回环地址！=127.0.0.1</code>,它们是包含关系，即<code>回环地址包含127.0.0.1</code>。<br>回环地址：所有发往该类地址的数据包都应该被loop back。<br>用途:   </any></p>
+<h3 id="3-2_127-0-0-1"><a href="#3-2_127-0-0-1" class="headerlink" title="3.2 127.0.0.1"></a>3.2 127.0.0.1</h3><p>127.0.0.1属于{127,<any>}集合中的一个，而所有网络号为127的地址都被称之为回环地址，所以<code>回环地址！=127.0.0.1</code>,它们是包含关系，即<code>回环地址包含127.0.0.1</code>。<br>回环地址：所有发往该类地址的数据包都应该被loop back。<br>用途:   </any></p>
 <ul>
 <li>回环测试,通过使用ping 127.0.0.1 测试某台机器上的网络设备，操作系统或者TCP/IP实现是否工作正常。</li>
 <li>DDos攻击防御：网站收到DDos攻击之后，将域名A记录到127.0.0.1，即让攻击者自己攻击自己。   </li>
 <li>大部分Web容器测试的时候绑定的本机地址。</li>
 </ul>
-<h3 id="4-3_localhost"><a href="#4-3_localhost" class="headerlink" title="4.3 localhost"></a>4.3 localhost</h3><p>相比127.0.0.1，localhost具有更多的意义。localhost是个域名，而不是一个ip地址。之所以我们经常把localhost与127.0.0.1认为是同一个是因为我们使用的大多数电脑上都讲localhost指向了127.0.0.1这个地址。<br>在ubuntu系统中，/ets/hosts文件中都会有如下内容：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>	localhost</span><br><span class="line"><span class="number">127.0</span><span class="number">.1</span><span class="number">.1</span>	jason-Lenovo-V3000</span><br><span class="line"></span><br><span class="line"><span class="comment"># The following lines are desirable for IPv6 capable hosts</span></span><br><span class="line">::<span class="number">1</span>     ip6-localhost ip6-loopback</span><br><span class="line">fe00::<span class="number">0</span> ip6-localnet</span><br><span class="line">ff00::<span class="number">0</span> ip6-mcastprefix</span><br><span class="line">ff02::<span class="number">1</span> ip6-allnodes</span><br><span class="line">ff02::<span class="number">2</span> ip6-allrouters</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-3_localhost"><a href="#3-3_localhost" class="headerlink" title="3.3 localhost"></a>3.3 localhost</h3><p>相比127.0.0.1，localhost具有更多的意义。localhost是个域名，而不是一个ip地址。之所以我们经常把localhost与127.0.0.1认为是同一个是因为我们使用的大多数电脑上都讲localhost指向了127.0.0.1这个地址。<br>在ubuntu系统中，/ets/hosts文件中都会有如下内容：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>	localhost</span><br><span class="line"><span class="number">127.0</span><span class="number">.1</span><span class="number">.1</span>	jason-Lenovo-V3000</span><br><span class="line"></span><br><span class="line"><span class="comment"># The following lines are desirable for IPv6 capable hosts</span></span><br><span class="line">::<span class="number">1</span>     ip6-localhost ip6-loopback</span><br><span class="line">fe00::<span class="number">0</span> ip6-localnet</span><br><span class="line">ff00::<span class="number">0</span> ip6-mcastprefix</span><br><span class="line">ff02::<span class="number">1</span> ip6-allnodes</span><br><span class="line">ff02::<span class="number">2</span> ip6-allrouters</span><br></pre></td></tr></table></figure></p>
 <p>上面第一行是几乎每台电脑上都会有的默认配置。<br>但是localhost的意义并不局限于127.0.0.1。</p>
 <p>localhost是一个域名，用于指代this computer或者this host,可以用它来获取运行在本机上的网络服务。<br>在大多数系统中，localhost被指向了IPV4的127.0.0.1和IPV6的::1。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>    localhost</span><br><span class="line">::<span class="number">1</span>          localhost</span><br></pre></td></tr></table></figure></p>
 <p>所以，在使用的时候要注意确认IPV4还是IPV6</p>
-<h3 id="5-__u603B_u7ED3"><a href="#5-__u603B_u7ED3" class="headerlink" title="5. 总结"></a>5. 总结</h3><p>127.0.0.1 是一个环回地址。并不表示“本机”。0.0.0.0才是真正表示“本网络中的本机”。<br>在实际应用中，一般我们在服务端绑定端口的时候可以选择绑定到0.0.0.0，这样我的服务访问方就可以通过我的多个ip地址访问我的服务。<br>比如我有一台服务器，一个外放地址A,一个内网地址B，如果我绑定的端口指定了0.0.0.0，那么通过内网地址或外网地址都可以访问我的应用。但是如果我之绑定了内网地址，那么通过外网地址就不能访问。 所以如果绑定0.0.0.0,也有一定安全隐患，对于只需要内网访问的服务，可以只绑定内网地址。</p>
+<h2 id="4-__u603B_u7ED3"><a href="#4-__u603B_u7ED3" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>127.0.0.1 是一个环回地址。并不表示“本机”。0.0.0.0才是真正表示“本网络中的本机”。<br>在实际应用中，一般我们在服务端绑定端口的时候可以选择绑定到0.0.0.0，这样我的服务访问方就可以通过我的多个ip地址访问我的服务。<br>比如我有一台服务器，一个外放地址A,一个内网地址B，如果我绑定的端口指定了0.0.0.0，那么通过内网地址或外网地址都可以访问我的应用。但是如果我之绑定了内网地址，那么通过外网地址就不能访问。 所以如果绑定0.0.0.0,也有一定安全隐患，对于只需要内网访问的服务，可以只绑定内网地址。</p>
 <p>[参考资料]   </p>
 <ol>
 <li><a href="https://en.wikipedia.org/wiki/0.0.0.0" target="_blank" rel="external">https://en.wikipedia.org/wiki/0.0.0.0</a></li>
@@ -358,7 +358,7 @@ IP地址分类1. IP地址表示IP地址由两个部分组成，net-id和host-id�
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u95EE_u9898_u5F15_u5165"><span class="toc-number">1.</span> <span class="toc-text">问题引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP_u5730_u5740_u5206_u7C7B"><span class="toc-number">2.</span> <span class="toc-text">IP地址分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_IP_u5730_u5740_u8868_u793A"><span class="toc-number">2.1.</span> <span class="toc-text">1. IP地址表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_IP_u5730_u5740_u5206_u7C7B"><span class="toc-number">2.2.</span> <span class="toc-text">2. IP地址分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u7279_u6B8AIP_u5730_u5740"><span class="toc-number">2.3.</span> <span class="toc-text">3. 特殊IP地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u95EE_u9898_u89E3_u7B54"><span class="toc-number">2.4.</span> <span class="toc-text">4. 问题解答</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1_0-0-0-0"><span class="toc-number">2.4.1.</span> <span class="toc-text">4.1 0.0.0.0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2_127-0-0-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">4.2 127.0.0.1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3_localhost"><span class="toc-number">2.5.</span> <span class="toc-text">4.3 localhost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-__u603B_u7ED3"><span class="toc-number">2.6.</span> <span class="toc-text">5. 总结</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-__u95EE_u9898_u5F15_u5165"><span class="toc-number">1.</span> <span class="toc-text">1. 问题引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_IP_u5730_u5740_u5206_u7C7B"><span class="toc-number">2.</span> <span class="toc-text">2. IP地址分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_IP_u5730_u5740_u8868_u793A"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 IP地址表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_IP_u5730_u5740_u5206_u7C7B"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 IP地址分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3__u7279_u6B8AIP_u5730_u5740"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 特殊IP地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-__u95EE_u9898_u89E3_u7B54"><span class="toc-number">3.</span> <span class="toc-text">3. 问题解答</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1_0-0-0-0"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 0.0.0.0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2_127-0-0-1"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 127.0.0.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3_localhost"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 localhost</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-__u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">4. 总结</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
