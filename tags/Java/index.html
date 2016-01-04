@@ -3,19 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>maven内置隐式变量 | Medusar&#39;s playground</title>
+  <title>Tag: Java | Medusar&#39;s playground</title>
   <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="maven内置隐式变量">
-<meta property="og:url" content="https://medusar.github.io/2016/01/01/maven内置隐式变量/index.html">
+  <meta name="description" content="Medusar的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Medusar's playground">
+<meta property="og:url" content="https://medusar.github.io/tags/Java/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
-<meta property="og:updated_time" content="2016-01-03T09:34:58.000Z">
+<meta property="og:description" content="Medusar的个人博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maven内置隐式变量">
-<meta name="twitter:description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
+<meta name="twitter:title" content="Medusar's playground">
+<meta name="twitter:description" content="Medusar的个人博客">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -238,202 +237,83 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-maven内置隐式变量" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/01/01/maven内置隐式变量/" class="article-date">
-  	<time datetime="2016-01-01T14:24:14.000Z" itemprop="datePublished">2016-01-01</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/01/04/自旋锁/" class="archive-article-date">
+  	<time datetime="2016-01-04T13:03:40.000Z" itemprop="datePublished">Jan 4</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      maven内置隐式变量
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/01/04/自旋锁/">自旋锁</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
 	</div>
 
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <p>Maven提供了三个隐式的变量可以用来访环境变量，POM信息，和Maven Settings</p>
-<h3 id="1-_env"><a href="#1-_env" class="headerlink" title="1. env"></a>1. env</h3><p>env变量，暴露了你操作系统或者shell的环境变量。便 如在Maven POM中一个对<code>${env.PATH}</code>的引用将会被<code>${PATH}</code>环境变量替换，在Windows中为%PATH%.</p>
-<h3 id="2-_projet"><a href="#2-_projet" class="headerlink" title="2. projet"></a>2. projet</h3><p>project变量暴露了POM。可以使用点标记(.)的路径来引用POM元素的值。例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 项目根目录</span><br><span class="line">$&#123;project.build.directory&#125; 构建目录，缺省为target</span><br><span class="line">$&#123;project.build.outputDirectory&#125; 构建过程输出目录，缺省为target/classes</span><br><span class="line">$&#123;project.build.finalName&#125; 产出物名称，缺省为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br><span class="line">$&#123;project.packaging&#125; 打包类型，缺省为jar</span><br><span class="line">$&#123;project.xxx&#125; 当前pom文件的任意节点的内容</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-_settings"><a href="#3-_settings" class="headerlink" title="3. settings"></a>3. settings</h3><p>settings变量暴露了Maven settings信息。可以使用点标记(.)的路径来引用settings.xml文件中元素的值。例如${settings.offline}会引用~/.m2/settings.xml文件中offline元素的值。</p>
 
-      
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          127.0.0.1和0.0.0.0地址的区别
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/01/01/常用Maven插件/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">常用Maven插件</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_env"><span class="toc-number">1.</span> <span class="toc-text">1. env</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_projet"><span class="toc-number">2.</span> <span class="toc-text">2. projet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_settings"><span class="toc-number">3.</span> <span class="toc-text">3. settings</span></a></li></ol>
-</div>
-<style>
-    .left-col .switch-btn {
-        display: none;
-    }
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
-
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script>
-    var toc_button = document.getElementById("tocButton");
-    var toc_div = document.getElementById("toc");
-    toc_button.onclick=function() {
-        if (toc_div.style.display == "none") {
-            toc_div.style.display = "block";
-            toc_button.value = "隐藏目录";
-            document.getElementById("switch-btn").style.display = "none";
-            document.getElementById("switch-area").style.display = "none";
-        }
-        else {
-            toc_div.style.display = "none";
-            toc_button.value = "显示目录";
-            document.getElementById("switch-btn").style.display = "block";
-            document.getElementById("switch-area").style.display = "block";
-        }
-    }
-
-    if ($(".toc").length < 1) {
-        $("#toc").css("display","none");
-        $("#tocButton").css("display","none");
-        $(".switch-btn").css("display","block");
-        $(".switch-area").css("display","block");
-    }
-</script>
-
-
-
-
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"slide":{"type":"slide","bdImg":"8","bdPos":"right","bdTop":"186"},"image":{"viewList":["evernotecn","qzone","tsina","tqq","weixin","renren","sqq","douban","copy","mshare"],"viewText":"分享到：","viewSize":"24"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["evernotecn","qzone","tsina","tqq","weixin","renren","sqq","douban","copy","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-
-
-    <div class="duoshuo" id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/01/01/maven内置隐式变量/" data-title="maven内置隐式变量" data-url="https://medusar.github.io/2016/01/01/maven内置隐式变量/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"medusar"};
-    	(function() {
-    		var ds = document.createElement('script');
-    		ds.type = 'text/javascript';ds.async = true;
-    		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    		ds.charset = 'UTF-8';
-    		(document.getElementsByTagName('head')[0]
-    		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-    	})();
-    	</script>
-    <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/" title="上一篇: 127.0.0.1和0.0.0.0地址的区别">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/01/01/常用Maven插件/" title="下一篇: 常用Maven插件">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/自旋锁/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Java中的可重入-Reentrant-锁/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/常用Maven插件/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/MySQL分区表/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/13/Netty中的Buffer/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/10/Netty中的几个关键概念/">Netty中的几个关键概念</a></li></ul>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200);
-            }
-            else {
-                $(".switch-btn, .switch-area").toggle(200);
-            }
-        })
-    </script>
-
-
-
-
+  
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-            var yiliaConfig = {
-            fancybox: true,
-            mathjax: false,
-            animate: true,
-            isHome: false,
-            isPost: true,
-            isArchive: false,
-            isTag: false,
-            isCategory: false,
-            open_in_new: false
-            }
-        </script>
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/01/04/Java中的可重入-Reentrant-锁/" class="archive-article-date">
+  	<time datetime="2016-01-04T00:34:06.000Z" itemprop="datePublished">Jan 4</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/01/04/Java中的可重入-Reentrant-锁/">Java中的可重入(Reentrant)锁</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
     
 
 </div>
@@ -474,9 +354,9 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false
 	}
