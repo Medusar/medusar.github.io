@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>maven内置隐式变量 | Medusar&#39;s playground</title>
+  <title>[Linux工具] rsync数据同步工具 | Medusar&#39;s playground</title>
   <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
+  <meta name="description" content="Linux系统中的数据同步工具rsync的简单介绍。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="maven内置隐式变量">
-<meta property="og:url" content="https://medusar.github.io/2016/01/01/maven内置隐式变量/index.html">
+<meta property="og:title" content="[Linux工具] rsync数据同步工具">
+<meta property="og:url" content="https://medusar.github.io/2016/01/06/Linux工具-rsync数据同步工具/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
-<meta property="og:updated_time" content="2016-01-03T09:34:58.000Z">
+<meta property="og:description" content="Linux系统中的数据同步工具rsync的简单介绍。">
+<meta property="og:updated_time" content="2016-01-06T12:31:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maven内置隐式变量">
-<meta name="twitter:description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
+<meta name="twitter:title" content="[Linux工具] rsync数据同步工具">
+<meta name="twitter:description" content="Linux系统中的数据同步工具rsync的简单介绍。">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -238,11 +238,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-maven内置隐式变量" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Linux工具-rsync数据同步工具" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/01/maven内置隐式变量/" class="article-date">
-  	<time datetime="2016-01-01T14:24:14.000Z" itemprop="datePublished">2016-01-01</time>
+      <a href="/2016/01/06/Linux工具-rsync数据同步工具/" class="article-date">
+  	<time datetime="2016-01-06T12:27:36.000Z" itemprop="datePublished">2016-01-06</time>
 </a>
     </div>
   
@@ -255,7 +255,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      maven内置隐式变量
+      [Linux工具] rsync数据同步工具
     </h1>
   
 
@@ -266,7 +266,7 @@
 
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 	</div>
 
         <div class="clearfix"></div>
@@ -276,10 +276,45 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Maven提供了三个隐式的变量可以用来访环境变量，POM信息，和Maven Settings</p>
-<h3 id="1-_env"><a href="#1-_env" class="headerlink" title="1. env"></a>1. env</h3><p>env变量，暴露了你操作系统或者shell的环境变量。便 如在Maven POM中一个对<code>${env.PATH}</code>的引用将会被<code>${PATH}</code>环境变量替换，在Windows中为%PATH%.</p>
-<h3 id="2-_projet"><a href="#2-_projet" class="headerlink" title="2. projet"></a>2. projet</h3><p>project变量暴露了POM。可以使用点标记(.)的路径来引用POM元素的值。例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 项目根目录</span><br><span class="line">$&#123;project.build.directory&#125; 构建目录，缺省为target</span><br><span class="line">$&#123;project.build.outputDirectory&#125; 构建过程输出目录，缺省为target/classes</span><br><span class="line">$&#123;project.build.finalName&#125; 产出物名称，缺省为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br><span class="line">$&#123;project.packaging&#125; 打包类型，缺省为jar</span><br><span class="line">$&#123;project.xxx&#125; 当前pom文件的任意节点的内容</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-_settings"><a href="#3-_settings" class="headerlink" title="3. settings"></a>3. settings</h3><p>settings变量暴露了Maven settings信息。可以使用点标记(.)的路径来引用settings.xml文件中元素的值。例如${settings.offline}会引用~/.m2/settings.xml文件中offline元素的值。</p>
+        <p>之前有个统计脚本，监控多台机器的日志，发现异常数据自动报警。由于统计脚本只存在一台机器上，所以需要将多台机器日志同步过来。这个同步日志的功能就是通过rsync实现的。</p>
+<h2 id="rsync__u662F_u4EC0_u4E48_uFF1F"><a href="#rsync__u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="rsync 是什么？"></a>rsync 是什么？</h2><p>通过man rsync命令可以看到，它是a fast, versatile, remote (and local) file-copying tool，就是一个数据同步工具。versatile:通用的，万能的，多才多艺的。可以简单理解为：一个功能强大的数据同步工具。<br>官方说明：</p>
+<blockquote>
+<p>Rsync is a fast and extraordinarily versatile file copying tool. It can copy locally, to/from another host over any remote shell, or to/from a remote rsync daemon.  It offers a large  number  of  options that control every aspect of its behavior and permit very flexible specification of the set of files to be copied.</p>
+</blockquote>
+<p>它支持本地与本地，本地到远程，远程到本地三种方式的数据传输。它提供了非常多的选项可以让你控制数据传输过程中的各个方面。</p>
+<h2 id="rsync_u7528_u6CD5"><a href="#rsync_u7528_u6CD5" class="headerlink" title="rsync用法"></a>rsync用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">本地模式:  rsync [OPTION...] SRC... [DEST]</span><br><span class="line"></span><br><span class="line">shell模式:</span><br><span class="line">        拉: rsync [OPTION...] [USER@]HOST:SRC... [DEST]</span><br><span class="line">        推: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br><span class="line"></span><br><span class="line">rsync deamon模式:</span><br><span class="line">        拉: rsync [OPTION...] [USER@]HOST::SRC... [DEST]</span><br><span class="line">            rsync [OPTION...] rsync://[USER@]HOST[:PORT]/SRC... [DEST]</span><br><span class="line">        推: rsync [OPTION...] SRC... [USER@]HOST::DEST</span><br><span class="line">            rsync [OPTION...] SRC... rsync://[USER@]HOST[:PORT]/DEST</span><br><span class="line"></span><br><span class="line">      DEST目录可以省略，如果省略，将只会列出SRC中的文件，而不进行拷贝.</span><br></pre></td></tr></table></figure>
+<p>同步远程数据有两种方式</p>
+<ol>
+<li>使用其他远程脚本程序进行传输，比如ssh或者rsh。即上面所说的shell模式。</li>
+<li>通过TCP协议直接连接到一个rsync后台进程。使用这种方式就需要在远程机器上启动一个rsync后台进程，默认该进程监听的端口是873。即上面所说的rsync deamon模式。</li>
+</ol>
+<h2 id="rsync_u4F7F_u7528_u4E3E_u4F8B"><a href="#rsync_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="rsync使用举例"></a>rsync使用举例</h2><h3 id="u672C_u5730_u62F7_u8D1D"><a href="#u672C_u5730_u62F7_u8D1D" class="headerlink" title="本地拷贝"></a>本地拷贝</h3><p>用法： <code>rsync [OPTION...] SRC... [DEST]</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[dev@mymachaine tmp]$ mkdir src</span><br><span class="line">[dev@mymachaine tmp]$ mkdir dest</span><br><span class="line">[dev@mymachaine tmp]$ rsync <span class="number">2305.</span>txt dest/</span><br></pre></td></tr></table></figure></p>
+<p>以上命令将会把2305.txt这个文件拷贝到dest目录中。</p>
+<h3 id="u4ECE_u8FDC_u7A0B_u673A_u5668_u540C_u6B65_u6570_u636E_u5230_u672C_u5730"><a href="#u4ECE_u8FDC_u7A0B_u673A_u5668_u540C_u6B65_u6570_u636E_u5230_u672C_u5730" class="headerlink" title="从远程机器同步数据到本地"></a>从远程机器同步数据到本地</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -vz -P --bwlimit=<span class="number">8096</span> rsync://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/src/xxx.log rsync://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/src/yyy.log /local/dest/</span><br></pre></td></tr></table></figure>
+<p>上面的命令，将127.0.0.1这台机器上src目录下的xxx.log和yyy.log两个文件同步到本地的/local/dest目录下。采用的是rsync deamon模式。<br>-z:压缩<br>-v:verbose,即打印传输日志<br>-P:相当于–partial –progress 两个命令一起用。<br>–bwlimit: (–bwlimit=KBPS)限制IO带宽，KB每秒。<br>–partial:默认情况下，在传输中断的时候，rsync会将已经传输完成的部分删掉，使用该命令就告诉rsync不要删除已经传完的部分，这样就能够提高后续传输的速度。<br>–progress:告诉rsync，显示传输进度。比如:<code>782448  63%  110.64kB/s    0:00:04</code></p>
+<h2 id="rsync_u673A_u5236"><a href="#rsync_u673A_u5236" class="headerlink" title="rsync机制"></a>rsync机制</h2><h3 id="delta-transfer__u7B97_u6CD5"><a href="#delta-transfer__u7B97_u6CD5" class="headerlink" title="delta-transfer 算法"></a>delta-transfer 算法</h3><p>它只传输源文件和目标文件不同的部分数据，这样就可以减少网络传输的数据量。</p>
+<h3 id="quick_check__u7B97_u6CD5"><a href="#quick_check__u7B97_u6CD5" class="headerlink" title="quick check 算法"></a>quick check 算法</h3><p>它默认使用quick check算法来查找需要传输的文件，quick check算法是通过判断文件大小和修改时间来判断文件是否发生了改变。当它发现数据文件不需要传输的时候，可以将文件其他属性（属性可以指定）的变化直接同步到目标文件上。</p>
+<h3 id="u5176_u4ED6_u7279_u70B9"><a href="#u5176_u4ED6_u7279_u70B9" class="headerlink" title="其他特点"></a>其他特点</h3><ol>
+<li>支持拷贝连接(links)，设备(devices),所有者（owners）,所在组（groups）和权限（permissions）</li>
+<li>文件传输过程中支持pipeline，从而降低延迟</li>
+<li>不需要超级用户权限</li>
+<li>可以使用任意的远程脚本，包括ssh和rsh</li>
+<li>具有和GNU tar打包工具类似的功能参数exclude和exclude-from</li>
+<li>CVS exclude模式会忽略掉那些在.cvsignore文件中存在的文件</li>
+<li>支持匿名或者需要身份验证的rsync进程访问（特别适合镜像同步）</li>
+</ol>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>rsync是一个快速的数据同步工具</li>
+<li>支持本地之间，本地与远程之间的数据同步</li>
+<li>本地与远程的数据同步包括推和拉两种模式，同时又可以使用其他远程传输shell或者使用rsync deamon两种传输方式。</li>
+<li>参数多样</li>
+<li>支持pipeline，能够极大减少传输延时</li>
+<li>支持只传输差异部分数据，减少网络传输数据量</li>
+</ol>
+<h2 id="u6269_u5C55_u9605_u8BFB"><a href="#u6269_u5C55_u9605_u8BFB" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ol>
+<li><a href="https://github.com/renzhexigua/LUG/blob/master/mirrors/%E8%AF%91.md" target="_blank" rel="external">https://github.com/renzhexigua/LUG/blob/master/mirrors/%E8%AF%91.md</a></li>
+<li>linux系统 man rsync</li>
+</ol>
 
       
     </div>
@@ -289,18 +324,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          127.0.0.1和0.0.0.0地址的区别
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/01/常用Maven插件/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">常用Maven插件</div>
+    <a href="/2016/01/06/广播（broadcast-，组播-multicast-，单播-unicast-的Java实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -311,7 +337,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_env"><span class="toc-number">1.</span> <span class="toc-text">1. env</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_projet"><span class="toc-number">2.</span> <span class="toc-text">2. projet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_settings"><span class="toc-number">3.</span> <span class="toc-text">3. settings</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#rsync__u662F_u4EC0_u4E48_uFF1F"><span class="toc-number">1.</span> <span class="toc-text">rsync 是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rsync_u7528_u6CD5"><span class="toc-number">2.</span> <span class="toc-text">rsync用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rsync_u4F7F_u7528_u4E3E_u4F8B"><span class="toc-number">3.</span> <span class="toc-text">rsync使用举例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u672C_u5730_u62F7_u8D1D"><span class="toc-number">3.1.</span> <span class="toc-text">本地拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4ECE_u8FDC_u7A0B_u673A_u5668_u540C_u6B65_u6570_u636E_u5230_u672C_u5730"><span class="toc-number">3.2.</span> <span class="toc-text">从远程机器同步数据到本地</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rsync_u673A_u5236"><span class="toc-number">4.</span> <span class="toc-text">rsync机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#delta-transfer__u7B97_u6CD5"><span class="toc-number">4.1.</span> <span class="toc-text">delta-transfer 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#quick_check__u7B97_u6CD5"><span class="toc-number">4.2.</span> <span class="toc-text">quick check 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5176_u4ED6_u7279_u70B9"><span class="toc-number">4.3.</span> <span class="toc-text">其他特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6269_u5C55_u9605_u8BFB"><span class="toc-number">6.</span> <span class="toc-text">扩展阅读</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -361,7 +387,7 @@
 
     <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/01/01/maven内置隐式变量/" data-title="maven内置隐式变量" data-url="https://medusar.github.io/2016/01/01/maven内置隐式变量/"></div>
+    <div class="ds-thread" data-thread-key="2016/01/06/Linux工具-rsync数据同步工具/" data-title="[Linux工具] rsync数据同步工具" data-url="https://medusar.github.io/2016/01/06/Linux工具-rsync数据同步工具/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -386,15 +412,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/" title="上一篇: 127.0.0.1和0.0.0.0地址的区别">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/01/01/常用Maven插件/" title="下一篇: 常用Maven插件">
+            <a href="/2016/01/06/广播（broadcast-，组播-multicast-，单播-unicast-的Java实现/" title="下一篇: 广播（broadcast)，组播(multicast)，单播(unicast)的Java实现">
                 <i class="fa fa-angle-right"></i>
             </a>
         
