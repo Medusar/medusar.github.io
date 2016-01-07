@@ -126,7 +126,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
+						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
 					</div>
 				</section>
 				
@@ -242,10 +242,91 @@
 
       <div class="body-wrap">
   
-    <article id="post-Linux工具-rsync数据同步工具" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-what-if-exception-occurs-in-threadpool" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/06/Linux工具-rsync数据同步工具/" class="article-date">
+      <a href="/2016-01-07-what-if-exception-occurs-in-threadpool/" class="article-date">
+  	<time datetime="2016-01-07T13:37:30.000Z" itemprop="datePublished">2016-01-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016-01-07-what-if-exception-occurs-in-threadpool/">如果提交到java线程池中的任务都抛出了异常会发生什么？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              假设我们有一个线程池，由于程序需要，我们向该线程池中提交了好多任务，但是这些任务都没有对异常进行try catch处理，并且运行的时候都抛出了异常。这会对线程池的运行带来什么影响？
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程池/">线程池</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016-01-07-what-if-exception-occurs-in-threadpool/#more">read more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+
+  
+    <article id="post-linux-rsync" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016-01-06-linux-rsync/" class="article-date">
   	<time datetime="2016-01-06T12:27:36.000Z" itemprop="datePublished">2016-01-06</time>
 </a>
     </div>
@@ -259,7 +340,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/06/Linux工具-rsync数据同步工具/">[Linux工具] rsync数据同步工具</a>
+      <a class="article-title" href="/2016-01-06-linux-rsync/">[Linux工具] rsync数据同步工具</a>
     </h1>
   
 
@@ -285,7 +366,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/06/Linux工具-rsync数据同步工具/#more">read more >></a>
+          <a  href="/2016-01-06-linux-rsync/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -323,10 +404,10 @@
 
 
   
-    <article id="post-广播（broadcast-，组播-multicast-，单播-unicast-的Java实现" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-broadcast-multicast-unicast" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/06/广播（broadcast-，组播-multicast-，单播-unicast-的Java实现/" class="article-date">
+      <a href="/2016-01-06-broadcast-multicast-unicast/" class="article-date">
   	<time datetime="2016-01-06T12:21:27.000Z" itemprop="datePublished">2016-01-06</time>
 </a>
     </div>
@@ -340,7 +421,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/06/广播（broadcast-，组播-multicast-，单播-unicast-的Java实现/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a>
+      <a class="article-title" href="/2016-01-06-broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a>
     </h1>
   
 
@@ -366,7 +447,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/06/广播（broadcast-，组播-multicast-，单播-unicast-的Java实现/#more">read more >></a>
+          <a  href="/2016-01-06-broadcast-multicast-unicast/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -404,10 +485,10 @@
 
 
   
-    <article id="post-自旋锁" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-spinlock" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/04/自旋锁/" class="article-date">
+      <a href="/2016-01-04-spinlock/" class="article-date">
   	<time datetime="2016-01-04T13:03:40.000Z" itemprop="datePublished">2016-01-04</time>
 </a>
     </div>
@@ -421,7 +502,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/04/自旋锁/">自旋锁</a>
+      <a class="article-title" href="/2016-01-04-spinlock/">自旋锁</a>
     </h1>
   
 
@@ -447,7 +528,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/04/自旋锁/#more">read more >></a>
+          <a  href="/2016-01-04-spinlock/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -485,10 +566,10 @@
 
 
   
-    <article id="post-Java中的可重入-Reentrant-锁" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Reentrant-lock" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/04/Java中的可重入-Reentrant-锁/" class="article-date">
+      <a href="/2016-01-04-Reentrant-lock/" class="article-date">
   	<time datetime="2016-01-04T00:34:06.000Z" itemprop="datePublished">2016-01-04</time>
 </a>
     </div>
@@ -502,7 +583,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/04/Java中的可重入-Reentrant-锁/">Java中的可重入(Reentrant)锁</a>
+      <a class="article-title" href="/2016-01-04-Reentrant-lock/">Java中的可重入(Reentrant)锁</a>
     </h1>
   
 
@@ -528,7 +609,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/04/Java中的可重入-Reentrant-锁/#more">read more >></a>
+          <a  href="/2016-01-04-Reentrant-lock/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -566,10 +647,10 @@
 
 
   
-    <article id="post-127-0-0-1和0-0-0-0地址的区别" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-how-127-0-0-1and0-0-0-0-differs-from-each-other" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/" class="article-date">
+      <a href="/2016-01-03-how-127-0-0-1and0-0-0-0-differs-from-each-other/" class="article-date">
   	<time datetime="2016-01-03T04:00:45.000Z" itemprop="datePublished">2016-01-03</time>
 </a>
     </div>
@@ -583,7 +664,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/">127.0.0.1和0.0.0.0地址的区别</a>
+      <a class="article-title" href="/2016-01-03-how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a>
     </h1>
   
 
@@ -609,7 +690,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/03/127-0-0-1和0-0-0-0地址的区别/#more">read more >></a>
+          <a  href="/2016-01-03-how-127-0-0-1and0-0-0-0-differs-from-each-other/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -647,10 +728,10 @@
 
 
   
-    <article id="post-maven内置隐式变量" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-maven-hidden-variables" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/01/maven内置隐式变量/" class="article-date">
+      <a href="/2016-01-01-maven-hidden-variables/" class="article-date">
   	<time datetime="2016-01-01T14:24:14.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
@@ -664,7 +745,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/01/maven内置隐式变量/">maven内置隐式变量</a>
+      <a class="article-title" href="/2016-01-01-maven-hidden-variables/">maven内置隐式变量</a>
     </h1>
   
 
@@ -690,7 +771,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/01/maven内置隐式变量/#more">read more >></a>
+          <a  href="/2016-01-01-maven-hidden-variables/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -728,10 +809,10 @@
 
 
   
-    <article id="post-常用Maven插件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-useful-maven-plugin" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/01/常用Maven插件/" class="article-date">
+      <a href="/2016-01-01-useful-maven-plugin/" class="article-date">
   	<time datetime="2016-01-01T14:22:02.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
@@ -745,7 +826,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/01/常用Maven插件/">常用Maven插件</a>
+      <a class="article-title" href="/2016-01-01-useful-maven-plugin/">常用Maven插件</a>
     </h1>
   
 
@@ -771,7 +852,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/01/常用Maven插件/#more">read more >></a>
+          <a  href="/2016-01-01-useful-maven-plugin/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -809,10 +890,10 @@
 
 
   
-    <article id="post-如何区分一个类是wait-timeout-还是notify唤醒的" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-timeout-or-notify" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/" class="article-date">
+      <a href="/2016-01-01-timeout-or-notify/" class="article-date">
   	<time datetime="2016-01-01T14:19:32.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
@@ -826,7 +907,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/">如何区分一个类是wait timeout 还是notify唤醒的?</a>
+      <a class="article-title" href="/2016-01-01-timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a>
     </h1>
   
 
@@ -852,7 +933,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/01/01/如何区分一个类是wait-timeout-还是notify唤醒的/#more">read more >></a>
+          <a  href="/2016-01-01-timeout-or-notify/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -893,7 +974,7 @@
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/01/hello-world/" class="article-date">
+      <a href="/2016-01-01-hello-world/" class="article-date">
   	<time datetime="2016-01-01T11:44:15.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
@@ -907,7 +988,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/01/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016-01-01-hello-world/">Hello World</a>
     </h1>
   
 
@@ -935,87 +1016,6 @@
       
 
       
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-            var yiliaConfig = {
-            fancybox: true,
-            mathjax: false,
-            animate: true,
-            isHome: true,
-            isPost: false,
-            isArchive: false,
-            isTag: false,
-            isCategory: false,
-            open_in_new: false
-            }
-        </script>
-    
-
-
-  
-    <article id="post-Ajax跨域请求原理及解囧办法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/01/Ajax跨域请求原理及解囧办法/" class="article-date">
-  	<time datetime="2016-01-01T07:03:08.000Z" itemprop="datePublished">2016-01-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/01/Ajax跨域请求原理及解囧办法/">Ajax跨域请求原理及解决办法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/">ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
-	</div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/01/Ajax跨域请求原理及解囧办法/#more">read more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

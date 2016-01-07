@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ajax跨域请求原理及解决办法 | Medusar&#39;s playground</title>
+  <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax跨域请求原理及解决办法">
+<meta property="og:url" content="https://medusar.github.io/2016-01-01-ajax-cross-domain/index.html">
+<meta property="og:site_name" content="Medusar's playground">
+<meta property="og:description" content="ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？">
+<meta property="og:image" content="http://static.zybuluo.com/939958749/11z1efgco1p38598zd9z5g4s/QQ%E5%9B%BE%E7%89%8720151224163925.png">
+<meta property="og:image" content="http://static.zybuluo.com/939958749/52t678l8q0qe2adct67etjbt/QQ%E6%88%AA%E5%9B%BE20151224171533.png">
+<meta property="og:updated_time" content="2016-01-07T14:46:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax跨域请求原理及解决办法">
+<meta name="twitter:description" content="ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Medusar</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">首页</a></li>
+				        
+							<li><a href="/archives">文章</a></li>
+				        
+							<li><a href="/others">其他</a></li>
+				        
+							<li><a href="/booklist">书单</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+					        
+								<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+					        
+								<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+					        
+								<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://java.jr-jr.com/">Java面试指南</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hollischuang.com/">Hollis</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://happypeter.github.io/">Peter</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dengo.org/">dengo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://litten.github.io/">Litten</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yueyuxing.github.io/">岳宇星</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wuchenglong.com/">JackieWu</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zippera.github.io/">zipperary</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.osmn00.com/translation/221.html">堂主</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://jikeytang.github.io/">豪情</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ibruce.info/">不如</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ruanyifeng.com/home.html">阮一峰</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">真心不想自我介绍</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Medusar</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Medusar</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">首页</a></li>
+		        
+					<li><a href="/archives">文章</a></li>
+		        
+					<li><a href="/others">其他</a></li>
+		        
+					<li><a href="/booklist">书单</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+			        
+						<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+			        
+						<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+			        
+						<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ajax-cross-domain" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016-01-01-ajax-cross-domain/" class="article-date">
+  	<time datetime="2016-01-01T07:03:08.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ajax跨域请求原理及解决办法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/">ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F"><a href="#1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F" class="headerlink" title="1. 什么是跨域（Cross-site)？"></a>1. 什么是跨域（Cross-site)？</h2><p>想了解跨域，必须先了解一下“同源策略(same origin policy)”。</p>
+<h3 id="1-1__u540C_u6E90_u7B56_u7565"><a href="#1-1__u540C_u6E90_u7B56_u7565" class="headerlink" title="1.1 同源策略"></a>1.1 同源策略</h3><p>它限制了某个域下的文档或者js与另一个域中的资源交互的方式，它提供了一种安全机制，这种安全机制可以避免来自恶意网站的攻击。<br>同源策略要求浏览器允许来自某个网页上的js请求来自另一个网页的数据，当且仅当两个页面来自相同的域。</p>
+<h3 id="1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F"><a href="#1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F" class="headerlink" title="1.2 什么是域(origin)？"></a>1.2 什么是域(origin)？</h3><p>域是由三部分组合而成：URI Schema（协议类型），host name（域名）,port number（端口号）<br>举个例子：<br>1） <a href="http://www.domain.com" target="_blank" rel="external">http://www.domain.com</a> 这个页面，URI Schema是http,host name是www.domain.com,port number是默认的80<br>2） <a href="https://www.xxx.com:8080/xxx/yyy" target="_blank" rel="external">https://www.xxx.com:8080/xxx/yyy</a> URI Schema是https，hostname是www.xxx.com，port number是8080<br>由于1）和2）中的三部分都不相同，所以它们就是不同的域。<br>下面的图更好的解释了什么是同域：<br><img src="http://static.zybuluo.com/939958749/11z1efgco1p38598zd9z5g4s/QQ%E5%9B%BE%E7%89%8720151224163925.png" alt="QQ图片20151224163925.png-15.9kB"><br>PS:IE浏览器里可能不太一样，它不会把端口号作为判断依据。   </p>
+<h3 id="1-3__u4E3A_u4EC0_u4E48_u8981_u6709_u540C_u6E90_u7B56_u7565_uFF1F"><a href="#1-3__u4E3A_u4EC0_u4E48_u8981_u6709_u540C_u6E90_u7B56_u7565_uFF1F" class="headerlink" title="1.3 为什么要有同源策略？"></a>1.3 为什么要有同源策略？</h3><p>提出同源策略的目的是出于安全性考虑，它能够阻止来自恶意网站的脚本通过其他网站的DOM获取其他网站的信息。可以避免CSRF[^footnote1]和XSS[^footnote2]攻击。   </p>
+<h3 id="1-4__u540C_u6E90_u7B56_u7565_u662F_u9650_u5236_u8C01_u7684_uFF1F"><a href="#1-4__u540C_u6E90_u7B56_u7565_u662F_u9650_u5236_u8C01_u7684_uFF1F" class="headerlink" title="1.4 同源策略是限制谁的？"></a>1.4 同源策略是限制谁的？</h3><p>1） 很多人可能搞不清楚这个问题，同源策略限制的是浏览器或者其他提供类似浏览器服务的软件，而且这仅仅是个规范，所以浏览器是否遵守这个规范也不一定，所以就会有上面的IE浏览器判断是否同源的时候并没有考虑端口号的问题。<br>2） 同源策略限制的是js，而图片，css这些是不存在同源策略限制的。   </p>
+<h3 id="1-5__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF1F"><a href="#1-5__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF1F" class="headerlink" title="1.5 什么是跨域？"></a>1.5 什么是跨域？</h3><p>在某个网站的页面上通过js请求另外一个网站的数据，如果两个网站不满足同源策略，那么就存在跨域问题。   </p>
+<h2 id="2-__u4E3A_u4EC0_u4E48_u4F1A_u6709_u8DE8_u57DF_u95EE_u9898_uFF1F"><a href="#2-__u4E3A_u4EC0_u4E48_u4F1A_u6709_u8DE8_u57DF_u95EE_u9898_uFF1F" class="headerlink" title="2. 为什么会有跨域问题？"></a>2. 为什么会有跨域问题？</h2><p>由于在实际环境中，经常需要通过js获取一些数据，特别是ajax的流行，通过ajax加载某个网站的数据的场景就会经常遇到，而一旦有这样的需求，就可能会出现跨域的问题。   </p>
+<h2 id="3-__u5982_u4F55_u5224_u65AD_u6211_u662F_u5426_u9047_u5230_u4E86_u8DE8_u57DF_u95EE_u9898_uFF1F"><a href="#3-__u5982_u4F55_u5224_u65AD_u6211_u662F_u5426_u9047_u5230_u4E86_u8DE8_u57DF_u95EE_u9898_uFF1F" class="headerlink" title="3. 如何判断我是否遇到了跨域问题？"></a>3. 如何判断我是否遇到了跨域问题？</h2><p>一般来讲，如果你的请求被同源策略限制，浏览器的开发工具都会给出错误提示，在Chrome浏览器的console中，可能会有类似下面的提示：<br><img src="http://static.zybuluo.com/939958749/52t678l8q0qe2adct67etjbt/QQ%E6%88%AA%E5%9B%BE20151224171533.png" alt="QQ截图20151224171533.png-110.1kB">   </p>
+<h2 id="4-_u5982_u4F55_u89E3_u51B3_u8DE8_u57DF_u95EE_u9898_uFF1F"><a href="#4-_u5982_u4F55_u89E3_u51B3_u8DE8_u57DF_u95EE_u9898_uFF1F" class="headerlink" title="4.如何解决跨域问题？"></a>4.如何解决跨域问题？</h2><p>一般的思路是：通过一些妥协调整，绕过同源策略的限制。下面是我最近了解的一些方法。<br>为方便讲解，这里先举一个例子：<br>客户端采用H5开发，所有的数据都通过ajax请求从服务端获取。<br>客户端的页面都存放在静态文件服务器中，域名是<a href="http://static.demo.com" target="_blank" rel="external">http://static.demo.com</a><br>服务端提供接口供客户端调用，接口的参数和返回值都是JSON格式，服务端的域名是:<a href="http://server.demo.com。" target="_blank" rel="external">http://server.demo.com。</a><br>如果不考虑跨域的问题，客户端与服务端的交互方式如下：<br>1.客户端post请求服务端，参数：｛”key”:”value”｝<br>2.服务端返回结果：{“code”：1，”data”:”success”}   </p>
+<h3 id="4-1_Jsonp_u65B9_u5F0F"><a href="#4-1_Jsonp_u65B9_u5F0F" class="headerlink" title="4.1 Jsonp方式"></a>4.1 Jsonp方式</h3><p>原理： 通过在页面中新增一个<code>&lt;script&gt;</code>标签，标签的src指向的是另外一个域的能够提供数据的url，同时将一个本地的callback方法传给服务端，服务端返回的时候将会自动执行callback方法。<br>实现举例：<br>1)服务端修改返回的数据类型为js，同时在请求参数中增加一个callback字段，这个字段用于客户端传递要执行的js方法名称。<br>2）客户端传递的参数中增加callback，同时将普通的ajax方法改成在页面中新增一个<code>&lt;script&gt;</code>节点的方式。<br>具体实现：<br>1.通过js在页面中append如下标签<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"application/javascript"</span></span><br><span class="line">        src=<span class="string">"http://server.demo.com/Users/1234?callback=parseResponse"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>增加该标签之后，浏览器就会立即去请求这个url，由于<code>&lt;script src=&quot;&quot;&gt;</code>方式的是不受同源策略限制的，所以可以避免跨域限制。<br>2.服务端收到callback参数之后，将它拼接在返回的数据中，返回的数据如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseResponse(&#123;<span class="string">"Name"</span>: <span class="string">"Foo"</span>, <span class="string">"Id"</span>: <span class="number">1234</span>, <span class="string">"Rank"</span>: <span class="number">7</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3.这样返回之后，就调用页面上的parseResponse js方法，就达到了数据处理的目的。<br>4.最后将刚刚新增加到页面中的<code>&lt;script&gt;</code>元素删掉。   </p>
+<h3 id="4-2__u8BBE_u7F6Edocument-domain_u5C5E_u6027"><a href="#4-2__u8BBE_u7F6Edocument-domain_u5C5E_u6027" class="headerlink" title="4.2 设置document.domain属性"></a>4.2 设置document.domain属性</h3><p>如果两个页面或者frame可以将document.domain属性设置成相同的值，那么也可以绕过同源策略限制。<br>假设两个页面分别是static.demo.com和server.demo.com，两个页面加载之后都通过js将document.domain设置成demo.com，这样接下来的ajax请求就可以绕过同源策略限制了。<br>但是：如果两个页面存在端口，比如static.demo.com:8080 和 server.demo.com:8090，由于document.domain只能设置域名，所以就不起作用。<br>举例：<br>上面的例子，由于服务端返回的是json,而不是一个页面，所以没法将自己的域名设置成demo.com,但是可以通过另外一种方式，即在服务端增加一个静态页面，页面中放如下js代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain=demo.com</span><br></pre></td></tr></table></figure></p>
+<p>然后客户端页面加载的时候先去调用一下这个静态页面就好了。   </p>
+<h3 id="4-3_CORS_28Cross-Origin_Resource_Sharing_29"><a href="#4-3_CORS_28Cross-Origin_Resource_Sharing_29" class="headerlink" title="4.3 CORS(Cross-Origin Resource Sharing)"></a>4.3 CORS(Cross-Origin Resource Sharing)</h3><p>原理MDN上讲的更清楚一些，<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">点击这里</a>。<br>其实简单来说就是服务端在响应头中添加一个Access-Control-Allow-Origin头部，头部的值为客户端的域名，比如:<a href="http://static.demo.com，这样就可以了。" target="_blank" rel="external">http://static.demo.com，这样就可以了。</a><br>但是需要注意的是:CROS分为两种，一种是简单请求，一种是复杂请求，简单请求按照上面的方式是可以的，如果是复杂请求，浏览器会进行两步，先发一个options请求，这个请求称之为“预请求”，预请求实际上是个OPTIONS请求，类似于一个探测作用，如果服务端返回的头部通过了预请求的内容，则浏览器才会发起第二个真实请求。</p>
+<h3 id="4-4__u5BA2_u6237_u7AEF_u8BF7_u6C42_u901A_u8FC7Nginx_u8F6C_u53D1"><a href="#4-4__u5BA2_u6237_u7AEF_u8BF7_u6C42_u901A_u8FC7Nginx_u8F6C_u53D1" class="headerlink" title="4.4 客户端请求通过Nginx转发"></a>4.4 客户端请求通过Nginx转发</h3><p>原理：客户端的所有请求都直接发到客户端所在域名下，但是在客户端服务器增加一台nginx服务器，作为代理，如果是后端的url，直接代理转发到服务端，这样就不存在前端的跨域问题了。<br>举例:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="title">server_name</span>  static.demo.com;    <span class="comment">#可配置多个主机头</span></span><br><span class="line">    <span class="title">charset</span> utf-<span class="number">8</span>,gbk,gb2312,gb18030; <span class="comment">#可以实现多种编码识别</span></span><br><span class="line"></span><br><span class="line">    <span class="title">location</span> / &#123;</span><br><span class="line">        <span class="title">root</span>   /home/wy/www/static.demo.com/ROOT;  <span class="comment">#网站文件路径</span></span><br><span class="line"></span><br><span class="line">        <span class="title">autoindex</span> <span class="built_in">on</span>;</span><br><span class="line">        <span class="title">autoindex_exact_size</span> <span class="built_in">off</span>;</span><br><span class="line">        <span class="title">autoindex_localtime</span> <span class="built_in">on</span>;</span><br><span class="line">        <span class="title">index</span>  default.html;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">##所有/server/开头的请求都会走这里</span></span><br><span class="line">    <span class="title">location</span> /server/ &#123;</span><br><span class="line">            <span class="title">proxy_pass</span> <span class="url">http://server.demo.com:8080</span>;  <span class="comment">##转发到server</span></span><br><span class="line">            <span class="title">proxy_set_header</span>    Host             <span class="variable">$host</span>;</span><br><span class="line">            <span class="title">proxy_set_header</span>    X-Real-IP        <span class="variable">$remote_addr</span>;</span><br><span class="line">            <span class="title">proxy_set_header</span>    X-Forwarded-For  <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-5__u5176_u4ED6_u65B9_u5F0F"><a href="#4-5__u5176_u4ED6_u65B9_u5F0F" class="headerlink" title="4.5 其他方式"></a>4.5 其他方式</h3><p>1）WebSocket<br>2）Cross-document messaging</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Same-origin_policy" target="_blank" rel="external">https://en.wikipedia.org/wiki/Same-origin_policy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cross-site_scripting</a></li>
+<li><a href="https://en.wikipedia.org/wiki/JSONP" target="_blank" rel="external">https://en.wikipedia.org/wiki/JSONP</a></li>
+<li><a href="http://www.w3.org/TR/cors/" target="_blank" rel="external">http://www.w3.org/TR/cors/</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016-01-01-hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016-01-01-mysql-partition/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL分区表</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F"><span class="toc-number">1.</span> <span class="toc-text">1. 什么是跨域（Cross-site)？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1__u540C_u6E90_u7B56_u7565"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 同源策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 什么是域(origin)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3__u4E3A_u4EC0_u4E48_u8981_u6709_u540C_u6E90_u7B56_u7565_uFF1F"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 为什么要有同源策略？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4__u540C_u6E90_u7B56_u7565_u662F_u9650_u5236_u8C01_u7684_uFF1F"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 同源策略是限制谁的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF1F"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 什么是跨域？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-__u4E3A_u4EC0_u4E48_u4F1A_u6709_u8DE8_u57DF_u95EE_u9898_uFF1F"><span class="toc-number">2.</span> <span class="toc-text">2. 为什么会有跨域问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-__u5982_u4F55_u5224_u65AD_u6211_u662F_u5426_u9047_u5230_u4E86_u8DE8_u57DF_u95EE_u9898_uFF1F"><span class="toc-number">3.</span> <span class="toc-text">3. 如何判断我是否遇到了跨域问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5982_u4F55_u89E3_u51B3_u8DE8_u57DF_u95EE_u9898_uFF1F"><span class="toc-number">4.</span> <span class="toc-text">4.如何解决跨域问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1_Jsonp_u65B9_u5F0F"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Jsonp方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2__u8BBE_u7F6Edocument-domain_u5C5E_u6027"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 设置document.domain属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3_CORS_28Cross-Origin_Resource_Sharing_29"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 CORS(Cross-Origin Resource Sharing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4__u5BA2_u6237_u7AEF_u8BF7_u6C42_u901A_u8FC7Nginx_u8F6C_u53D1"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 客户端请求通过Nginx转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5__u5176_u4ED6_u65B9_u5F0F"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 其他方式</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
+
+
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a><a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+    <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016-01-01-ajax-cross-domain/" data-title="Ajax跨域请求原理及解决办法" data-url="https://medusar.github.io/2016-01-01-ajax-cross-domain/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"medusar"};
+    	(function() {
+    		var ds = document.createElement('script');
+    		ds.type = 'text/javascript';ds.async = true;
+    		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    		ds.charset = 'UTF-8';
+    		(document.getElementsByTagName('head')[0]
+    		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+    	})();
+    	</script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016-01-01-hello-world/" title="上一篇: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016-01-01-mysql-partition/" title="下一篇: MySQL分区表">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016-01-07-what-if-exception-occurs-in-threadpool/">如果提交到java线程池中的任务都抛出了异常会发生什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-06-linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-06-broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-04-spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-04-Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-03-how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015-10-13-buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015-10-10-key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Medusar
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        <!-- <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >Unique Visitor:
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, Page View:
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div> -->
+    </div>
+    <!-- <script async src="/js/busuanzi.pure.mini.js"></script> -->
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var spfkConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?4600374f3aa3683027e8116eaf768887";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71945534-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+  </div>
+</body>
+</html>

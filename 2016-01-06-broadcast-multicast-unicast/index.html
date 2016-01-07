@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>广播（broadcast)，组播(multicast)，单播(unicast)的Java实现 | Medusar&#39;s playground</title>
+  <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IPV4地址共分为5类，其中ABC三类为单播(unicast)地址，D类为组播地址，另外，IP地址包括网络号和主机号两部分，主机号的二进制为都为1的就是该网络中的多播地址。那么广播(broadcast)，组播(multicast)，单播(unicast)都有哪些特点呢?它们在java中是如何体现的呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广播（broadcast)，组播(multicast)，单播(unicast)的Java实现">
+<meta property="og:url" content="https://medusar.github.io/2016-01-06-broadcast-multicast-unicast/index.html">
+<meta property="og:site_name" content="Medusar's playground">
+<meta property="og:description" content="IPV4地址共分为5类，其中ABC三类为单播(unicast)地址，D类为组播地址，另外，IP地址包括网络号和主机号两部分，主机号的二进制为都为1的就是该网络中的多播地址。那么广播(broadcast)，组播(multicast)，单播(unicast)都有哪些特点呢?它们在java中是如何体现的呢？">
+<meta property="og:updated_time" content="2016-01-07T14:45:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="广播（broadcast)，组播(multicast)，单播(unicast)的Java实现">
+<meta name="twitter:description" content="IPV4地址共分为5类，其中ABC三类为单播(unicast)地址，D类为组播地址，另外，IP地址包括网络号和主机号两部分，主机号的二进制为都为1的就是该网络中的多播地址。那么广播(broadcast)，组播(multicast)，单播(unicast)都有哪些特点呢?它们在java中是如何体现的呢？">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Medusar</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">首页</a></li>
+				        
+							<li><a href="/archives">文章</a></li>
+				        
+							<li><a href="/others">其他</a></li>
+				        
+							<li><a href="/booklist">书单</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+					        
+								<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+					        
+								<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+					        
+								<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://java.jr-jr.com/">Java面试指南</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hollischuang.com/">Hollis</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://happypeter.github.io/">Peter</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dengo.org/">dengo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://litten.github.io/">Litten</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yueyuxing.github.io/">岳宇星</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wuchenglong.com/">JackieWu</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zippera.github.io/">zipperary</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.osmn00.com/translation/221.html">堂主</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://jikeytang.github.io/">豪情</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ibruce.info/">不如</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ruanyifeng.com/home.html">阮一峰</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">真心不想自我介绍</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Medusar</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Medusar</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">首页</a></li>
+		        
+					<li><a href="/archives">文章</a></li>
+		        
+					<li><a href="/others">其他</a></li>
+		        
+					<li><a href="/booklist">书单</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+			        
+						<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+			        
+						<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+			        
+						<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-broadcast-multicast-unicast" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016-01-06-broadcast-multicast-unicast/" class="article-date">
+  	<time datetime="2016-01-06T12:21:27.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      广播（broadcast)，组播(multicast)，单播(unicast)的Java实现
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP/">IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="IP_u5730_u5740"><a href="#IP_u5730_u5740" class="headerlink" title="IP地址"></a>IP地址</h2><p>在IPv4中，一共有五类IP地址   </p>
+<ul>
+<li>A类地址：网络号占1个字节。网络号的第一位固定为0。</li>
+<li>B类地址：网络号占2个字节。网络号的前两位固定为10。</li>
+<li>C类地址：网络号占3个字节。网络号的前三位固定位110。</li>
+<li>D类地址：前四位是1110，用于多播(multicast)，即一对多通信。</li>
+<li>E类地址：前四位是1111，保留为以后使用。</li>
+</ul>
+<p>其中，D类地址是从224.0.0.0到239.255.255.255这个范围的。这类地址的主要做用就是用作组播（又叫做多播）。<br>而ABC类地址是单播地址。<br>广播地址：主机位全部是1的地址都是广播地址,即<code>&lt;net-id,-1&gt;</code>。网络位和主机位全都是1的是本地广播地址，即<code>&lt;-1,-1&gt;</code>,IPV4:255.255.255.255。</p>
+<h2 id="u5355_u64AD"><a href="#u5355_u64AD" class="headerlink" title="单播"></a>单播</h2><p>单播就是一对一通信，我们常用的就是TCP协议，在Java中的体现就是Socket和ServerSocket。有人可能会问，那UDP协议呢？其实UDP协议即可以用来做单播又可以用来做多播和广播。Java中，处理UDP对应的是DatagramSocket。</p>
+<p>下面我们分别使用TCP和UDP实现一个服务端客户端。</p>
+<h3 id="u57FA_u4E8ETCP_u7684_u5B9E_u73B0"><a href="#u57FA_u4E8ETCP_u7684_u5B9E_u73B0" class="headerlink" title="基于TCP的实现"></a>基于TCP的实现</h3><p>TCP服务端：<br>服务端监听本地端口9999，然后等待客户端输入，将客户端的输入原样输出给客户端。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Date: 2016年1月6日 下午1:16:57 &lt;br/&gt;</span><br><span class="line"> * TCP服务端，监听端口，等待连接，然后将客户端的输入的内容原样返回给客户端</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPUnicastServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		ServerSocket serverSocket = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">// 服务端，绑定到端口9999</span></span><br><span class="line">			serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">9999</span>);</span><br><span class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">				<span class="keyword">final</span> Socket clientSocket = serverSocket.accept();</span><br><span class="line">				<span class="comment">// 启动一个线程，处理客户端连接</span></span><br><span class="line">				<span class="keyword">new</span> Thread() &#123;</span><br><span class="line">					<span class="annotation">@Override</span></span><br><span class="line">					<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">						<span class="keyword">try</span> &#123;</span><br><span class="line">							BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(clientSocket.getInputStream()));</span><br><span class="line">							PrintWriter writer = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(clientSocket.getOutputStream()));</span><br><span class="line">							<span class="comment">// 监听客户端的输入</span></span><br><span class="line">							<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">								String requestData = reader.readLine();</span><br><span class="line">								<span class="keyword">if</span> (requestData == <span class="keyword">null</span>) &#123;</span><br><span class="line">									<span class="keyword">break</span>;</span><br><span class="line">								&#125;</span><br><span class="line"></span><br><span class="line">								System.out.println(<span class="string">"server received:"</span> + requestData);</span><br><span class="line">								<span class="comment">// 将客户端的输入原样返回给客户端</span></span><br><span class="line">								writer.println(requestData);</span><br><span class="line">								writer.flush();</span><br><span class="line">							&#125;</span><br><span class="line">						&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">							e.printStackTrace();</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;.start();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (serverSocket != <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					serverSocket.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>TCP客户端：<br>客户端负责与客户端建立连接，并向服务端发送数据，同时接受服务端返回的结果。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// 向服务端创建连接</span></span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, <span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line">		BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">		PrintWriter writer = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(socket.getOutputStream()));</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 发送数据</span></span><br><span class="line">		writer.println(<span class="string">"Hello,i am client"</span>);</span><br><span class="line">		writer.flush();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 等待服务端响应</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			String serverData = reader.readLine();</span><br><span class="line">			<span class="keyword">if</span> (serverData == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(<span class="string">"client received:"</span> + serverData);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		socket.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>TCP的实现比较特殊，Socket分为服务端Socket(ServerSocket)和客户端Socket(Socket)。</p>
+<h3 id="u57FA_u4E8EUDP_u7684_u5B9E_u73B0"><a href="#u57FA_u4E8EUDP_u7684_u5B9E_u73B0" class="headerlink" title="基于UDP的实现"></a>基于UDP的实现</h3><p>Java中UDP对应的Socket只有一个DatagramSocket，不区分客户端与服务端（想想也是）。<br>发送数据的一端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		DatagramSocket serverSocket = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 发送的目的地址和端口</span></span><br><span class="line">		InetAddress destination = InetAddress.getByName(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">byte</span>[] buf = <span class="string">"Hello client"</span>.getBytes();</span><br><span class="line">			DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(buf, buf.length, destination, <span class="number">9999</span>);</span><br><span class="line">			serverSocket.send(packet);</span><br><span class="line">			TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		serverSocket.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接收数据的一端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		DatagramSocket clientSocket = <span class="keyword">new</span> DatagramSocket(<span class="number">9999</span>);</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">256</span>], <span class="number">256</span>);</span><br><span class="line">			clientSocket.receive(packet);</span><br><span class="line">			System.out.println(<span class="keyword">new</span> String(packet.getData()).trim());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<ol>
+<li>发送端和接收端都使用DatagramSocket</li>
+<li>发送端发送的时候指定的地址是一个单播地址</li>
+<li>发送和接收数据使用的是DatagramPacket</li>
+</ol>
+<h2 id="u591A_u64AD"><a href="#u591A_u64AD" class="headerlink" title="多播"></a>多播</h2><p>多播就是一对多通信，即从一台机器发送数据到多台机器。在Java里的体现就是MulticastSocket，MulticastSocket是DatagramSocket的子类。<br>很多人喜欢将多播称作组播，是因为多播不同于广播，广播是向所有机器发送数据，而多播是针对某一组机器发送数据。下面我们来看一下多播的实现。</p>
+<p>发送数据的一端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 指定组播要发送的组</span></span><br><span class="line">		InetAddress group = InetAddress.getByName(<span class="string">"224.0.0.3"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 创建MulticastSocket，它是DatagramSocket的子类</span></span><br><span class="line">		MulticastSocket socket = <span class="keyword">new</span> MulticastSocket();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			String data = <span class="string">"hello client"</span>;</span><br><span class="line">			<span class="keyword">byte</span>[] bytes = data.getBytes();</span><br><span class="line">			<span class="comment">// 将数据发送到对应组的对应端口</span></span><br><span class="line">			socket.send(<span class="keyword">new</span> DatagramPacket(bytes, bytes.length, group, <span class="number">9999</span>));</span><br><span class="line">			TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		socket.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接收数据的一端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// 多播客户端监听相应的端口</span></span><br><span class="line">		MulticastSocket clientSocket = <span class="keyword">new</span> MulticastSocket(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 客户端将自己加入到指定的多播组中，这样就能收到来自这个组的消息</span></span><br><span class="line">		InetAddress group = InetAddress.getByName(<span class="string">"224.0.0.3"</span>);</span><br><span class="line">		clientSocket.joinGroup(group);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">256</span>];</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="comment">// 读取数据</span></span><br><span class="line">			DatagramPacket msgPacket = <span class="keyword">new</span> DatagramPacket(buf, buf.length);</span><br><span class="line">			clientSocket.receive(msgPacket);</span><br><span class="line"></span><br><span class="line">			String msg = <span class="keyword">new</span> String(msgPacket.getData());</span><br><span class="line">			System.out.println(<span class="string">"Socket 1 received msg: "</span> + msg.trim());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">//离开组</span></span><br><span class="line">		<span class="comment">//clientSocket.leaveGroup(group);</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<ol>
+<li>多播发送端和接收端使用的都是MulticastSocket，它是DatagramSocket的一个子类，其实在底层，多播也是基于UDP的。</li>
+<li>客户端需要加入到对应的group中，才可以接收到服务端的消息：<code>clientSocket.joinGroup(group);</code></li>
+</ol>
+<h2 id="u5E7F_u64AD"><a href="#u5E7F_u64AD" class="headerlink" title="广播"></a>广播</h2><p>广播分组的目标IP地址的主机部分全为1，这意味着本地网络（广播域）中的所有主机都将接收并查看该分组。诸如ARP和DHCP等很多网络协议都使用广播。<br>例如：</p>
+<ol>
+<li>C类网络192.168.1.0的默认子网掩码为255.255.255.0，其广播地址为192.168.1.255，其主机部分为十进制数255或二进制数11111111（全为1）。</li>
+<li>B类网络172.16.0.0的默认子网掩码为255.255.0.0，其广播地址为172.16.255.255。</li>
+<li>A类网络10.0.0.0的默认子网掩码为255.0.0.0，其广播地址为10.255.255.255。</li>
+</ol>
+<p>在java中，广播也是借助DatagramSocket实现的。<br>消息发送方<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		DatagramSocket serverSocket = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 发送的目的地址和端口</span></span><br><span class="line">		InetAddress destination = InetAddress.getByName(<span class="string">"255.255.255.255"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">byte</span>[] buf = <span class="string">"Hello client"</span>.getBytes();</span><br><span class="line">			DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(buf, buf.length, destination, <span class="number">9999</span>);</span><br><span class="line">			serverSocket.send(packet);</span><br><span class="line">			TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		serverSocket.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：发送的地址必须是广播地址。</p>
+<p>消息接收方<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		DatagramSocket clientSocket = <span class="keyword">new</span> DatagramSocket(<span class="number">9999</span>);</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">256</span>], <span class="number">256</span>);</span><br><span class="line">			clientSocket.receive(packet);</span><br><span class="line">			System.out.println(<span class="keyword">new</span> String(packet.getData()).trim());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其实仔细观察一下你会发现，在前面的UDP实现单播的时候的代码与广播的代码基本是一样的，区别就在于单播的时候目的端的地址必须是单播地址，而广播的时候，目的端的地址必须是广播地址。</p>
+<h2 id="u5355_u64AD_uFF0C_u7EC4_u64AD_uFF0C_u5E7F_u64AD_u90FD_u6709_u54EA_u4E9B_u5E94_u7528_u573A_u666F_uFF1F"><a href="#u5355_u64AD_uFF0C_u7EC4_u64AD_uFF0C_u5E7F_u64AD_u90FD_u6709_u54EA_u4E9B_u5E94_u7528_u573A_u666F_uFF1F" class="headerlink" title="单播，组播，广播都有哪些应用场景？"></a>单播，组播，广播都有哪些应用场景？</h2><ol>
+<li>单播：点对点通信，最常用的就是TCP协议。</li>
+<li>组播：一对多通信，视频教学：多个学生连接到同一个服务端。</li>
+<li>广播：一对多通信，DHCP动态分配IP地址的时候，客户机器就是通过发送一个广播信息，只有DHCP服务器才会对这个广播信息进行响应。</li>
+</ol>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>IPv4地址分为五类，其中ABC三类都是单播地址，D类是多播地址，地址范围为224.0.0.0到239.255.255.255。</li>
+<li>广播地址：地址位都为1。网络位和地址位都为1的（255.255.255.255）为本地广播地址。</li>
+<li>广播和多播都是通过UDP协议实现的，在Java中广播是借助DatagramSocket实现，多播是MulticastSocket，后者是前者的子类。</li>
+</ol>
+<h2 id="u6269_u5C55_u9605_u8BFB"><a href="#u6269_u5C55_u9605_u8BFB" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ol>
+<li><a href="http://www.nakov.com/inetjava/lectures/part-1-sockets/InetJava-1.5-UDP-and-Multicast-Sockets.html" target="_blank" rel="external">http://www.nakov.com/inetjava/lectures/part-1-sockets/InetJava-1.5-UDP-and-Multicast-Sockets.html</a></li>
+<li><a href="http://book.51cto.com/art/200904/120471.htm" target="_blank" rel="external">http://book.51cto.com/art/200904/120471.htm</a></li>
+<li><a href="http://colobu.com/2014/10/21/udp-and-unicast-multicast-broadcast-anycast/（这篇文章讲解的非常好）" target="_blank" rel="external">http://colobu.com/2014/10/21/udp-and-unicast-multicast-broadcast-anycast/（这篇文章讲解的非常好）</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016-01-06-linux-rsync/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          [Linux工具] rsync数据同步工具
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016-01-04-spinlock/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">自旋锁</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP_u5730_u5740"><span class="toc-number">1.</span> <span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5355_u64AD"><span class="toc-number">2.</span> <span class="toc-text">单播</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u57FA_u4E8ETCP_u7684_u5B9E_u73B0"><span class="toc-number">2.1.</span> <span class="toc-text">基于TCP的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u57FA_u4E8EUDP_u7684_u5B9E_u73B0"><span class="toc-number">2.2.</span> <span class="toc-text">基于UDP的实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u591A_u64AD"><span class="toc-number">3.</span> <span class="toc-text">多播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5E7F_u64AD"><span class="toc-number">4.</span> <span class="toc-text">广播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5355_u64AD_uFF0C_u7EC4_u64AD_uFF0C_u5E7F_u64AD_u90FD_u6709_u54EA_u4E9B_u5E94_u7528_u573A_u666F_uFF1F"><span class="toc-number">5.</span> <span class="toc-text">单播，组播，广播都有哪些应用场景？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6269_u5C55_u9605_u8BFB"><span class="toc-number">7.</span> <span class="toc-text">扩展阅读</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
+
+
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a><a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+    <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016-01-06-broadcast-multicast-unicast/" data-title="广播（broadcast)，组播(multicast)，单播(unicast)的Java实现" data-url="https://medusar.github.io/2016-01-06-broadcast-multicast-unicast/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"medusar"};
+    	(function() {
+    		var ds = document.createElement('script');
+    		ds.type = 'text/javascript';ds.async = true;
+    		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    		ds.charset = 'UTF-8';
+    		(document.getElementsByTagName('head')[0]
+    		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+    	})();
+    	</script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016-01-06-linux-rsync/" title="上一篇: [Linux工具] rsync数据同步工具">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016-01-04-spinlock/" title="下一篇: 自旋锁">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016-01-07-what-if-exception-occurs-in-threadpool/">如果提交到java线程池中的任务都抛出了异常会发生什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-06-linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-06-broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-04-spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-04-Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-03-how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016-01-01-mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015-10-13-buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/2015-10-10-key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Medusar
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        <!-- <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >Unique Visitor:
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, Page View:
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div> -->
+    </div>
+    <!-- <script async src="/js/busuanzi.pure.mini.js"></script> -->
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var spfkConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?4600374f3aa3683027e8116eaf768887";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71945534-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+  </div>
+</body>
+</html>
