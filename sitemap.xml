@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://medusar.github.io/2016-01-07-what-if-exception-occurs-in-threadpool/</loc>
+    <lastmod>2016-01-08T01:03:42.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>https://medusar.github.io/2015-10-13-buffer-in-netty/</loc>
     <lastmod>2016-01-07T14:47:49.000Z</lastmod>
   </url>
@@ -54,11 +59,6 @@
   <url>
     <loc>https://medusar.github.io/2016-01-03-how-127-0-0-1and0-0-0-0-differs-from-each-other/</loc>
     <lastmod>2016-01-07T14:45:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://medusar.github.io/2016-01-07-what-if-exception-occurs-in-threadpool/</loc>
-    <lastmod>2016-01-07T13:39:20.000Z</lastmod>
   </url>
   
   <url>

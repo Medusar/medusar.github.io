@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>https://medusar.github.io/2016-01-07-what-if-exception-occurs-in-threadpool/</loc>
+    <lastmod>2016-01-08T01:03:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java线程池异常处理最佳实践</title>
+        <pubTime>2016-01-07T13:37:30.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>多线程</tag>
+         
+        <tag>线程池</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://medusar.github.io/2015-10-13-buffer-in-netty/</loc>
     <lastmod>2016-01-07T14:47:49.000Z</lastmod>
     <data>
@@ -206,27 +227,6 @@
         <tag>IP</tag>
          
         <tag>网络</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://medusar.github.io/2016-01-07-what-if-exception-occurs-in-threadpool/</loc>
-    <lastmod>2016-01-07T13:39:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>如果提交到java线程池中的任务都抛出了异常会发生什么？</title>
-        <pubTime>2016-01-07T13:37:30.000Z</pubTime>
-        
-        <tag>java</tag>
-         
-        <tag>多线程</tag>
-         
-        <tag>线程池</tag>
          
          
            
