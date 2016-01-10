@@ -126,7 +126,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
+						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
 					</div>
 				</section>
 				
@@ -242,10 +242,172 @@
 
       <div class="body-wrap">
   
+    <article id="post-timeout-or-notify" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/timeout-or-notify/" class="article-date">
+  	<time datetime="2016-01-01T14:19:32.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              我们知道java中Object的wait方法的作用是让线程进入等待状态，而它的唤醒是有两种方式的：一种就是wait设置的超时时间到了，另一种就是由其他线程调用了改线程的notiy或者notifyAll方法，但是，如果我们想判断线程是如何返回的，该如何判断呢？
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/timeout-or-notify/#more">read more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/hello-world/" class="article-date">
+  	<time datetime="2016-01-01T11:44:15.000Z" itemprop="datePublished">2016-01-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: true,
+            isPost: false,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+
+  
     <article id="post-ajax-cross-domain" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016-01-01-ajax-cross-domain/" class="article-date">
+      <a href="/ajax-cross-domain/" class="article-date">
   	<time datetime="2016-01-01T07:03:08.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
@@ -259,7 +421,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016-01-01-ajax-cross-domain/">Ajax跨域请求原理及解决办法</a>
+      <a class="article-title" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a>
     </h1>
   
 
@@ -285,7 +447,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016-01-01-ajax-cross-domain/#more">read more >></a>
+          <a  href="/ajax-cross-domain/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -326,7 +488,7 @@
     <article id="post-mysql-partition" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016-01-01-mysql-partition/" class="article-date">
+      <a href="/mysql-partition/" class="article-date">
   	<time datetime="2016-01-01T06:43:08.000Z" itemprop="datePublished">2016-01-01</time>
 </a>
     </div>
@@ -340,7 +502,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016-01-01-mysql-partition/">MySQL分区表</a>
+      <a class="article-title" href="/mysql-partition/">MySQL分区表</a>
     </h1>
   
 
@@ -366,7 +528,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016-01-01-mysql-partition/#more">read more >></a>
+          <a  href="/mysql-partition/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -407,7 +569,7 @@
     <article id="post-buffer-in-netty" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015-10-13-buffer-in-netty/" class="article-date">
+      <a href="/buffer-in-netty/" class="article-date">
   	<time datetime="2015-10-13T14:17:15.000Z" itemprop="datePublished">2015-10-13</time>
 </a>
     </div>
@@ -421,7 +583,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015-10-13-buffer-in-netty/">Netty中的Buffer</a>
+      <a class="article-title" href="/buffer-in-netty/">Netty中的Buffer</a>
     </h1>
   
 
@@ -447,7 +609,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2015-10-13-buffer-in-netty/#more">read more >></a>
+          <a  href="/buffer-in-netty/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -488,7 +650,7 @@
     <article id="post-key-concepts-netty" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015-10-10-key-concepts-netty/" class="article-date">
+      <a href="/key-concepts-netty/" class="article-date">
   	<time datetime="2015-10-10T14:14:55.000Z" itemprop="datePublished">2015-10-10</time>
 </a>
     </div>
@@ -502,7 +664,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015-10-10-key-concepts-netty/">Netty中的几个关键概念</a>
+      <a class="article-title" href="/key-concepts-netty/">Netty中的几个关键概念</a>
     </h1>
   
 
@@ -528,7 +690,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2015-10-10-key-concepts-netty/#more">read more >></a>
+          <a  href="/key-concepts-netty/#more">read more >></a>
         </p>
       
       <div class="clearfix"></div>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java中的可重入(Reentrant)锁 | Medusar&#39;s playground</title>
+  <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大家都听说过可重入锁，那么什么是可重入锁，为什么要用可重入锁，Java中是否有不可重入锁？可重入锁应该如何使用呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的可重入(Reentrant)锁">
+<meta property="og:url" content="https://medusar.github.io/Reentrant-lock/index.html">
+<meta property="og:site_name" content="Medusar's playground">
+<meta property="og:description" content="大家都听说过可重入锁，那么什么是可重入锁，为什么要用可重入锁，Java中是否有不可重入锁？可重入锁应该如何使用呢？">
+<meta property="og:updated_time" content="2016-01-10T08:43:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java中的可重入(Reentrant)锁">
+<meta name="twitter:description" content="大家都听说过可重入锁，那么什么是可重入锁，为什么要用可重入锁，Java中是否有不可重入锁？可重入锁应该如何使用呢？">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Medusar</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">首页</a></li>
+				        
+							<li><a href="/archives">文章</a></li>
+				        
+							<li><a href="/others">其他</a></li>
+				        
+							<li><a href="/booklist">书单</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+					        
+								<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+					        
+								<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+					        
+								<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://java.jr-jr.com/">Java面试指南</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hollischuang.com/">Hollis</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://happypeter.github.io/">Peter</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dengo.org/">dengo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://litten.github.io/">Litten</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yueyuxing.github.io/">岳宇星</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wuchenglong.com/">JackieWu</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zippera.github.io/">zipperary</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.osmn00.com/translation/221.html">堂主</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://jikeytang.github.io/">豪情</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ibruce.info/">不如</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ruanyifeng.com/home.html">阮一峰</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">真心不想自我介绍</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Medusar</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Medusar</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">首页</a></li>
+		        
+					<li><a href="/archives">文章</a></li>
+		        
+					<li><a href="/others">其他</a></li>
+		        
+					<li><a href="/booklist">书单</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+			        
+						<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+			        
+						<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+			        
+						<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Reentrant-lock" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/Reentrant-lock/" class="article-date">
+  	<time datetime="2016-01-04T00:34:06.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java中的可重入(Reentrant)锁
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="u4EC0_u4E48_u662F_u53EF_u91CD_u5165_u9501_uFF1F"><a href="#u4EC0_u4E48_u662F_u53EF_u91CD_u5165_u9501_uFF1F" class="headerlink" title="什么是可重入锁？"></a>什么是可重入锁？</h2><p>可重入锁是一种特殊的互斥锁，它可以被同一个线程多次获取，而不会产生死锁。   </p>
+<ol>
+<li>首先它是互斥锁：任意时刻，只有一个线程锁。即假设A线程已经获取了锁，在A线程释放这个锁之前，B线程是无法获取到这个锁的，B要获取这个锁就会进入阻塞状态。</li>
+<li>其次，它可以被同一个线程多次持有。即，假设A线程已经获取了这个锁，如果A线程在释放锁之前又一次请求获取这个锁，那么是能够获取成功的。<br>举例说明：   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">lockA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		lockB();  <span class="comment">//lockA方法中调用lockB方法</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">lockB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"lock B"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如上面的的代码所示，假如我们要调用lockA方法，而lockA方法又要调用lockB方法，并且这两个方法上都有synchronized关键字，即两个方法都会以类对象作为锁，所以两个方法是统一把锁，如果没有可重入锁的机制，那么这个方法就无法被正确执行。另外可以想象一下，假如我们有一个递归方法，而这个方法是需要加锁的，如果没有可重入锁的机制，加锁的递归方法也是不能实现的。这就是为什么要有可重入锁。  </p>
+<h2 id="Java_u4E2D_u7684_u53EF_u91CD_u5165_u9501"><a href="#Java_u4E2D_u7684_u53EF_u91CD_u5165_u9501" class="headerlink" title="Java中的可重入锁"></a>Java中的可重入锁</h2><h3 id="1-_synchronized"><a href="#1-_synchronized" class="headerlink" title="1. synchronized"></a>1. synchronized</h3><p>synchronized是Java提供的内置锁，是互斥锁，又是可重入锁。<br>synchronized关键字有三种用法：</p>
+<ul>
+<li>加在对象方法上:锁住的是当前对象，不同的对象可以被同时访问</li>
+<li>加在类方法上：锁住的是当前类对应在JVM中的Class对象</li>
+<li>加在代码块上：锁住的是synchronized(lockobj)中的lockobj</li>
+</ul>
+<p>synchronized可重入举例：<br>我们知道Hashtable是线程安全的，因为它的所有对元素的读写操作都有synchronized关键字修饰，其中有个putAll方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    * Copies all of the mappings from the specified map to this hashtable.</span><br><span class="line">    * These mappings will replace any mappings that this hashtable had for any</span><br><span class="line">    * of the keys currently in the specified map.</span><br><span class="line">    *</span><br><span class="line">    * <span class="doctag">@param</span> t mappings to be stored in this map</span><br><span class="line">    * <span class="doctag">@throws</span> NullPointerException if the specified map is null</span><br><span class="line">    * <span class="doctag">@since</span> 1.2</span><br><span class="line">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map&lt;? extends K, ? extends V&gt; t)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">for</span> (Map.Entry&lt;? extends K, ? extends V&gt; e : t.entrySet())</span><br><span class="line">           put(e.getKey(), e.getValue());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到这个方法是被synchronized关键字修饰的，方法里面是通过for循环调用put(K,V)方法，我们再来看一下put方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// Make sure the value is not null</span></span><br><span class="line">      <span class="keyword">if</span> (value == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Makes sure the key is not already in the hashtable.</span></span><br><span class="line">      Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">      <span class="keyword">int</span> hash = key.hashCode();</span><br><span class="line">      <span class="keyword">int</span> index = (hash &amp; <span class="number">0x7FFFFFFF</span>) % tab.length;</span><br><span class="line">      <span class="annotation">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">      Entry&lt;K,V&gt; entry = (Entry&lt;K,V&gt;)tab[index];</span><br><span class="line">      <span class="keyword">for</span>(; entry != <span class="keyword">null</span> ; entry = entry.next) &#123;</span><br><span class="line">          <span class="keyword">if</span> ((entry.hash == hash) &amp;&amp; entry.key.equals(key)) &#123;</span><br><span class="line">              V old = entry.value;</span><br><span class="line">              entry.value = value;</span><br><span class="line">              <span class="keyword">return</span> old;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      addEntry(hash, key, value, index);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，put方法也是被synchronized关键字修饰的。<br>所以，当我们调用一个Hashtable对象的putAll方法的时候，如果synchronized关键字不支持重入，那么程序将不能正常运行。</p>
+<h3 id="2-_ReentrantLock"><a href="#2-_ReentrantLock" class="headerlink" title="2. ReentrantLock"></a>2. ReentrantLock</h3><p>ReentrantLock是Java提供的显示锁，它也是互斥锁，也是可重入锁（通过名字就知道，哈哈）。<br>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReentrantLockTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFirstLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		lock.lock();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">"doFirstLock---"</span> + Thread.currentThread().getId());</span><br><span class="line">			doSecondLock();</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			lock.unlock();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSecondLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		lock.lock();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">"doSecondLock---"</span> + Thread.currentThread().getId());</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			lock.unlock();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">new</span> Thread() &#123;</span><br><span class="line"></span><br><span class="line">				<span class="annotation">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">					<span class="keyword">new</span> ReentrantLockTest().doFirstLock();</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;.start();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		TimeUnit.SECONDS.sleep(<span class="number">100</span> * <span class="number">50</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">doFirstLock---<span class="number">9</span></span><br><span class="line">doFirstLock---<span class="number">10</span></span><br><span class="line">doSecondLock---<span class="number">9</span></span><br><span class="line">doSecondLock---<span class="number">10</span></span><br><span class="line">doFirstLock---<span class="number">11</span></span><br><span class="line">doSecondLock---<span class="number">11</span></span><br><span class="line">doFirstLock---<span class="number">12</span></span><br><span class="line">doSecondLock---<span class="number">12</span></span><br><span class="line">doFirstLock---<span class="number">13</span></span><br><span class="line">doSecondLock---<span class="number">13</span></span><br><span class="line">doFirstLock---<span class="number">16</span></span><br><span class="line">doSecondLock---<span class="number">16</span></span><br><span class="line">doFirstLock---<span class="number">14</span></span><br><span class="line">doSecondLock---<span class="number">14</span></span><br><span class="line">doFirstLock---<span class="number">15</span></span><br><span class="line">doSecondLock---<span class="number">15</span></span><br><span class="line">doFirstLock---<span class="number">17</span></span><br><span class="line">doSecondLock---<span class="number">17</span></span><br><span class="line">doFirstLock---<span class="number">18</span></span><br><span class="line">doSecondLock---<span class="number">18</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Java_u4E2D_u7684_u4E0D_u53EF_u91CD_u5165_u9501"><a href="#Java_u4E2D_u7684_u4E0D_u53EF_u91CD_u5165_u9501" class="headerlink" title="Java中的不可重入锁"></a>Java中的不可重入锁</h2><p>下面是我在<a href="//自旋锁">自旋锁</a>中写的一个自旋锁的例子，它就是不可重入的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpinLock</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="keyword">new</span> AtomicReference&lt;Thread&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Thread current = Thread.currentThread();</span><br><span class="line">		<span class="comment">// 利用CAS</span></span><br><span class="line">		<span class="keyword">while</span> (!cas.compareAndSet(<span class="keyword">null</span>, current)) &#123;</span><br><span class="line">			<span class="comment">// DO nothing</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Thread current = Thread.currentThread();</span><br><span class="line">		cas.compareAndSet(current, <span class="keyword">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的例子，如果线程A两次调用lock方法获取锁，那么只有第一次可以成功，第二次将进入循环等待。<br>测试代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">final</span> SpinLock spinLock = <span class="keyword">new</span> SpinLock();</span><br><span class="line">		System.out.println(<span class="string">"invoke lock"</span>);</span><br><span class="line">		spinLock.lock();</span><br><span class="line">		System.out.println(<span class="string">" invoke lock success"</span>);</span><br><span class="line">		System.out.println(<span class="string">"try lock again"</span>);</span><br><span class="line">		spinLock.lock();</span><br><span class="line">		System.out.println(<span class="string">"try lock success"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">invoke lock</span><br><span class="line"> invoke lock success</span><br><span class="line"><span class="keyword">try</span> lock again</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，并没有输出”try lock success”,是因为在第二次获取锁的时候，由于不可重入，而进入循环等待。</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>可重入锁：即某个线程获得了锁之后，在锁释放前，它可以多次重新获取该锁。</li>
+<li>可重入锁解决了重入锁死的问题。</li>
+<li>java的内置锁synchronized和ReentrantLock都是可重入锁</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/spinlock/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          自旋锁
+        
+      </div>
+    </a>
+  
+  
+    <a href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">127.0.0.1和0.0.0.0地址的区别</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4EC0_u4E48_u662F_u53EF_u91CD_u5165_u9501_uFF1F"><span class="toc-number">1.</span> <span class="toc-text">什么是可重入锁？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java_u4E2D_u7684_u53EF_u91CD_u5165_u9501"><span class="toc-number">2.</span> <span class="toc-text">Java中的可重入锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_synchronized"><span class="toc-number">2.1.</span> <span class="toc-text">1. synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_ReentrantLock"><span class="toc-number">2.2.</span> <span class="toc-text">2. ReentrantLock</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java_u4E2D_u7684_u4E0D_u53EF_u91CD_u5165_u9501"><span class="toc-number">3.</span> <span class="toc-text">Java中的不可重入锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
+
+
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a><a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+    <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="Reentrant-lock/" data-title="Java中的可重入(Reentrant)锁" data-url="https://medusar.github.io/Reentrant-lock/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"medusar"};
+    	(function() {
+    		var ds = document.createElement('script');
+    		ds.type = 'text/javascript';ds.async = true;
+    		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    		ds.charset = 'UTF-8';
+    		(document.getElementsByTagName('head')[0]
+    		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+    	})();
+    	</script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/spinlock/" title="上一篇: 自旋锁">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/" title="下一篇: 127.0.0.1和0.0.0.0地址的区别">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/java线程间通信/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Medusar
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        <!-- <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >Unique Visitor:
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, Page View:
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div> -->
+    </div>
+    <!-- <script async src="/js/busuanzi.pure.mini.js"></script> -->
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var spfkConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?4600374f3aa3683027e8116eaf768887";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71945534-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+  </div>
+</body>
+</html>
