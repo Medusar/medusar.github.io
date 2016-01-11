@@ -3,9 +3,9 @@
   <title><![CDATA[Medusar's playground]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="https://medusar.github.io/"/>
-  <updated>2016-01-10T07:16:25.000Z</updated>
-  <id>https://medusar.github.io/</id>
+  <link href="http://blog.onlycatch.com/"/>
+  <updated>2016-01-10T15:07:24.000Z</updated>
+  <id>http://blog.onlycatch.com/</id>
   
   <author>
     <name><![CDATA[Medusar]]></name>
@@ -15,24 +15,56 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[java线程间通信]]></title>
-    <link href="https://medusar.github.io/java%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
-    <id>https://medusar.github.io/java线程间通信/</id>
-    <published>2016-01-10T07:16:25.000Z</published>
-    <updated>2016-01-10T07:16:25.000Z</updated>
-    <content type="html"></content>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://blog.onlycatch.com/hello-world/"/>
+    <id>http://blog.onlycatch.com/hello-world/</id>
+    <published>2016-01-10T15:07:24.000Z</published>
+    <updated>2016-01-10T15:07:24.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">$ shit</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
     <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    </summary>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[java线程间通信]]></title>
+    <link href="http://blog.onlycatch.com/java-thread-communication/"/>
+    <id>http://blog.onlycatch.com/java-thread-communication/</id>
+    <published>2016-01-10T07:16:25.000Z</published>
+    <updated>2016-01-10T14:22:16.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span>女朋友身体不适，先不写了。希望她赶快好起来！</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[曾经面试的时候被问过这样一个问题，当时我的答案是：共享内存，信号量，消息队列。如今已经距离那次面试过去半年多了，我也成长了很多，现在让我再回过头来看看这个问题。]]>
     
     </summary>
+    
+      <category term="java" scheme="http://blog.onlycatch.com/tags/java/"/>
+    
+      <category term="多线程" scheme="http://blog.onlycatch.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[java中线程的状态以及线程栈分析]]></title>
-    <link href="https://medusar.github.io/thread-state-and-analysis/"/>
-    <id>https://medusar.github.io/thread-state-and-analysis/</id>
+    <link href="http://blog.onlycatch.com/thread-state-and-analysis/"/>
+    <id>http://blog.onlycatch.com/thread-state-and-analysis/</id>
     <published>2016-01-10T04:18:38.000Z</published>
-    <updated>2016-01-10T13:49:49.000Z</updated>
+    <updated>2016-01-10T15:06:33.000Z</updated>
     <content type="html"><![CDATA[<h2 id="java_u4E2D_u7EBF_u7A0B_u7684_u72B6_u6001"><a href="#java_u4E2D_u7EBF_u7A0B_u7684_u72B6_u6001" class="headerlink" title="java中线程的状态"></a>java中线程的状态</h2><table>
 <thead>
 <tr>
@@ -84,6 +116,11 @@
 <p>例如：<br>命令：<code>jstack 10968</code> 则会把进程号为10968的进程所包含的线程信息打印出来。<br>其中的部分结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"main" #1 prio=5 os_prio=0 tid=0x00007fab88009800 nid=0x2add waiting on condition [0x00007fab8ee92000]</span><br><span class="line">   java.lang.Thread.State: WAITING (parking)</span><br><span class="line">	at sun.misc.Unsafe.park(Native Method)</span><br><span class="line">	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:304)</span><br><span class="line">	at test.DeadLockTest.main(DeadLockTest.java:17)</span><br></pre></td></tr></table></figure></p>
 <p>命令：<code>jstack -l 10968</code>则会包含当前线程获取到的同步器。<br>其中的部分结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"main" #1 prio=5 os_prio=0 tid=0x00007fab88009800 nid=0x2add waiting on condition [0x00007fab8ee92000]</span><br><span class="line">   java.lang.Thread.State: WAITING (parking)</span><br><span class="line">	at sun.misc.Unsafe.park(Native Method)</span><br><span class="line">	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:304)</span><br><span class="line">	at test.DeadLockTest.main(DeadLockTest.java:17)</span><br><span class="line"></span><br><span class="line">   Locked ownable synchronizers:</span><br><span class="line">	- None</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，带-l参数的，在线程信息后面有个’ Locked ownable synchronizers:’信息。</p>
+<p>关于jstack的使用，下面两篇文章写的很不错，非常建议一看:</p>
+<ol>
+<li><a href="https://sites.google.com/site/threaddumps/java-thread-dumps" target="_blank" rel="external">java-thread-dumps</a></li>
+<li><a href="https://sites.google.com/site/threaddumps/java-thread-dumps-2" target="_blank" rel="external">java-thread-dumps-2</a></li>
+</ol>
 <h3 id="u4E0D_u540C_u7EBF_u7A0B_u72B6_u6001_u5728jstack_u4FE1_u606F_u4E2D_u5F62_u5F0F"><a href="#u4E0D_u540C_u7EBF_u7A0B_u72B6_u6001_u5728jstack_u4FE1_u606F_u4E2D_u5F62_u5F0F" class="headerlink" title="不同线程状态在jstack信息中形式"></a>不同线程状态在jstack信息中形式</h3><p>我们来看一下，当线程处于不同状态的时候，通过jstack看到的是什么样子的。</p>
 <h4 id="WAITING_u72B6_u6001"><a href="#WAITING_u72B6_u6001" class="headerlink" title="WAITING状态"></a>WAITING状态</h4><p>通过上面的讲解我们知道，线程进入waiting状态可以通过三种方式：1.Object.wait,2.Thread.join,3.LockSupport.park ，那么我们分别来看下，当程序分别通过这三种方式进入WAITING状态的时候，对应的jstack信息是怎样的。</p>
 <p>1.Object.wait方式<br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitingTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="comment">// Object.wait</span></span><br><span class="line">		<span class="keyword">synchronized</span> (WaitingTest.class) &#123;</span><br><span class="line">			WaitingTest.class.wait();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -126,22 +163,24 @@
     
     </summary>
     
-      <category term="Troubleshooting Tools" scheme="https://medusar.github.io/tags/Troubleshooting-Tools/"/>
+      <category term="Troubleshooting Tools" scheme="http://blog.onlycatch.com/tags/Troubleshooting-Tools/"/>
     
-      <category term="java" scheme="https://medusar.github.io/tags/java/"/>
+      <category term="java" scheme="http://blog.onlycatch.com/tags/java/"/>
     
-      <category term="jstack" scheme="https://medusar.github.io/tags/jstack/"/>
+      <category term="jstack" scheme="http://blog.onlycatch.com/tags/jstack/"/>
     
-      <category term="线程" scheme="https://medusar.github.io/tags/%E7%BA%BF%E7%A8%8B/"/>
+      <category term="线程" scheme="http://blog.onlycatch.com/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Java线程池异常处理最佳实践]]></title>
-    <link href="https://medusar.github.io/what-if-exception-occurs-in-threadpool/"/>
-    <id>https://medusar.github.io/what-if-exception-occurs-in-threadpool/</id>
+    <link href="http://blog.onlycatch.com/what-if-exception-occurs-in-threadpool/"/>
+    <id>http://blog.onlycatch.com/what-if-exception-occurs-in-threadpool/</id>
     <published>2016-01-07T13:37:30.000Z</published>
-    <updated>2016-01-10T03:12:02.000Z</updated>
+    <updated>2016-01-10T14:21:59.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>问题描述：<br>假设我们有一个线程池，由于程序需要，我们向该线程池中提交了好多任务，但是这些任务都没有对异常进行try catch处理，并且运行的时候都抛出了异常。这会对线程池的运行带来什么影响？</p>
 </blockquote>
@@ -186,20 +225,22 @@
     
     </summary>
     
-      <category term="java" scheme="https://medusar.github.io/tags/java/"/>
+      <category term="java" scheme="http://blog.onlycatch.com/tags/java/"/>
     
-      <category term="多线程" scheme="https://medusar.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <category term="多线程" scheme="http://blog.onlycatch.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="线程池" scheme="https://medusar.github.io/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+      <category term="线程池" scheme="http://blog.onlycatch.com/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[[Linux工具] rsync数据同步工具]]></title>
-    <link href="https://medusar.github.io/linux-rsync/"/>
-    <id>https://medusar.github.io/linux-rsync/</id>
+    <link href="http://blog.onlycatch.com/linux-rsync/"/>
+    <id>http://blog.onlycatch.com/linux-rsync/</id>
     <published>2016-01-06T12:27:36.000Z</published>
-    <updated>2016-01-07T14:46:41.000Z</updated>
+    <updated>2016-01-10T14:22:24.000Z</updated>
     <content type="html"><![CDATA[<p>之前有个统计脚本，监控多台机器的日志，发现异常数据自动报警。由于统计脚本只存在一台机器上，所以需要将多台机器日志同步过来。这个同步日志的功能就是通过rsync实现的。</p>
 <h2 id="rsync__u662F_u4EC0_u4E48_uFF1F"><a href="#rsync__u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="rsync 是什么？"></a>rsync 是什么？</h2><p>通过man rsync命令可以看到，它是a fast, versatile, remote (and local) file-copying tool，就是一个数据同步工具。versatile:通用的，万能的，多才多艺的。可以简单理解为：一个功能强大的数据同步工具。<br>官方说明：</p>
 <blockquote>
@@ -245,16 +286,18 @@
     
     </summary>
     
-      <category term="linux" scheme="https://medusar.github.io/tags/linux/"/>
+      <category term="linux" scheme="http://blog.onlycatch.com/tags/linux/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[广播（broadcast)，组播(multicast)，单播(unicast)的Java实现]]></title>
-    <link href="https://medusar.github.io/broadcast-multicast-unicast/"/>
-    <id>https://medusar.github.io/broadcast-multicast-unicast/</id>
+    <link href="http://blog.onlycatch.com/broadcast-multicast-unicast/"/>
+    <id>http://blog.onlycatch.com/broadcast-multicast-unicast/</id>
     <published>2016-01-06T12:21:27.000Z</published>
-    <updated>2016-01-07T14:45:30.000Z</updated>
+    <updated>2016-01-10T14:21:56.000Z</updated>
     <content type="html"><![CDATA[<h2 id="IP_u5730_u5740"><a href="#IP_u5730_u5740" class="headerlink" title="IP地址"></a>IP地址</h2><p>在IPv4中，一共有五类IP地址   </p>
 <ul>
 <li>A类地址：网络号占1个字节。网络号的第一位固定为0。</li>
@@ -316,20 +359,22 @@
     
     </summary>
     
-      <category term="IP" scheme="https://medusar.github.io/tags/IP/"/>
+      <category term="IP" scheme="http://blog.onlycatch.com/tags/IP/"/>
     
-      <category term="java" scheme="https://medusar.github.io/tags/java/"/>
+      <category term="java" scheme="http://blog.onlycatch.com/tags/java/"/>
     
-      <category term="网络" scheme="https://medusar.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+      <category term="网络" scheme="http://blog.onlycatch.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[自旋锁]]></title>
-    <link href="https://medusar.github.io/spinlock/"/>
-    <id>https://medusar.github.io/spinlock/</id>
+    <link href="http://blog.onlycatch.com/spinlock/"/>
+    <id>http://blog.onlycatch.com/spinlock/</id>
     <published>2016-01-04T13:03:40.000Z</published>
-    <updated>2016-01-10T13:37:48.000Z</updated>
+    <updated>2016-01-10T14:22:05.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u4EC0_u4E48_u662F_u81EA_u65CB_u9501_uFF1F"><a href="#u4EC0_u4E48_u662F_u81EA_u65CB_u9501_uFF1F" class="headerlink" title="什么是自旋锁？"></a>什么是自旋锁？</h2><p>自旋锁（spinlock）：是指当一个线程在获取锁的时候，如果锁已经被其它线程获取，那么该线程将循环等待，然后不断的判断锁是否能够被成功获取，直到获取到锁才会退出循环。<br>获取锁的线程一直处于活跃状态，但是并没有执行任何有效的任务，使用这种锁会造成<a href="https://en.wikipedia.org/wiki/Busy_waiting" target="_blank" rel="external">busy-waiting</a>。</p>
 <h2 id="Java_u5982_u4F55_u5B9E_u73B0_u81EA_u65CB_u9501_uFF1F"><a href="#Java_u5982_u4F55_u5B9E_u73B0_u81EA_u65CB_u9501_uFF1F" class="headerlink" title="Java如何实现自旋锁？"></a>Java如何实现自旋锁？</h2><p>下面是个简单的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Date: 2016年1月4日 下午4:41:50 &lt;br/&gt;</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> medusar</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpinLock</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="keyword">new</span> AtomicReference&lt;Thread&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Thread current = Thread.currentThread();</span><br><span class="line">		<span class="comment">// 利用CAS</span></span><br><span class="line">		<span class="keyword">while</span> (!cas.compareAndSet(<span class="keyword">null</span>, current)) &#123;</span><br><span class="line">			<span class="comment">// DO nothing</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Thread current = Thread.currentThread();</span><br><span class="line">		cas.compareAndSet(current, <span class="keyword">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>lock（)方法利用的CAS，当第一个线程A获取锁的时候，能够成功获取到，不会进入while循环，如果此时线程A没有释放锁，另一个线程B又来获取锁，此时由于不满足CAS，所以就会进入while循环，不断判断是否满足CAS，直到A线程调用unlock方法释放了该锁。   </p>
@@ -389,20 +434,22 @@
     
     </summary>
     
-      <category term="Java" scheme="https://medusar.github.io/tags/Java/"/>
+      <category term="Java" scheme="http://blog.onlycatch.com/tags/Java/"/>
     
-      <category term="并发" scheme="https://medusar.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
+      <category term="并发" scheme="http://blog.onlycatch.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
-      <category term="锁" scheme="https://medusar.github.io/tags/%E9%94%81/"/>
+      <category term="锁" scheme="http://blog.onlycatch.com/tags/%E9%94%81/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Java中的可重入(Reentrant)锁]]></title>
-    <link href="https://medusar.github.io/Reentrant-lock/"/>
-    <id>https://medusar.github.io/Reentrant-lock/</id>
+    <link href="http://blog.onlycatch.com/Reentrant-lock/"/>
+    <id>http://blog.onlycatch.com/Reentrant-lock/</id>
     <published>2016-01-04T00:34:06.000Z</published>
-    <updated>2016-01-10T08:43:56.000Z</updated>
+    <updated>2016-01-10T14:22:18.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u4EC0_u4E48_u662F_u53EF_u91CD_u5165_u9501_uFF1F"><a href="#u4EC0_u4E48_u662F_u53EF_u91CD_u5165_u9501_uFF1F" class="headerlink" title="什么是可重入锁？"></a>什么是可重入锁？</h2><p>可重入锁是一种特殊的互斥锁，它可以被同一个线程多次获取，而不会产生死锁。   </p>
 <ol>
 <li>首先它是互斥锁：任意时刻，只有一个线程锁。即假设A线程已经获取了锁，在A线程释放这个锁之前，B线程是无法获取到这个锁的，B要获取这个锁就会进入阻塞状态。</li>
@@ -436,20 +483,22 @@
     
     </summary>
     
-      <category term="Java" scheme="https://medusar.github.io/tags/Java/"/>
+      <category term="Java" scheme="http://blog.onlycatch.com/tags/Java/"/>
     
-      <category term="并发" scheme="https://medusar.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
+      <category term="并发" scheme="http://blog.onlycatch.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
-      <category term="锁" scheme="https://medusar.github.io/tags/%E9%94%81/"/>
+      <category term="锁" scheme="http://blog.onlycatch.com/tags/%E9%94%81/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[127.0.0.1和0.0.0.0地址的区别]]></title>
-    <link href="https://medusar.github.io/how-127-0-0-1and0-0-0-0-differs-from-each-other/"/>
-    <id>https://medusar.github.io/how-127-0-0-1and0-0-0-0-differs-from-each-other/</id>
+    <link href="http://blog.onlycatch.com/how-127-0-0-1and0-0-0-0-differs-from-each-other/"/>
+    <id>http://blog.onlycatch.com/how-127-0-0-1and0-0-0-0-differs-from-each-other/</id>
     <published>2016-01-03T04:00:45.000Z</published>
-    <updated>2016-01-07T14:45:02.000Z</updated>
+    <updated>2016-01-10T14:21:48.000Z</updated>
     <content type="html"><![CDATA[<h2 id="1-__u95EE_u9898_u5F15_u5165"><a href="#1-__u95EE_u9898_u5F15_u5165" class="headerlink" title="1. 问题引入"></a>1. 问题引入</h2><p>之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 <code>hexo server</code>命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?<br>在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。</p>
 <h2 id="2-_IP_u5730_u5740_u5206_u7C7B"><a href="#2-_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2. IP地址分类"></a>2. IP地址分类</h2><h3 id="2-1_IP_u5730_u5740_u8868_u793A"><a href="#2-1_IP_u5730_u5740_u8868_u793A" class="headerlink" title="2.1 IP地址表示"></a>2.1 IP地址表示</h3><p>IP地址由两个部分组成，net-id和host-id，即网络号和主机号。<br>net-id:表示ip地址所在的网络号。<br>host-id：表示ip地址所在网络中的某个主机号码。<br>即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP-address ::=  &#123; &#60;Network-number&#62;, &#60;Host-number&#62; &#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="2-2_IP_u5730_u5740_u5206_u7C7B"><a href="#2-2_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2.2 IP地址分类"></a>2.2 IP地址分类</h3><p>IP地址一共分为5类，即A～E，它们分类的依据是其net-id所占的字节长度以及网络号前几位。</p>
@@ -515,18 +564,20 @@
     
     </summary>
     
-      <category term="IP" scheme="https://medusar.github.io/tags/IP/"/>
+      <category term="IP" scheme="http://blog.onlycatch.com/tags/IP/"/>
     
-      <category term="网络" scheme="https://medusar.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+      <category term="网络" scheme="http://blog.onlycatch.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[maven内置隐式变量]]></title>
-    <link href="https://medusar.github.io/maven-hidden-variables/"/>
-    <id>https://medusar.github.io/maven-hidden-variables/</id>
+    <link href="http://blog.onlycatch.com/maven-hidden-variables/"/>
+    <id>http://blog.onlycatch.com/maven-hidden-variables/</id>
     <published>2016-01-01T14:24:14.000Z</published>
-    <updated>2016-01-07T14:47:00.000Z</updated>
+    <updated>2016-01-10T14:22:29.000Z</updated>
     <content type="html"><![CDATA[<p>Maven提供了三个隐式的变量可以用来访环境变量，POM信息，和Maven Settings</p>
 <h3 id="1-_env"><a href="#1-_env" class="headerlink" title="1. env"></a>1. env</h3><p>env变量，暴露了你操作系统或者shell的环境变量。便 如在Maven POM中一个对<code>${env.PATH}</code>的引用将会被<code>${PATH}</code>环境变量替换，在Windows中为%PATH%.</p>
 <h3 id="2-_projet"><a href="#2-_projet" class="headerlink" title="2. projet"></a>2. projet</h3><p>project变量暴露了POM。可以使用点标记(.)的路径来引用POM元素的值。例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 项目根目录</span><br><span class="line">$&#123;project.build.directory&#125; 构建目录，缺省为target</span><br><span class="line">$&#123;project.build.outputDirectory&#125; 构建过程输出目录，缺省为target/classes</span><br><span class="line">$&#123;project.build.finalName&#125; 产出物名称，缺省为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br><span class="line">$&#123;project.packaging&#125; 打包类型，缺省为jar</span><br><span class="line">$&#123;project.xxx&#125; 当前pom文件的任意节点的内容</span><br></pre></td></tr></table></figure></p>
@@ -537,16 +588,18 @@
     
     </summary>
     
-      <category term="maven" scheme="https://medusar.github.io/tags/maven/"/>
+      <category term="maven" scheme="http://blog.onlycatch.com/tags/maven/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[常用Maven插件]]></title>
-    <link href="https://medusar.github.io/useful-maven-plugin/"/>
-    <id>https://medusar.github.io/useful-maven-plugin/</id>
+    <link href="http://blog.onlycatch.com/useful-maven-plugin/"/>
+    <id>http://blog.onlycatch.com/useful-maven-plugin/</id>
     <published>2016-01-01T14:22:02.000Z</published>
-    <updated>2016-01-07T01:17:00.000Z</updated>
+    <updated>2016-01-10T14:21:53.000Z</updated>
     <content type="html"><![CDATA[<h3 id="1-maven-compiler-plugin"><a href="#1-maven-compiler-plugin" class="headerlink" title="1.maven-compiler-plugin"></a>1.maven-compiler-plugin</h3><p>作用：编译项目源码<br>使用举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">source</span>&gt;</span>1.6<span class="tag">&lt;/<span class="title">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">target</span>&gt;</span>1.6<span class="tag">&lt;/<span class="title">target</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">encoding</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>官方文档：<a href="http://maven.apache.org/plugins/maven-compiler-plugin/" target="_blank" rel="external">点击这里</a></p>
 <h3 id="2-maven-resources-plugin"><a href="#2-maven-resources-plugin" class="headerlink" title="2.maven-resources-plugin"></a>2.maven-resources-plugin</h3><p>作用:用于将项目的资源拷贝到输出目录中。有两种资源：main resources 和 test resources,区别在于main资源是和程序主代码相关的，而test资源是与测试代码相关的。<br>使用举例：<br>Step 1. 声明该资源<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">         <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">encoding</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -572,16 +625,18 @@
     
     </summary>
     
-      <category term="maven" scheme="https://medusar.github.io/tags/maven/"/>
+      <category term="maven" scheme="http://blog.onlycatch.com/tags/maven/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[如何区分一个类是wait timeout 还是notify唤醒的?]]></title>
-    <link href="https://medusar.github.io/timeout-or-notify/"/>
-    <id>https://medusar.github.io/timeout-or-notify/</id>
+    <link href="http://blog.onlycatch.com/timeout-or-notify/"/>
+    <id>http://blog.onlycatch.com/timeout-or-notify/</id>
     <published>2016-01-01T14:19:32.000Z</published>
-    <updated>2016-01-07T14:45:47.000Z</updated>
+    <updated>2016-01-10T14:22:02.000Z</updated>
     <content type="html"><![CDATA[<p><strong>问题</strong> 怎么判断wait是超时返回还是其他线程通知返回的呢？<br><a href="http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify" target="_blank" rel="external">http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify</a></p>
 <p>两种方式：<br>1.记录一个时间，当唤醒之后，比较一下唤醒时间与开始时间，判断是否大于设置的timeout时间<br>2.使用java 提供的 Condition.await(timeout,TimeUnit),该方法返回true表示是超时唤醒</p>
 <p>需求:与服务端进行连接，返回连接结果，如果在指定时间内连接成功，返回true，否则，返回false<br>场景：org.I0Itec.ckclient.ZkClient中有个waitForKeeperState方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">waitForKeeperState</span><span class="params">(KeeperState keeperState, <span class="keyword">long</span> time, TimeUnit timeUnit)</span> <span class="keyword">throws</span> ZkInterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_zookeeperEventThread != <span class="keyword">null</span> &amp;&amp; Thread.currentThread() == _zookeeperEventThread) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Must not be done in the zookeeper event thread."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//设置超时时间</span></span><br><span class="line">        Date timeout = <span class="keyword">new</span> Date(System.currentTimeMillis() + timeUnit.toMillis(time));</span><br><span class="line"></span><br><span class="line">        LOG.debug(<span class="string">"Waiting for keeper state "</span> + keeperState);</span><br><span class="line">        acquireEventLock(); <span class="comment">//这里要首先获取都锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//设置是否继续等待标志</span></span><br><span class="line">			<span class="keyword">boolean</span> stillWaiting = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">			<span class="comment">//如果当前zk状态不是想要的状态，则继续等待</span></span><br><span class="line">            <span class="keyword">while</span> (_currentState != keeperState) &#123;</span><br><span class="line">				<span class="comment">//如果stillWaiting为false，则表示到达超时时间，而不是连接成功，返回false</span></span><br><span class="line">                <span class="keyword">if</span> (!stillWaiting) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">				<span class="comment">//否则，继续等待</span></span><br><span class="line">				<span class="comment">//这里的getEventLock().getStateChangedCondition()会返回一个ReentrantLock,</span></span><br><span class="line">				<span class="comment">//所以这里用的是ReentrantLock中实现的Condition接口的awaitUntil方法</span></span><br><span class="line">                stillWaiting = getEventLock().getStateChangedCondition().awaitUntil(timeout);</span><br><span class="line">				<span class="comment">//awaitUntil方法如果是由于超时而返回的，false，如果是其他原因返回的，返回true，所以，stillWaiting标志位如果是true就继续等待，直到_currentState等于参数中的state</span></span><br><span class="line">            &#125;</span><br><span class="line">            LOG.debug(<span class="string">"State is "</span> + _currentState);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ZkInterruptedException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            getEventLock().unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
@@ -597,40 +652,20 @@
     
     </summary>
     
-      <category term="多线程" scheme="https://medusar.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <category term="多线程" scheme="http://blog.onlycatch.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="锁" scheme="https://medusar.github.io/tags/%E9%94%81/"/>
+      <category term="锁" scheme="http://blog.onlycatch.com/tags/%E9%94%81/"/>
     
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="https://medusar.github.io/hello-world/"/>
-    <id>https://medusar.github.io/hello-world/</id>
-    <published>2016-01-01T11:44:15.000Z</published>
-    <updated>2016-01-01T11:44:15.000Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
-    </summary>
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Ajax跨域请求原理及解决办法]]></title>
-    <link href="https://medusar.github.io/ajax-cross-domain/"/>
-    <id>https://medusar.github.io/ajax-cross-domain/</id>
+    <link href="http://blog.onlycatch.com/ajax-cross-domain/"/>
+    <id>http://blog.onlycatch.com/ajax-cross-domain/</id>
     <published>2016-01-01T07:03:08.000Z</published>
-    <updated>2016-01-07T14:46:16.000Z</updated>
+    <updated>2016-01-10T14:22:08.000Z</updated>
     <content type="html"><![CDATA[<h2 id="1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F"><a href="#1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F" class="headerlink" title="1. 什么是跨域（Cross-site)？"></a>1. 什么是跨域（Cross-site)？</h2><p>想了解跨域，必须先了解一下“同源策略(same origin policy)”。</p>
 <h3 id="1-1__u540C_u6E90_u7B56_u7565"><a href="#1-1__u540C_u6E90_u7B56_u7565" class="headerlink" title="1.1 同源策略"></a>1.1 同源策略</h3><p>它限制了某个域下的文档或者js与另一个域中的资源交互的方式，它提供了一种安全机制，这种安全机制可以避免来自恶意网站的攻击。<br>同源策略要求浏览器允许来自某个网页上的js请求来自另一个网页的数据，当且仅当两个页面来自相同的域。</p>
 <h3 id="1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F"><a href="#1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F" class="headerlink" title="1.2 什么是域(origin)？"></a>1.2 什么是域(origin)？</h3><p>域是由三部分组合而成：URI Schema（协议类型），host name（域名）,port number（端口号）<br>举个例子：<br>1） <a href="http://www.domain.com" target="_blank" rel="external">http://www.domain.com</a> 这个页面，URI Schema是http,host name是www.domain.com,port number是默认的80<br>2） <a href="https://www.xxx.com:8080/xxx/yyy" target="_blank" rel="external">https://www.xxx.com:8080/xxx/yyy</a> URI Schema是https，hostname是www.xxx.com，port number是8080<br>由于1）和2）中的三部分都不相同，所以它们就是不同的域。<br>下面的图更好的解释了什么是同域：<br><img src="http://static.zybuluo.com/939958749/11z1efgco1p38598zd9z5g4s/QQ%E5%9B%BE%E7%89%8720151224163925.png" alt="QQ图片20151224163925.png-15.9kB"><br>PS:IE浏览器里可能不太一样，它不会把端口号作为判断依据。   </p>
@@ -663,22 +698,24 @@
     
     </summary>
     
-      <category term="ajax" scheme="https://medusar.github.io/tags/ajax/"/>
+      <category term="ajax" scheme="http://blog.onlycatch.com/tags/ajax/"/>
     
-      <category term="前端" scheme="https://medusar.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://blog.onlycatch.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="安全" scheme="https://medusar.github.io/tags/%E5%AE%89%E5%85%A8/"/>
+      <category term="安全" scheme="http://blog.onlycatch.com/tags/%E5%AE%89%E5%85%A8/"/>
     
-      <category term="跨域" scheme="https://medusar.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
+      <category term="跨域" scheme="http://blog.onlycatch.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[MySQL分区表]]></title>
-    <link href="https://medusar.github.io/mysql-partition/"/>
-    <id>https://medusar.github.io/mysql-partition/</id>
+    <link href="http://blog.onlycatch.com/mysql-partition/"/>
+    <id>http://blog.onlycatch.com/mysql-partition/</id>
     <published>2016-01-01T06:43:08.000Z</published>
-    <updated>2016-01-07T14:47:23.000Z</updated>
+    <updated>2016-01-10T14:22:32.000Z</updated>
     <content type="html"><![CDATA[<p>今天统计数据的时候发现一张表使用了表分区，借此机会记录一下。</p>
 <h3 id="1-__u4EC0_u4E48_u662F_u8868_u5206_u533A_uFF1F"><a href="#1-__u4EC0_u4E48_u662F_u8868_u5206_u533A_uFF1F" class="headerlink" title="1. 什么是表分区？"></a>1. 什么是表分区？</h3><p>表分区，是指根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。</p>
 <h3 id="2-__u8868_u5206_u533A_u4E0E_u5206_u8868_u7684_u533A_u522B"><a href="#2-__u8868_u5206_u533A_u4E0E_u5206_u8868_u7684_u533A_u522B" class="headerlink" title="2. 表分区与分表的区别"></a>2. 表分区与分表的区别</h3><p>分表：指的是通过一定规则，将一张表分解成多张不同的表。比如将用户订单记录根据时间成多个表。<br>分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表分解成多张表。</p>
@@ -741,18 +778,20 @@
     
     </summary>
     
-      <category term="MySQL" scheme="https://medusar.github.io/tags/MySQL/"/>
+      <category term="MySQL" scheme="http://blog.onlycatch.com/tags/MySQL/"/>
     
-      <category term="分区" scheme="https://medusar.github.io/tags/%E5%88%86%E5%8C%BA/"/>
+      <category term="分区" scheme="http://blog.onlycatch.com/tags/%E5%88%86%E5%8C%BA/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Netty中的Buffer]]></title>
-    <link href="https://medusar.github.io/buffer-in-netty/"/>
-    <id>https://medusar.github.io/buffer-in-netty/</id>
+    <link href="http://blog.onlycatch.com/buffer-in-netty/"/>
+    <id>http://blog.onlycatch.com/buffer-in-netty/</id>
     <published>2015-10-13T14:17:15.000Z</published>
-    <updated>2016-01-07T14:47:49.000Z</updated>
+    <updated>2016-01-10T15:06:07.000Z</updated>
     <content type="html"><![CDATA[<p>一 Buffer<br>1.Heap Buffer<br>数据存储在JVM堆内存中<br>数据放在一个backing array中排序存放。<br>当不使用池的时候，分配和释放很快</p>
 <p>2.Direct Buffer<br>数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。<br>此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题</p>
 <p>3.Composite Buffer<br>类似于一个列表，其中可以包含各种不同类型的ByteBuf，它提供了它所包含数据的一个视图</p>
@@ -771,16 +810,18 @@
     
     </summary>
     
-      <category term="Netty" scheme="https://medusar.github.io/tags/Netty/"/>
+      <category term="Netty" scheme="http://blog.onlycatch.com/tags/Netty/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Netty中的几个关键概念]]></title>
-    <link href="https://medusar.github.io/key-concepts-netty/"/>
-    <id>https://medusar.github.io/key-concepts-netty/</id>
+    <link href="http://blog.onlycatch.com/key-concepts-netty/"/>
+    <id>http://blog.onlycatch.com/key-concepts-netty/</id>
     <published>2015-10-10T14:14:55.000Z</published>
-    <updated>2016-01-07T14:47:40.000Z</updated>
+    <updated>2016-01-10T14:22:36.000Z</updated>
     <content type="html"><![CDATA[<h3 id="1-Channel_uFF0CEvent_u548CIO"><a href="#1-Channel_uFF0CEvent_u548CIO" class="headerlink" title="1.Channel，Event和IO"></a>1.Channel，Event和IO</h3><p>Netty是一个非阻塞的，事件驱动的网络框架，Netty是如何实现非阻塞的呢？<br><img src="http://static.zybuluo.com/939958749/zfcjzr5q5f9mc2gyk5tf9yv9/000.png" alt="000.png-64.6kB"><br>上图是Netty处理收到请求的结构图。<br>可以看到，Netty使用的是EventLoopGroup，每次有请求过来的时候，会从Group中拿一个EventLoop，将这个EventLoop与Channel绑定，然后由这个EventLoop来执行Channel中需要做的工作。每一个请求进来，都有一个EventLoop与之对应，这就是Netty非阻塞的原因。</p>
 <p>下图是EvnetLoop和EventLoopGroup的类结构关系：<br><img src="http://static.zybuluo.com/939958749/rnpy83qdcc4mddqkp4svfzlv/12.png" alt="12.png-68.5kB"><br>可以看到，其实它们都是Executor的实现类。</p>
 <h3 id="2-Bootstrap_u548CServerBotstrap"><a href="#2-Bootstrap_u548CServerBotstrap" class="headerlink" title="2.Bootstrap和ServerBotstrap"></a>2.Bootstrap和ServerBotstrap</h3><p>Bootstrap的主要作用就是处理程序启动时候的逻辑，通过它你可以配置你的应用。你可以使用Bootstrap连接到某个客户端的ip和port，或者将服务端绑定到某个端口上。</p>
@@ -819,7 +860,9 @@
     
     </summary>
     
-      <category term="Netty" scheme="https://medusar.github.io/tags/Netty/"/>
+      <category term="Netty" scheme="http://blog.onlycatch.com/tags/Netty/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     
   </entry>
   

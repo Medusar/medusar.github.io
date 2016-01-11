@@ -9,11 +9,11 @@
   <meta name="description" content="java线程有6种不同的状态，不同的状态之间是怎样转换的？在实际程序运行过程中，我们应该如何判断线程处于什么状态呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中线程的状态以及线程栈分析">
-<meta property="og:url" content="https://medusar.github.io/thread-state-and-analysis/index.html">
+<meta property="og:url" content="http://blog.onlycatch.com/thread-state-and-analysis/index.html">
 <meta property="og:site_name" content="Medusar's playground">
 <meta property="og:description" content="java线程有6种不同的状态，不同的状态之间是怎样转换的？在实际程序运行过程中，我们应该如何判断线程处于什么状态呢？">
 <meta property="og:image" content="http://7xo4v8.com1.z0.glb.clouddn.com/state-machine-example-java-6-thread-states.png">
-<meta property="og:updated_time" content="2016-01-10T13:49:49.000Z">
+<meta property="og:updated_time" content="2016-01-10T15:06:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中线程的状态以及线程栈分析">
 <meta name="twitter:description" content="java线程有6种不同的状态，不同的状态之间是怎样转换的？在实际程序运行过程中，我们应该如何判断线程处于什么状态呢？">
@@ -125,7 +125,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/IP/" style="font-size: 15px;">IP</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 15px;">Netty</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 15px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 20px;">锁</a>
+						<a href="/tags/IP/" style="font-size: 13.33px;">IP</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Netty/" style="font-size: 13.33px;">Netty</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 13.33px;">并发</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 13.33px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 16.67px;">锁</a>
 					</div>
 				</section>
 				
@@ -264,6 +264,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/coding/">编程</a>
+	</div>
+
 
         
 	<div class="article-tag tagcloud">
@@ -328,6 +332,11 @@
 <p>例如：<br>命令：<code>jstack 10968</code> 则会把进程号为10968的进程所包含的线程信息打印出来。<br>其中的部分结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"main" #1 prio=5 os_prio=0 tid=0x00007fab88009800 nid=0x2add waiting on condition [0x00007fab8ee92000]</span><br><span class="line">   java.lang.Thread.State: WAITING (parking)</span><br><span class="line">	at sun.misc.Unsafe.park(Native Method)</span><br><span class="line">	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:304)</span><br><span class="line">	at test.DeadLockTest.main(DeadLockTest.java:17)</span><br></pre></td></tr></table></figure></p>
 <p>命令：<code>jstack -l 10968</code>则会包含当前线程获取到的同步器。<br>其中的部分结果如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"main" #1 prio=5 os_prio=0 tid=0x00007fab88009800 nid=0x2add waiting on condition [0x00007fab8ee92000]</span><br><span class="line">   java.lang.Thread.State: WAITING (parking)</span><br><span class="line">	at sun.misc.Unsafe.park(Native Method)</span><br><span class="line">	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:304)</span><br><span class="line">	at test.DeadLockTest.main(DeadLockTest.java:17)</span><br><span class="line"></span><br><span class="line">   Locked ownable synchronizers:</span><br><span class="line">	- None</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，带-l参数的，在线程信息后面有个’ Locked ownable synchronizers:’信息。</p>
+<p>关于jstack的使用，下面两篇文章写的很不错，非常建议一看:</p>
+<ol>
+<li><a href="https://sites.google.com/site/threaddumps/java-thread-dumps" target="_blank" rel="external">java-thread-dumps</a></li>
+<li><a href="https://sites.google.com/site/threaddumps/java-thread-dumps-2" target="_blank" rel="external">java-thread-dumps-2</a></li>
+</ol>
 <h3 id="u4E0D_u540C_u7EBF_u7A0B_u72B6_u6001_u5728jstack_u4FE1_u606F_u4E2D_u5F62_u5F0F"><a href="#u4E0D_u540C_u7EBF_u7A0B_u72B6_u6001_u5728jstack_u4FE1_u606F_u4E2D_u5F62_u5F0F" class="headerlink" title="不同线程状态在jstack信息中形式"></a>不同线程状态在jstack信息中形式</h3><p>我们来看一下，当线程处于不同状态的时候，通过jstack看到的是什么样子的。</p>
 <h4 id="WAITING_u72B6_u6001"><a href="#WAITING_u72B6_u6001" class="headerlink" title="WAITING状态"></a>WAITING状态</h4><p>通过上面的讲解我们知道，线程进入waiting状态可以通过三种方式：1.Object.wait,2.Thread.join,3.LockSupport.park ，那么我们分别来看下，当程序分别通过这三种方式进入WAITING状态的时候，对应的jstack信息是怎样的。</p>
 <p>1.Object.wait方式<br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitingTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="comment">// Object.wait</span></span><br><span class="line">		<span class="keyword">synchronized</span> (WaitingTest.class) &#123;</span><br><span class="line">			WaitingTest.class.wait();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -373,7 +382,7 @@
     
 <nav id="article-nav">
   
-    <a href="/java线程间通信/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/java-thread-communication/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -445,7 +454,7 @@
 
     <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="thread-state-and-analysis/" data-title="java中线程的状态以及线程栈分析" data-url="https://medusar.github.io/thread-state-and-analysis/"></div>
+    <div class="ds-thread" data-thread-key="thread-state-and-analysis/" data-title="java中线程的状态以及线程栈分析" data-url="http://blog.onlycatch.com/thread-state-and-analysis/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -470,7 +479,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/java线程间通信/" title="上一篇: java线程间通信">
+            <a href="/java-thread-communication/" title="上一篇: java线程间通信">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -484,7 +493,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/java线程间通信/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
