@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.onlycatch.com/linux-xargs-command/</loc>
+    <lastmod>2016-01-13T11:47:58.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.onlycatch.com/hello-world/</loc>
     <lastmod>2016-01-10T15:07:24.000Z</lastmod>
   </url>

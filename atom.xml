@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
-  <updated>2016-01-10T15:07:24.000Z</updated>
+  <updated>2016-01-13T11:47:58.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
   
   <author>
@@ -13,6 +13,23 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[[Linux命令]xargs命令]]></title>
+    <link href="http://blog.onlycatch.com/linux-xargs-command/"/>
+    <id>http://blog.onlycatch.com/linux-xargs-command/</id>
+    <published>2016-01-13T11:46:12.000Z</published>
+    <updated>2016-01-13T11:47:58.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.onlycatch.com/tags/Linux/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
