@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/</loc>
+    <lastmod>2016-01-13T14:34:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>SQL中= null与is null的区别</title>
+        <pubTime>2016-01-13T14:32:24.000Z</pubTime>
+        
+        <tag>MySQl</tag>
+         
+        <tag>SQL</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.onlycatch.com/linux-xargs-command/</loc>
     <lastmod>2016-01-13T11:47:58.000Z</lastmod>
     <data>
