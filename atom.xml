@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
-  <updated>2016-01-14T14:24:59.000Z</updated>
+  <updated>2016-01-14T15:17:18.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
   
   <author>
@@ -13,6 +13,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[[Linux]xargs命令]]></title>
+    <link href="http://blog.onlycatch.com/xargs-in-linux/"/>
+    <id>http://blog.onlycatch.com/xargs-in-linux/</id>
+    <published>2016-01-14T14:45:19.000Z</published>
+    <updated>2016-01-14T15:17:18.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="xargs_u547D_u4EE4_u7684_u4F5C_u7528"><a href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528" class="headerlink" title="xargs命令的作用"></a>xargs命令的作用</h2><p>像很多人一样，我一开始的时候也迫切想知道这个命令的作用，但是到目前为止，我的确是没有用过这个命令。但是我发现别人在用这个命令，于是我便想知道这个命令的作用，于是我使用了<code>man xargs</code>。<br>它给我的解释是：<code>xargs - build and execute command lines from standard input</code>，就是从构建并且执行来自标准输入中的命令行。<br>看不懂？没错，我相信每个人刚接触这个命令的说明的收都看不懂。那么让我们从几个例子开始吧。</p>
+<h2 id="xargs_u4F7F_u7528_u4E3E_u4F8B"><a href="#xargs_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="xargs使用举例"></a>xargs使用举例</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name test1 -type f -print |xargs /bin/rm -f  &#10;&#26597;&#25214;&#24403;&#21069;&#30446;&#24405;&#19979;&#65292;&#21517;&#23383;&#20026;test1&#30340;&#25991;&#20214;&#65292;&#24182;&#19988;&#23558;&#23427;&#21024;&#38500;</span><br></pre></td></tr></table></figure>
+<p>未完待续。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[linux中，xargs命令的应用]]>
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://blog.onlycatch.com/tags/Linux/"/>
+    
+      <category term="Linux命令" scheme="http://blog.onlycatch.com/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[HTTP响应码301和302的区别]]></title>
@@ -71,9 +94,16 @@
     <link href="http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/"/>
     <id>http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/</id>
     <published>2016-01-13T14:32:24.000Z</published>
-    <updated>2016-01-14T13:59:44.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://jackyrong.iteye.com/blog/2076933" target="_blank" rel="external">http://jackyrong.iteye.com/blog/2076933</a></p>
-<p><a href="http://stackoverflow.com/questions/9581745/sql-is-null-and-null" target="_blank" rel="external">http://stackoverflow.com/questions/9581745/sql-is-null-and-null</a></p>
+    <updated>2016-01-14T14:36:43.000Z</updated>
+    <content type="html"><![CDATA[<p>类似下面的SQL语句：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> <span class="keyword">field</span> = <span class="literal">null</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> <span class="keyword">field</span> <span class="keyword">IS</span> <span class="literal">null</span>;</span></span><br></pre></td></tr></table></figure></p>
+<p>第一行SQL将不会返回任何内容，而第二行将会返回field字段为NULL的行。</p>
+<p>原因如下：</p>
+<blockquote>
+<p>在SQL中，null值与另外一个值（包括null值）的逻辑比较（=，！=，&lt;&gt;等），返回的结果也是null，而这个null值在where子句中是被当做false来看待的。null表示”未知“，所以比较的结果也是”未知“。   </p>
+</blockquote>
+<p>所以，上面的第一条SQL就不会返回任何内容。</p>
+<p>如果在SQL中，需要判断某个字段是否为NULL，需要用IS NULL或者 IS NOT NULL,而不能使用=null或者！=null或者&lt;&gt;null。</p>
+<p>参考资料：<br><a href="http://jackyrong.iteye.com/blog/2076933" target="_blank" rel="external">http://jackyrong.iteye.com/blog/2076933</a><br><a href="http://stackoverflow.com/questions/9581745/sql-is-null-and-null" target="_blank" rel="external">http://stackoverflow.com/questions/9581745/sql-is-null-and-null</a><br><a href="http://www.w3schools.com/sql/sql_null_values.asp" target="_blank" rel="external">http://www.w3schools.com/sql/sql_null_values.asp</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[Why in SQL SELECT * FROM table WHERE field = null does not match records with null field?]]>
@@ -132,7 +162,7 @@
     <link href="http://blog.onlycatch.com/java-thread-communication/"/>
     <id>http://blog.onlycatch.com/java-thread-communication/</id>
     <published>2016-01-10T07:16:25.000Z</published>
-    <updated>2016-01-10T14:22:16.000Z</updated>
+    <updated>2016-01-14T14:36:59.000Z</updated>
     <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span>女朋友身体不适，先不写了。希望她赶快好起来！</span></span><br></pre></td></tr></table></figure>
 ]]></content>
     <summary type="html">
@@ -896,56 +926,6 @@
 ]]></content>
     <summary type="html">
     <![CDATA[本文为作者在学习Netty4的过程中记录的关于Netty中的Buffer的一些知识点。]]>
-    
-    </summary>
-    
-      <category term="Netty" scheme="http://blog.onlycatch.com/tags/Netty/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Netty中的几个关键概念]]></title>
-    <link href="http://blog.onlycatch.com/key-concepts-netty/"/>
-    <id>http://blog.onlycatch.com/key-concepts-netty/</id>
-    <published>2015-10-10T14:14:55.000Z</published>
-    <updated>2016-01-10T14:22:36.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="1-Channel_uFF0CEvent_u548CIO"><a href="#1-Channel_uFF0CEvent_u548CIO" class="headerlink" title="1.Channel，Event和IO"></a>1.Channel，Event和IO</h3><p>Netty是一个非阻塞的，事件驱动的网络框架，Netty是如何实现非阻塞的呢？<br><img src="http://static.zybuluo.com/939958749/zfcjzr5q5f9mc2gyk5tf9yv9/000.png" alt="000.png-64.6kB"><br>上图是Netty处理收到请求的结构图。<br>可以看到，Netty使用的是EventLoopGroup，每次有请求过来的时候，会从Group中拿一个EventLoop，将这个EventLoop与Channel绑定，然后由这个EventLoop来执行Channel中需要做的工作。每一个请求进来，都有一个EventLoop与之对应，这就是Netty非阻塞的原因。</p>
-<p>下图是EvnetLoop和EventLoopGroup的类结构关系：<br><img src="http://static.zybuluo.com/939958749/rnpy83qdcc4mddqkp4svfzlv/12.png" alt="12.png-68.5kB"><br>可以看到，其实它们都是Executor的实现类。</p>
-<h3 id="2-Bootstrap_u548CServerBotstrap"><a href="#2-Bootstrap_u548CServerBotstrap" class="headerlink" title="2.Bootstrap和ServerBotstrap"></a>2.Bootstrap和ServerBotstrap</h3><p>Bootstrap的主要作用就是处理程序启动时候的逻辑，通过它你可以配置你的应用。你可以使用Bootstrap连接到某个客户端的ip和port，或者将服务端绑定到某个端口上。</p>
-<p>Bootstrap是为客户端准备的，ServerBootstrap是为服务端准备的。</p>
-<p>使用Bootstrap还是ServerBootstrap与你使用的协议没有任何关系，只与你的目的有关：你是想创建一个客户端还是服务端。</p>
-<p>两者的不同点：<br><img src="http://static.zybuluo.com/939958749/gj5v9pz7hx9b3thypqqsvqyc/1111.png" alt="1111.png-45.2kB"></p>
-<p>两者除了使用场景不同之外，还有一个很关键的不同:客户端Bootstrap使用一个EventLoopGroup，而服务端的使用的是两个。</p>
-<p>服务端可以看成是包含两组Channel，一组只包含一个ServerChannel，它表示服务端自己绑定到本地端口的套接字；另一组则包含了很多Channel，它们代表服务端所收到的所有的连接。</p>
-<p>下图是服务端两个EventLoopGroup的协作流程：<br><img src="http://static.zybuluo.com/939958749/92lde9kl97wngb1gwhfzxazd/22222.png" alt="22222.png-60.6kB"></p>
-<p>上图中，GroupA的主要目的是：接收外部连接请求，然后将连接转移给GroupB，而GroupB负责这些请求建立的通道的处理。</p>
-<p>为什么ServerBootstrap需要两个EventLoopGroup?<br>因为在请求量很大的情况下，如果只有一个EventLoopGroup，而这个Group中的EventLoop都忙于处理已经收到的请求，而在合理的时间内不能接收新的请求，那么有些连接请求就会超时而得不到处理。用两个Group，一个负责接收请求，而另一个负责处理请求，两个Group中的EventLoop不共享，这样所有的请求都可以被接收。</p>
-<p>当然也可以只使用一个EventLoopGroup，对于大多数应用来说这样也没问题，如果只有一个EventLoopGroup，程序的处理是这样的：<br><img src="http://static.zybuluo.com/939958749/dqjzamcknvw3t8rnwhwc9wla/33333.png" alt="33333.png-63.3kB"></p>
-<h4 id="EventLoopGroup_u548CEventLoop"><a href="#EventLoopGroup_u548CEventLoop" class="headerlink" title="EventLoopGroup和EventLoop"></a>EventLoopGroup和EventLoop</h4><p>Group中可以包含一个或多个EventLoop，每一个Channel创建之后就会与一个EventLoop绑定，由于一个Group中包含的Loop数量通常都会比创建的Channel数量少，所以很多Channel将会公用同一个EventLoop，这意味着如果一个EventLoop忙于处理某个Channel，那么它就无法处理其他Channel，所以，我们在任何情况下都不能阻塞某个EventLoop。</p>
-<h3 id="3-ChannelHandler_u548CChannelPipeline"><a href="#3-ChannelHandler_u548CChannelPipeline" class="headerlink" title="3.ChannelHandler和ChannelPipeline"></a>3.ChannelHandler和ChannelPipeline</h3><p>ChannelHandler可以看作是用于处理在ChannelPipeline中传输的数据的工具。但它们的作用远不止这些。<br>ChannelPipeline的作用就是合理安排这些ChannelHandler去工作。<br>如下图：<br><img src="http://static.zybuluo.com/939958749/zfcun96d8xfus8rvowmdjom8/2323.png" alt="2323.png-73.7kB"></p>
-<ol>
-<li><p>Netty中有两种方式可以发送消息：直接写到Channel中，或者写到ChannelHandlerContext中。<br>两种方式的区别在于：<br>直接写入Channel会让消息从ChannelPipeline的末尾开始<br>写入contedxtObject会让消息从ChannelPipeline中的下一个Handler开始</p>
-</li>
-<li><p>在ChannelPipeline中，每一个handler都要负责将Netty事件传递给下一个handler，为此，Netty提供了<em>Adapter抽象类来提供这些传递功能，这样我们在使用的时候就可以只实现我们感兴趣的方法（事件）。除此之外，</em>Adapter还提供了其他功能，例如：对于消息的编码和解码。<br>Netty中提供的几个Adapter：</p>
-</li>
-</ol>
-<ul>
-<li>ChannelHandlerAdapter</li>
-<li>ChannelInboundHandlerAdapter</li>
-<li>ChannelOutboundHandlerAdapter</li>
-<li>ChannelDuplexHandlerAdapter</li>
-</ul>
-<ol>
-<li><p>编码器与解码器<br>用于将消息转换成字节码或者将字节码转换成消息。</p>
-</li>
-<li><p>Netty中，实现自己业务逻辑的时候不能阻塞当前线程， 虽然Netty是多线程，但是在高并发的情况下仍然会有问题。因为总的线程数是有限的，每阻塞一个就会减弱并发性。<br>但是Netty提供了一种比较好的方式来解决此问题：当我们向ChannelPipeline中添加Handler的时候，你可以指定一个EventExecutorGroup，这个EventExecutorGroup可以提供一个 EventExecutor，而这个 EventExecutor将用于执行该handler中所有的方法， EventExecutor将会使用一个单独的线程来处理，这样就将EventLoop给解放出来了。</p>
-</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[本文是作者在学习Netty4的时候的一些笔记，简单介绍了Netty中的几个比较关键的概念以及需要注意的问题。]]>
     
     </summary>
     

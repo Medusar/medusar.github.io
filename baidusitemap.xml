@@ -4,6 +4,69 @@
 
     
   <url>
+    <loc>http://blog.onlycatch.com/xargs-in-linux/</loc>
+    <lastmod>2016-01-14T15:17:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>[Linux]xargs命令</title>
+        <pubTime>2016-01-14T14:45:19.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>Linux命令</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
+    <lastmod>2016-01-14T14:36:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>java线程间通信</title>
+        <pubTime>2016-01-10T07:16:25.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/</loc>
+    <lastmod>2016-01-14T14:36:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>SQL中= null与is null的区别</title>
+        <pubTime>2016-01-13T14:32:24.000Z</pubTime>
+        
+        <tag>MySQl</tag>
+         
+        <tag>SQL</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.onlycatch.com/differences-between-301-302/</loc>
     <lastmod>2016-01-14T14:24:59.000Z</lastmod>
     <data>
@@ -42,25 +105,6 @@
              
               <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/</loc>
-    <lastmod>2016-01-14T13:59:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>SQL中= null与is null的区别</title>
-        <pubTime>2016-01-13T14:32:24.000Z</pubTime>
-        
-        <tag>MySQl</tag>
-         
-        <tag>SQL</tag>
-         
-         
-           
         </display>
     </data>
     </url>
@@ -245,28 +289,6 @@
         <tag>并发</tag>
          
         <tag>锁</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
-    <lastmod>2016-01-10T14:22:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>java线程间通信</title>
-        <pubTime>2016-01-10T07:16:25.000Z</pubTime>
-        
-        <tag>java</tag>
-         
-        <tag>多线程</tag>
          
          
            
