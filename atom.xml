@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
-  <updated>2016-01-13T14:34:47.000Z</updated>
+  <updated>2016-01-14T14:24:59.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
   
   <author>
@@ -15,12 +15,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[HTTP响应码301和302的区别]]></title>
+    <link href="http://blog.onlycatch.com/differences-between-301-302/"/>
+    <id>http://blog.onlycatch.com/differences-between-301-302/</id>
+    <published>2016-01-14T14:16:50.000Z</published>
+    <updated>2016-01-14T14:24:59.000Z</updated>
+    <content type="html"><![CDATA[<p>301：永久重定向<br>302：临时重定向<br>302重定向与网址劫持:即A网站将自己302重定向到B网站，某些搜索引擎会收录A网站的网址，而显示的却是B网站的内容。   </p>
+<p>以下内容转自：<a href="http://www.jameswxx.com/web/301%E5%92%8C302%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank" rel="external">http://www.jameswxx.com/web/301%E5%92%8C302%E7%9A%84%E5%8C%BA%E5%88%AB/</a><br>原文写的清晰明了，保存一份。</p>
+<h2 id="u4EC0_u4E48_u662F301_u8F6C_u5411_3F_u4EC0_u4E48_u662F301_u91CD_u5B9A_u5411_3F"><a href="#u4EC0_u4E48_u662F301_u8F6C_u5411_3F_u4EC0_u4E48_u662F301_u91CD_u5B9A_u5411_3F" class="headerlink" title="什么是301转向?什么是301重定向?"></a>什么是301转向?什么是301重定向?</h2><p>301转向(或叫301重定向，301跳转)是当用户或搜索引擎向网站服务器发出浏览请求时，服务器返回的HTTP数据流中头信息(header)中的状态码的一种，表示本网页永久性转移到另一个地址。</p>
+<h2 id="u4EC0_u4E48_u662F302_u91CD_u5B9A_u5411_3F"><a href="#u4EC0_u4E48_u662F302_u91CD_u5B9A_u5411_3F" class="headerlink" title="什么是302重定向?"></a>什么是302重定向?</h2><p>302重定向又称之为302代表暂时性转移(Temporarily Moved )，英文名称：302 redirect。 也被认为是暂时重定向(temporary redirect)，一条对网站浏览器的指令来显示浏览器被要求显示的不同的URL，当一个网页经历过短期的URL的变化时使用。一个暂时重定向是一种服务器端的重定向，能够被搜索引擎蜘蛛正确地处理。</p>
+<h2 id="301_u91CD_u5B9A_u5411_u4E0E302_u91CD_u5B9A_u5411_u7684_u533A_u522B"><a href="#301_u91CD_u5B9A_u5411_u4E0E302_u91CD_u5B9A_u5411_u7684_u533A_u522B" class="headerlink" title="301重定向与302重定向的区别"></a>301重定向与302重定向的区别</h2><p>302重定向是暂时的重定向，搜索引擎会抓取新的内容而保留旧的网址。因为服务器返回302代码，搜索引擎认为新的网址只是暂时的。301重定向是永久的重定向，搜索引擎在抓取新内容的同时也将旧的网址替换为重定向之后的网址。</p>
+<h2 id="u4E3A_u4EC0_u4E48302__u91CD_u5B9A_u5411_u548C_u7F51_u5740_u52AB_u6301_u6709_u5173_u8054"><a href="#u4E3A_u4EC0_u4E48302__u91CD_u5B9A_u5411_u548C_u7F51_u5740_u52AB_u6301_u6709_u5173_u8054" class="headerlink" title="为什么302 重定向和网址劫持有关联"></a>为什么302 重定向和网址劫持有关联</h2><p>从网址A 做一个302 重定向到网址B 时，主机服务器的隐含意思是网址A随时有可能改主意，重新显示本身的内容或转向其他的地方。大部分的搜索引擎在大部分情况下，当收到302重定向时，一般只要去抓取目标网址就可以了，也就是说网址B。如果搜索引擎在遇到302 转向时，百分之百的都抓取目标网址B 的话，就不用担心网址URL劫持了。问题就在于，有的时候搜索引擎，尤其是Google，并不能总是抓取目标网址。</p>
+<p>比如说，有的时候A 网址很短，但是它做了一个302 重定向到B 网址，而B 网址是一个很长的乱七八糟的URL网址，甚至还有可能包含一些问号之类的参数。很自然的，A 网址更加用户友好，而B 网址既难看，又不用户友好。这时Google 很有可能会仍然显示网址A。由于搜索引擎排名算法只是程序而不是人，在遇到302重定向的时候，并不能像人一样的去准确判定哪一个网址更适当，这就造成了网址URL 劫持的可能性。也就是说，一个不道德的人在他自己的网址A 做一个302 重定向到你的网址B，出于某种原因， Google搜索结果所显示的仍然是网址A，但是所用的网页内容却是你的网址B 上的内容，这种情况就叫做网址URL 劫持。你辛辛苦苦所写的内容就这样被别人偷走了。</p>
+<p>302 重定向所造成的网址URL劫持现象，已经存在一段时间了。不过到目前为止，似乎也没有什么更好的解决方法。在正在进行的数据中心转换中，302 重定向问题也是要被解决的目标之一。从一些搜索结果来看，网址劫持现象有所改善，但是并没有完全解决。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[HTTP响应状态码301和302的区别]]>
+    
+    </summary>
+    
+      <category term="HTTP" scheme="http://blog.onlycatch.com/tags/HTTP/"/>
+    
+      <category term="网络" scheme="http://blog.onlycatch.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[队列与栈的互相实现]]></title>
+    <link href="http://blog.onlycatch.com/queue-and-stack-implements/"/>
+    <id>http://blog.onlycatch.com/queue-and-stack-implements/</id>
+    <published>2016-01-14T14:00:32.000Z</published>
+    <updated>2016-01-14T14:14:01.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u5982_u4F55_u4F7F_u7528LIFO_u7684_u6808_u5B9E_u73B0_u961F_u5217FIFO_u7684_u529F_u80FD_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528LIFO_u7684_u6808_u5B9E_u73B0_u961F_u5217FIFO_u7684_u529F_u80FD_uFF1F" class="headerlink" title="如何使用LIFO的栈实现队列FIFO的功能？"></a>如何使用LIFO的栈实现队列FIFO的功能？</h2><p>思路：将一个栈中的所有元素依次取出并放入另外一个栈，那么第二个栈中的元素出栈顺序就与第一个栈中元素的入栈顺序一致。<br>其实可以将栈想象成一个木桶，栈中的元素想象成大饼，如果我们将一个桶中的饼倒入另一个桶中，那么第二个桶中最上面的饼就是第一个桶中最下面的那张。<br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QueueByStack</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Stack&lt;String&gt; putStack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> Stack&lt;String&gt; popStack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		putStack.push(data);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (!putStack.isEmpty()) &#123;</span><br><span class="line">			popStack.push(putStack.pop());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> popStack.pop();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u5982_u4F55_u4F7F_u7528FIFO_u7684_u961F_u5217_u5B9E_u73B0LIFO_u7684_u529F_u80FD_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528FIFO_u7684_u961F_u5217_u5B9E_u73B0LIFO_u7684_u529F_u80FD_uFF1F" class="headerlink" title="如何使用FIFO的队列实现LIFO的功能？"></a>如何使用FIFO的队列实现LIFO的功能？</h2><p>思路：每次存入元素的时候，都要想办法保证最后加入的元素是放在队列头部的，这样才能保证取的时候是按照LIFO的顺序。<br>可以借助汉诺塔问题思考一下。</p>
+<p>下面是我写的第一个版本的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackByQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; tmpQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">			String poll = queue.poll();</span><br><span class="line">			tmpQueue.add(poll);</span><br><span class="line">		&#125;</span><br><span class="line">		queue.add(data);</span><br><span class="line">		<span class="keyword">while</span> (!tmpQueue.isEmpty()) &#123;</span><br><span class="line">			queue.add(tmpQueue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> queue.poll();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后来发现效率不高，于是有了下面的升级版本(空间换时间)：<br>思路：以空间换时间，增加了一个变量，用于标记当前正在使用的队列。好处是减少了每次数据元素的拷贝。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackByQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; tmpQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> queueInUse = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queueInUse) &#123;</span><br><span class="line">			tmpQueue.add(data);</span><br><span class="line">			switchQueue(tmpQueue, queue);</span><br><span class="line">			queueInUse = <span class="keyword">false</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			queue.add(data);</span><br><span class="line">			switchQueue(queue, tmpQueue);</span><br><span class="line">			queueInUse = <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">switchQueue</span><span class="params">(Queue&lt;String&gt; dest, Queue&lt;String&gt; source)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (!source.isEmpty()) &#123;</span><br><span class="line">			dest.add(source.poll());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queueInUse) &#123;</span><br><span class="line">			<span class="keyword">return</span> queue.poll();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> tmpQueue.poll();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[如何使用FIFO队列实现LIFO的栈功能？又如何使用LIFO的栈实现FIFO功能呢？]]>
+    
+    </summary>
+    
+      <category term="数据结构" scheme="http://blog.onlycatch.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="面试" scheme="http://blog.onlycatch.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[SQL中= null与is null的区别]]></title>
     <link href="http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/"/>
     <id>http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/</id>
     <published>2016-01-13T14:32:24.000Z</published>
-    <updated>2016-01-13T14:34:47.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://stackoverflow.com/questions/9581745/sql-is-null-and-null" target="_blank" rel="external">http://stackoverflow.com/questions/9581745/sql-is-null-and-null</a></p>
+    <updated>2016-01-14T13:59:44.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://jackyrong.iteye.com/blog/2076933" target="_blank" rel="external">http://jackyrong.iteye.com/blog/2076933</a></p>
+<p><a href="http://stackoverflow.com/questions/9581745/sql-is-null-and-null" target="_blank" rel="external">http://stackoverflow.com/questions/9581745/sql-is-null-and-null</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[Why in SQL SELECT * FROM table WHERE field = null does not match records with null field?]]>

@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>maven内置隐式变量 | Medusar&#39;s playground</title>
+  <title>队列与栈的互相实现 | Medusar&#39;s playground</title>
   <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
+  <meta name="description" content="如何使用FIFO队列实现LIFO的栈功能？又如何使用LIFO的栈实现FIFO功能呢？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="maven内置隐式变量">
-<meta property="og:url" content="http://blog.onlycatch.com/maven-hidden-variables/index.html">
+<meta property="og:title" content="队列与栈的互相实现">
+<meta property="og:url" content="http://blog.onlycatch.com/queue-and-stack-implements/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
-<meta property="og:updated_time" content="2016-01-10T14:22:29.000Z">
+<meta property="og:description" content="如何使用FIFO队列实现LIFO的栈功能？又如何使用LIFO的栈实现FIFO功能呢？">
+<meta property="og:updated_time" content="2016-01-14T14:14:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maven内置隐式变量">
-<meta name="twitter:description" content="我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。">
+<meta name="twitter:title" content="队列与栈的互相实现">
+<meta name="twitter:description" content="如何使用FIFO队列实现LIFO的栈功能？又如何使用LIFO的栈实现FIFO功能呢？">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -238,11 +238,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-maven-hidden-variables" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-queue-and-stack-implements" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/maven-hidden-variables/" class="article-date">
-  	<time datetime="2016-01-01T14:24:14.000Z" itemprop="datePublished">2016-01-01</time>
+      <a href="/queue-and-stack-implements/" class="article-date">
+  	<time datetime="2016-01-14T14:00:32.000Z" itemprop="datePublished">2016-01-14</time>
 </a>
     </div>
   
@@ -255,7 +255,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      maven内置隐式变量
+      队列与栈的互相实现
     </h1>
   
 
@@ -270,7 +270,7 @@
 
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
 	</div>
 
         <div class="clearfix"></div>
@@ -280,10 +280,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Maven提供了三个隐式的变量可以用来访环境变量，POM信息，和Maven Settings</p>
-<h3 id="1-_env"><a href="#1-_env" class="headerlink" title="1. env"></a>1. env</h3><p>env变量，暴露了你操作系统或者shell的环境变量。便 如在Maven POM中一个对<code>${env.PATH}</code>的引用将会被<code>${PATH}</code>环境变量替换，在Windows中为%PATH%.</p>
-<h3 id="2-_projet"><a href="#2-_projet" class="headerlink" title="2. projet"></a>2. projet</h3><p>project变量暴露了POM。可以使用点标记(.)的路径来引用POM元素的值。例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 项目根目录</span><br><span class="line">$&#123;project.build.directory&#125; 构建目录，缺省为target</span><br><span class="line">$&#123;project.build.outputDirectory&#125; 构建过程输出目录，缺省为target/classes</span><br><span class="line">$&#123;project.build.finalName&#125; 产出物名称，缺省为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br><span class="line">$&#123;project.packaging&#125; 打包类型，缺省为jar</span><br><span class="line">$&#123;project.xxx&#125; 当前pom文件的任意节点的内容</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-_settings"><a href="#3-_settings" class="headerlink" title="3. settings"></a>3. settings</h3><p>settings变量暴露了Maven settings信息。可以使用点标记(.)的路径来引用settings.xml文件中元素的值。例如${settings.offline}会引用~/.m2/settings.xml文件中offline元素的值。</p>
+        <h2 id="u5982_u4F55_u4F7F_u7528LIFO_u7684_u6808_u5B9E_u73B0_u961F_u5217FIFO_u7684_u529F_u80FD_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528LIFO_u7684_u6808_u5B9E_u73B0_u961F_u5217FIFO_u7684_u529F_u80FD_uFF1F" class="headerlink" title="如何使用LIFO的栈实现队列FIFO的功能？"></a>如何使用LIFO的栈实现队列FIFO的功能？</h2><p>思路：将一个栈中的所有元素依次取出并放入另外一个栈，那么第二个栈中的元素出栈顺序就与第一个栈中元素的入栈顺序一致。<br>其实可以将栈想象成一个木桶，栈中的元素想象成大饼，如果我们将一个桶中的饼倒入另一个桶中，那么第二个桶中最上面的饼就是第一个桶中最下面的那张。<br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QueueByStack</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Stack&lt;String&gt; putStack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> Stack&lt;String&gt; popStack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		putStack.push(data);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (!putStack.isEmpty()) &#123;</span><br><span class="line">			popStack.push(putStack.pop());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> popStack.pop();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u5982_u4F55_u4F7F_u7528FIFO_u7684_u961F_u5217_u5B9E_u73B0LIFO_u7684_u529F_u80FD_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528FIFO_u7684_u961F_u5217_u5B9E_u73B0LIFO_u7684_u529F_u80FD_uFF1F" class="headerlink" title="如何使用FIFO的队列实现LIFO的功能？"></a>如何使用FIFO的队列实现LIFO的功能？</h2><p>思路：每次存入元素的时候，都要想办法保证最后加入的元素是放在队列头部的，这样才能保证取的时候是按照LIFO的顺序。<br>可以借助汉诺塔问题思考一下。</p>
+<p>下面是我写的第一个版本的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackByQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; tmpQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">			String poll = queue.poll();</span><br><span class="line">			tmpQueue.add(poll);</span><br><span class="line">		&#125;</span><br><span class="line">		queue.add(data);</span><br><span class="line">		<span class="keyword">while</span> (!tmpQueue.isEmpty()) &#123;</span><br><span class="line">			queue.add(tmpQueue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> queue.poll();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后来发现效率不高，于是有了下面的升级版本(空间换时间)：<br>思路：以空间换时间，增加了一个变量，用于标记当前正在使用的队列。好处是减少了每次数据元素的拷贝。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackByQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;String&gt; tmpQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> queueInUse = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queueInUse) &#123;</span><br><span class="line">			tmpQueue.add(data);</span><br><span class="line">			switchQueue(tmpQueue, queue);</span><br><span class="line">			queueInUse = <span class="keyword">false</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			queue.add(data);</span><br><span class="line">			switchQueue(queue, tmpQueue);</span><br><span class="line">			queueInUse = <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">switchQueue</span><span class="params">(Queue&lt;String&gt; dest, Queue&lt;String&gt; source)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (!source.isEmpty()) &#123;</span><br><span class="line">			dest.add(source.poll());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queueInUse) &#123;</span><br><span class="line">			<span class="keyword">return</span> queue.poll();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> tmpQueue.poll();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -293,18 +293,18 @@
     
 <nav id="article-nav">
   
-    <a href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/differences-between-301-302/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          127.0.0.1和0.0.0.0地址的区别
+          HTTP响应码301和302的区别
         
       </div>
     </a>
   
   
-    <a href="/useful-maven-plugin/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">常用Maven插件</div>
+    <a href="/how-is-null-differs-from-equals-null-in-sql/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQL中= null与is null的区别</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -315,7 +315,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_env"><span class="toc-number">1.</span> <span class="toc-text">1. env</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_projet"><span class="toc-number">2.</span> <span class="toc-text">2. projet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_settings"><span class="toc-number">3.</span> <span class="toc-text">3. settings</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5982_u4F55_u4F7F_u7528LIFO_u7684_u6808_u5B9E_u73B0_u961F_u5217FIFO_u7684_u529F_u80FD_uFF1F"><span class="toc-number">1.</span> <span class="toc-text">如何使用LIFO的栈实现队列FIFO的功能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5982_u4F55_u4F7F_u7528FIFO_u7684_u961F_u5217_u5B9E_u73B0LIFO_u7684_u529F_u80FD_uFF1F"><span class="toc-number">2.</span> <span class="toc-text">如何使用FIFO的队列实现LIFO的功能？</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -365,7 +365,7 @@
 
     <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="maven-hidden-variables/" data-title="maven内置隐式变量" data-url="http://blog.onlycatch.com/maven-hidden-variables/"></div>
+    <div class="ds-thread" data-thread-key="queue-and-stack-implements/" data-title="队列与栈的互相实现" data-url="http://blog.onlycatch.com/queue-and-stack-implements/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -390,7 +390,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/" title="上一篇: 127.0.0.1和0.0.0.0地址的区别">
+            <a href="/differences-between-301-302/" title="上一篇: HTTP响应码301和302的区别">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -398,7 +398,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/useful-maven-plugin/" title="下一篇: 常用Maven插件">
+            <a href="/how-is-null-differs-from-equals-null-in-sql/" title="下一篇: SQL中= null与is null的区别">
                 <i class="fa fa-angle-right"></i>
             </a>
         
