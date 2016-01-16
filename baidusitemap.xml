@@ -3,9 +3,32 @@
 
 
     
+    
+  <url>
+    <loc>http://blog.onlycatch.com/data-catch-and-https/</loc>
+    <lastmod>2016-01-16T15:33:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>流量劫持与HTTPS阅读笔记</title>
+        <pubTime>2016-01-16T15:23:33.000Z</pubTime>
+        
+        <tag>http</tag>
+         
+        <tag>https</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://blog.onlycatch.com/xargs-in-linux/</loc>
-    <lastmod>2016-01-14T15:17:18.000Z</lastmod>
+    <lastmod>2016-01-16T15:20:02.000Z</lastmod>
     <data>
         <display>
         <title>[Linux]xargs命令</title>
@@ -461,7 +484,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
-  <updated>2016-01-14T15:17:18.000Z</updated>
+  <updated>2016-01-16T15:33:32.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
   
   <author>
@@ -15,14 +15,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[流量劫持与HTTPS阅读笔记]]></title>
+    <link href="http://blog.onlycatch.com/data-catch-and-https/"/>
+    <id>http://blog.onlycatch.com/data-catch-and-https/</id>
+    <published>2016-01-16T15:23:33.000Z</published>
+    <updated>2016-01-16T15:33:32.000Z</updated>
+    <content type="html"><![CDATA[<p>今天看了一篇文章<a href="http://yq.aliyun.com/articles/2666" target="_blank" rel="external">使用HTTPS防止流量劫持</a>，写的很清楚，但是为了防止自己忘记，还是要转成自己的理解的方式记录一下。</p>
+<h2 id="u6D41_u91CF_u52AB_u6301"><a href="#u6D41_u91CF_u52AB_u6301" class="headerlink" title="流量劫持"></a>流量劫持</h2><h3 id="u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F"><a href="#u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F" class="headerlink" title="什么是流量劫持？"></a>什么是流量劫持？</h3><h3 id="u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3_uFF1F"><a href="#u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3_uFF1F" class="headerlink" title="流量劫持的危害？"></a>流量劫持的危害？</h3><h3 id="u5982_u4F55_u907F_u514D_u6D41_u91CF_u52AB_u6301_uFF1F"><a href="#u5982_u4F55_u907F_u514D_u6D41_u91CF_u52AB_u6301_uFF1F" class="headerlink" title="如何避免流量劫持？"></a>如何避免流量劫持？</h3><h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://yq.aliyun.com/articles/2666" target="_blank" rel="external">http://yq.aliyun.com/articles/2666</a></li>
+<li><a href="http://div.io/topic/907" target="_blank" rel="external">http://div.io/topic/907</a></li>
+<li><a href="http://www.huxiu.com/article/135293/1.html" target="_blank" rel="external">http://www.huxiu.com/article/135293/1.html</a></li>
+<li><a href="https://www.wosign.cn/News/Https_SSLStrip.htm" target="_blank" rel="external">https://www.wosign.cn/News/Https_SSLStrip.htm</a></li>
+<li><a href="http://fex.baidu.com/blog/2014/04/traffic-hijack-2/" target="_blank" rel="external">http://fex.baidu.com/blog/2014/04/traffic-hijack-2/</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[什么是流量劫持，有哪些危害？Https能否避免流量劫持？]]>
+    
+    </summary>
+    
+      <category term="http" scheme="http://blog.onlycatch.com/tags/http/"/>
+    
+      <category term="https" scheme="http://blog.onlycatch.com/tags/https/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[[Linux]xargs命令]]></title>
     <link href="http://blog.onlycatch.com/xargs-in-linux/"/>
     <id>http://blog.onlycatch.com/xargs-in-linux/</id>
     <published>2016-01-14T14:45:19.000Z</published>
-    <updated>2016-01-14T15:17:18.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="xargs_u547D_u4EE4_u7684_u4F5C_u7528"><a href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528" class="headerlink" title="xargs命令的作用"></a>xargs命令的作用</h2><p>像很多人一样，我一开始的时候也迫切想知道这个命令的作用，但是到目前为止，我的确是没有用过这个命令。但是我发现别人在用这个命令，于是我便想知道这个命令的作用，于是我使用了<code>man xargs</code>。<br>它给我的解释是：<code>xargs - build and execute command lines from standard input</code>，就是从构建并且执行来自标准输入中的命令行。<br>看不懂？没错，我相信每个人刚接触这个命令的说明的收都看不懂。那么让我们从几个例子开始吧。</p>
-<h2 id="xargs_u4F7F_u7528_u4E3E_u4F8B"><a href="#xargs_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="xargs使用举例"></a>xargs使用举例</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name test1 -type f -print |xargs /bin/rm -f  &#10;&#26597;&#25214;&#24403;&#21069;&#30446;&#24405;&#19979;&#65292;&#21517;&#23383;&#20026;test1&#30340;&#25991;&#20214;&#65292;&#24182;&#19988;&#23558;&#23427;&#21024;&#38500;</span><br></pre></td></tr></table></figure>
-<p>未完待续。</p>
+    <updated>2016-01-16T15:20:02.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="xargs_u547D_u4EE4_u7684_u4F5C_u7528"><a href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528" class="headerlink" title="xargs命令的作用"></a>xargs命令的作用</h2><p>像很多人一样，我一开始的时候也迫切想知道这个命令的作用，但是到目前为止，我的确是没有用过这个命令。但是我发现别人在用这个命令，于是我便想知道这个命令的作用，于是我使用了<code>man xargs</code>。<br>它给我的解释是：<code>xargs - build and execute command lines from standard input</code>，就是从构建并且执行来自标准输入中的命令行。<br>看不懂？没错，我相信每个人刚接触这个命令的说明的收都看不懂。而且的确，这个命令也很让人迷惑。我们还是先从例子开始看吧。</p>
+<h2 id="xargs_u4F7F_u7528_u4E3E_u4F8B"><a href="#xargs_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="xargs使用举例"></a>xargs使用举例</h2><h3 id="u8BFB_u53D6_u8F93_u5165_u6570_u636E_uFF0C_u91CD_u65B0_u683C_u5F0F_u5316_u540E_u8F93_u51FA"><a href="#u8BFB_u53D6_u8F93_u5165_u6570_u636E_uFF0C_u91CD_u65B0_u683C_u5F0F_u5316_u540E_u8F93_u51FA" class="headerlink" title="读取输入数据，重新格式化后输出"></a>读取输入数据，重新格式化后输出</h3><p>假设我们有一个文本文件，内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat data.txt</span><br><span class="line">a b c d e f g h</span><br><span class="line">i j k l m n o p q</span><br><span class="line">r s t u v w x y z</span><br></pre></td></tr></table></figure></p>
+<p>data.txt中的文件是换行显示的。</p>
+<ul>
+<li><p>多行输入变成单行输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat data.txt |xargs</span><br><span class="line">a b c d e f g h i j k l m n o p q r s t u v w x y z</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-n 控制多行输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat data.txt |xargs -n4</span><br><span class="line">a b c d</span><br><span class="line">e f g h</span><br><span class="line">i j k l</span><br><span class="line">m n o p</span><br><span class="line">q r s t</span><br><span class="line">u v w x</span><br><span class="line">y z</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-d 指定分隔符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'testAtestAtestAtest'</span>|xargs <span class="operator">-d</span>A</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span> <span class="built_in">test</span> <span class="built_in">test</span></span><br><span class="line"><span class="comment"># -d 与-n 一起使用</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'testAtestAtestAtest'</span>|xargs <span class="operator">-d</span>A -n2</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4"><a href="#u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4" class="headerlink" title="读取stdin,将格式化后的参数传递给某些命令"></a>读取stdin,将格式化后的参数传递给某些命令</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span> 未完待续</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name <span class="built_in">test</span>1 -type f -print |xargs /bin/rm <span class="operator">-f</span>  </span><br><span class="line">查找当前目录下，名字为<span class="built_in">test</span>1的文件，并且将它删除</span><br></pre></td></tr></table></figure>
+<p><code>find ./ -name test1 -type f</code> 就是查找当前目录下是文件类型并且名称是test1的文件<br><code>-print</code>是find命令的一个选项，它的作用就是find命令的查找结果打印出来。(要注意与-print0的区别)</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>In general xargs is used like this<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prog | xargs utility</span><br></pre></td></tr></table></figure></p>
+<p>where prog is expected to output one or more newline/space separated results. The trick is that xargs does not! nessarly call utility once for each result, instead it splits the result list into sublists and calls utility for every sublist. If you want to force xargs to call utility for every single result you will need to invoke it with xargs -L1.</p>
+<p>Note that xargs promises you that the sublist sent to utility is shorter than <em>ARG_MAX</em> (this is how it avoids those dreaded Argument list to long errors). You can get the current value of <em>ARG_MAX</em> using getconf ARG_MAX</p>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://man.linuxde.net/xargs" target="_blank" rel="external">http://man.linuxde.net/xargs</a></li>
+<li><a href="http://unix.stackexchange.com/questions/24954/when-is-xargs-needed" target="_blank" rel="external">http://unix.stackexchange.com/questions/24954/when-is-xargs-needed</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Xargs" target="_blank" rel="external">https://en.wikipedia.org/wiki/Xargs</a></li>
+<li><a href="http://stackoverflow.com/questions/1898044/understanding-the-unix-command-xargs" target="_blank" rel="external">http://stackoverflow.com/questions/1898044/understanding-the-unix-command-xargs</a></li>
+</ol>
 ]]></content>
     <summary type="html">
     <![CDATA[linux中，xargs命令的应用]]>
@@ -900,36 +951,6 @@
       <category term="MySQL" scheme="http://blog.onlycatch.com/tags/MySQL/"/>
     
       <category term="分区" scheme="http://blog.onlycatch.com/tags/%E5%88%86%E5%8C%BA/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Netty中的Buffer]]></title>
-    <link href="http://blog.onlycatch.com/buffer-in-netty/"/>
-    <id>http://blog.onlycatch.com/buffer-in-netty/</id>
-    <published>2015-10-13T14:17:15.000Z</published>
-    <updated>2016-01-10T15:06:07.000Z</updated>
-    <content type="html"><![CDATA[<p>一 Buffer<br>1.Heap Buffer<br>数据存储在JVM堆内存中<br>数据放在一个backing array中排序存放。<br>当不使用池的时候，分配和释放很快</p>
-<p>2.Direct Buffer<br>数据直接分配在内存中，不在堆内存里面，所以在堆内存中是看不到这一部分数据的。<br>此部分数据空间的分配和释放操作相对昂贵，但是可以通过Netty提供的池技术来解决此问题</p>
-<p>3.Composite Buffer<br>类似于一个列表，其中可以包含各种不同类型的ByteBuf，它提供了它所包含数据的一个视图</p>
-<p>二 Buffer的操作<br>1.随机存取<br>与java中的byte数组类似，ByteBuf也是从下标从0开始，我们可以根据下标来获取每一个byte，但需要注意的是，下标的值不能超过readerIndex或者writerIndex.<br>2.顺序存取<br>ByteBuf提供了两个指针来支持顺序的读和写，readerIndex用于读取，writerIndex用于写入<br>他们之间的关系：<br>0&lt;=readerIndex&lt;=writerIndex&lt;=capacity<br><img src="http://static.zybuluo.com/939958749/fylr2i1ds1mg0nhkkmk0c01j/bytebuf1.png" alt="bytebuf1.png-67.5kB"></p>
-<p>3.可丢弃的字节<br>可丢弃的字节指的是已经通过read操作被读取过的字节，因此可以被丢弃了。<br>初始大小为0，大小会随着reader操作而不断增大。只有read操作，get操作不会修改readerIndex的位置。<br>可以通过调用discardReadBytes()方法丢弃这些字节而获取新的存储空间。<br>下面两张图表示的是调用discardReadBytes方法之前和之后的情况：<br><img src="http://static.zybuluo.com/939958749/fdnv05wzx90qbv9hvqd755uf/bytebuf2.png" alt="bytebuf2.png-50.1kB"><br><img src="http://static.zybuluo.com/939958749/y8i2d78nvdlkmjshk1vj1qm1/bytebuf3.png" alt="bytebuf3.png-44.7kB"></p>
-<p>可以看到，调用discardReadBytes会造成数据拷贝，因为要将可读部分的数据移动到数组开始位置。所以如果经常调用该方法，可能会影响性能。</p>
-<p>4.可读字节<br>5.可写字节</p>
-<p>6.清空buffer index</p>
-<p>7.检索操作</p>
-<p>三 ByteBufHolder<br>就像Http响应一样，除了状态码，headers，还有response body,ByteBufHolder就能提供这样的功能。</p>
-<p>四 ByteBufAllocator<br>Netty提供了两种Allocator：<br>一种是基于池的，这种的好处是减小了分配和释放的开销，同时能够减少内存碎片的数量。它的实现采用了jemalloc还有与很多操作系统类似的高效的内存分配算法。<br>另一种是不使用池的。</p>
-<p>关于jemalloc，可以参考：<a href="http://club.alibabatech.org/article_detail.htm?articleId=36" target="_blank" rel="external">http://club.alibabatech.org/article_detail.htm?articleId=36</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[本文为作者在学习Netty4的过程中记录的关于Netty中的Buffer的一些知识点。]]>
-    
-    </summary>
-    
-      <category term="Netty" scheme="http://blog.onlycatch.com/tags/Netty/"/>
     
       <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     

@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>资源列表 | Medusar&#39;s playground</title>
+  <title>流量劫持与HTTPS阅读笔记 | Medusar&#39;s playground</title>
   <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一些比较好的学习资料">
-<meta property="og:type" content="website">
-<meta property="og:title" content="资源列表">
-<meta property="og:url" content="http://blog.onlycatch.com/others/index.html">
+  <meta name="description" content="什么是流量劫持，有哪些危害？Https能否避免流量劫持？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流量劫持与HTTPS阅读笔记">
+<meta property="og:url" content="http://blog.onlycatch.com/data-catch-and-https/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="一些比较好的学习资料">
-<meta property="og:updated_time" content="2016-01-16T15:44:14.000Z">
+<meta property="og:description" content="什么是流量劫持，有哪些危害？Https能否避免流量劫持？">
+<meta property="og:updated_time" content="2016-01-16T15:33:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="资源列表">
-<meta name="twitter:description" content="一些比较好的学习资料">
+<meta name="twitter:title" content="流量劫持与HTTPS阅读笔记">
+<meta name="twitter:description" content="什么是流量劫持，有哪些危害？Https能否避免流量劫持？">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -238,11 +238,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-data-catch-and-https" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/others/index.html" class="article-date">
-  	<time datetime="2016-01-01T12:41:22.000Z" itemprop="datePublished">2016-01-01</time>
+      <a href="/data-catch-and-https/" class="article-date">
+  	<time datetime="2016-01-16T15:23:33.000Z" itemprop="datePublished">2016-01-16</time>
 </a>
     </div>
   
@@ -255,7 +255,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      资源列表
+      流量劫持与HTTPS阅读笔记
     </h1>
   
 
@@ -263,8 +263,16 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/coding/">编程</a>
+	</div>
+
 
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li></ul>
+	</div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -272,21 +280,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              
-          
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span>不断完善中</span></span><br></pre></td></tr></table></figure>
-<h2 id="u6280_u672F_u76F8_u5173"><a href="#u6280_u672F_u76F8_u5173" class="headerlink" title="技术相关"></a>技术相关</h2><ul>
-<li><a href="http://www.uml-diagrams.org/index-examples.html" target="_blank" rel="external">UML示例</a>:UML官方网站给出的例子</li>
-<li><a href="http://www.uml-diagrams.org/examples/java-uml-examples.html" target="_blank" rel="external">UML java</a>：有很多java中的UML图，很不错</li>
-</ul>
-<h2 id="u597D_u7684_u535A_u5BA2"><a href="#u597D_u7684_u535A_u5BA2" class="headerlink" title="好的博客"></a>好的博客</h2><ul>
-<li><a href="http://fex.baidu.com/" target="_blank" rel="external">百度FEX</a></li>
-<li><a href="http://ued.taobao.org/blog/" target="_blank" rel="external">淘宝UED</a></li>
-<li><a href="http://mux.alimama.com/" target="_blank" rel="external">阿里妈妈MUX</a></li>
-<li><a href="http://yq.aliyun.com/articles" target="_blank" rel="external">云栖博客</a></li>
-<li><a href="http://yq.aliyun.com/teams/" target="_blank" rel="external">云栖团队博客</a></li>
-<li><a href="http://tech.meituan.com/" target="_blank" rel="external">美团技术博客</a></li>
-</ul>
+        <p>今天看了一篇文章<a href="http://yq.aliyun.com/articles/2666" target="_blank" rel="external">使用HTTPS防止流量劫持</a>，写的很清楚，但是为了防止自己忘记，还是要转成自己的理解的方式记录一下。</p>
+<h2 id="u6D41_u91CF_u52AB_u6301"><a href="#u6D41_u91CF_u52AB_u6301" class="headerlink" title="流量劫持"></a>流量劫持</h2><h3 id="u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F"><a href="#u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F" class="headerlink" title="什么是流量劫持？"></a>什么是流量劫持？</h3><h3 id="u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3_uFF1F"><a href="#u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3_uFF1F" class="headerlink" title="流量劫持的危害？"></a>流量劫持的危害？</h3><h3 id="u5982_u4F55_u907F_u514D_u6D41_u91CF_u52AB_u6301_uFF1F"><a href="#u5982_u4F55_u907F_u514D_u6D41_u91CF_u52AB_u6301_uFF1F" class="headerlink" title="如何避免流量劫持？"></a>如何避免流量劫持？</h3><h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://yq.aliyun.com/articles/2666" target="_blank" rel="external">http://yq.aliyun.com/articles/2666</a></li>
+<li><a href="http://div.io/topic/907" target="_blank" rel="external">http://div.io/topic/907</a></li>
+<li><a href="http://www.huxiu.com/article/135293/1.html" target="_blank" rel="external">http://www.huxiu.com/article/135293/1.html</a></li>
+<li><a href="https://www.wosign.cn/News/Https_SSLStrip.htm" target="_blank" rel="external">https://www.wosign.cn/News/Https_SSLStrip.htm</a></li>
+<li><a href="http://fex.baidu.com/blog/2014/04/traffic-hijack-2/" target="_blank" rel="external">http://fex.baidu.com/blog/2014/04/traffic-hijack-2/</a></li>
+</ol>
 
       
     </div>
@@ -294,8 +295,62 @@
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/xargs-in-linux/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[Linux]xargs命令</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D41_u91CF_u52AB_u6301"><span class="toc-number">1.</span> <span class="toc-text">流量劫持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F"><span class="toc-number">1.1.</span> <span class="toc-text">什么是流量劫持？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3_uFF1F"><span class="toc-number">1.2.</span> <span class="toc-text">流量劫持的危害？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5982_u4F55_u907F_u514D_u6D41_u91CF_u52AB_u6301_uFF1F"><span class="toc-number">1.3.</span> <span class="toc-text">如何避免流量劫持？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-number">2.</span> <span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u8D44_u6599"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
 
 
   <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a><a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a></div>
@@ -305,7 +360,7 @@
 
     <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="others/index.html" data-title="资源列表" data-url="http://blog.onlycatch.com/others/index.html"></div>
+    <div class="ds-thread" data-thread-key="data-catch-and-https/" data-title="流量劫持与HTTPS阅读笔记" data-url="http://blog.onlycatch.com/data-catch-and-https/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -328,6 +383,39 @@
 
 
 
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/xargs-in-linux/" title="下一篇: [Linux]xargs命令">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/data-catch-and-https/">流量劫持与HTTPS阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/xargs-in-linux/">[Linux]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/differences-between-301-302/">HTTP响应码301和302的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/queue-and-stack-implements/">队列与栈的互相实现</a></li><li class="post-list-item"><a class="post-list-link" href="/how-is-null-differs-from-equals-null-in-sql/">SQL中= null与is null的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-xargs-command/">[Linux命令]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
 
     
         <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
@@ -337,7 +425,7 @@
             mathjax: false,
             animate: true,
             isHome: false,
-            isPost: false,
+            isPost: true,
             isArchive: false,
             isTag: false,
             isCategory: false,
@@ -384,7 +472,7 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

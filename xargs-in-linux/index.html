@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://blog.onlycatch.com/xargs-in-linux/index.html">
 <meta property="og:site_name" content="Medusar's playground">
 <meta property="og:description" content="linux中，xargs命令的应用">
-<meta property="og:updated_time" content="2016-01-14T15:17:18.000Z">
+<meta property="og:updated_time" content="2016-01-16T15:20:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Linux]xargs命令">
 <meta name="twitter:description" content="linux中，xargs命令的应用">
@@ -124,7 +124,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/IP/" style="font-size: 13.33px;">IP</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/MySQl/" style="font-size: 10px;">MySQl</a> <a href="/tags/Netty/" style="font-size: 13.33px;">Netty</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 13.33px;">并发</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 16.67px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 16.67px;">锁</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+						<a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/IP/" style="font-size: 13.33px;">IP</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/MySQl/" style="font-size: 10px;">MySQl</a> <a href="/tags/Netty/" style="font-size: 13.33px;">Netty</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 13.33px;">并发</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 16.67px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 16.67px;">锁</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
 					</div>
 				</section>
 				
@@ -280,9 +280,32 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="xargs_u547D_u4EE4_u7684_u4F5C_u7528"><a href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528" class="headerlink" title="xargs命令的作用"></a>xargs命令的作用</h2><p>像很多人一样，我一开始的时候也迫切想知道这个命令的作用，但是到目前为止，我的确是没有用过这个命令。但是我发现别人在用这个命令，于是我便想知道这个命令的作用，于是我使用了<code>man xargs</code>。<br>它给我的解释是：<code>xargs - build and execute command lines from standard input</code>，就是从构建并且执行来自标准输入中的命令行。<br>看不懂？没错，我相信每个人刚接触这个命令的说明的收都看不懂。那么让我们从几个例子开始吧。</p>
-<h2 id="xargs_u4F7F_u7528_u4E3E_u4F8B"><a href="#xargs_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="xargs使用举例"></a>xargs使用举例</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name test1 -type f -print |xargs /bin/rm -f  &#10;&#26597;&#25214;&#24403;&#21069;&#30446;&#24405;&#19979;&#65292;&#21517;&#23383;&#20026;test1&#30340;&#25991;&#20214;&#65292;&#24182;&#19988;&#23558;&#23427;&#21024;&#38500;</span><br></pre></td></tr></table></figure>
-<p>未完待续。</p>
+        <h2 id="xargs_u547D_u4EE4_u7684_u4F5C_u7528"><a href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528" class="headerlink" title="xargs命令的作用"></a>xargs命令的作用</h2><p>像很多人一样，我一开始的时候也迫切想知道这个命令的作用，但是到目前为止，我的确是没有用过这个命令。但是我发现别人在用这个命令，于是我便想知道这个命令的作用，于是我使用了<code>man xargs</code>。<br>它给我的解释是：<code>xargs - build and execute command lines from standard input</code>，就是从构建并且执行来自标准输入中的命令行。<br>看不懂？没错，我相信每个人刚接触这个命令的说明的收都看不懂。而且的确，这个命令也很让人迷惑。我们还是先从例子开始看吧。</p>
+<h2 id="xargs_u4F7F_u7528_u4E3E_u4F8B"><a href="#xargs_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="xargs使用举例"></a>xargs使用举例</h2><h3 id="u8BFB_u53D6_u8F93_u5165_u6570_u636E_uFF0C_u91CD_u65B0_u683C_u5F0F_u5316_u540E_u8F93_u51FA"><a href="#u8BFB_u53D6_u8F93_u5165_u6570_u636E_uFF0C_u91CD_u65B0_u683C_u5F0F_u5316_u540E_u8F93_u51FA" class="headerlink" title="读取输入数据，重新格式化后输出"></a>读取输入数据，重新格式化后输出</h3><p>假设我们有一个文本文件，内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat data.txt</span><br><span class="line">a b c d e f g h</span><br><span class="line">i j k l m n o p q</span><br><span class="line">r s t u v w x y z</span><br></pre></td></tr></table></figure></p>
+<p>data.txt中的文件是换行显示的。</p>
+<ul>
+<li><p>多行输入变成单行输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat data.txt |xargs</span><br><span class="line">a b c d e f g h i j k l m n o p q r s t u v w x y z</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-n 控制多行输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat data.txt |xargs -n4</span><br><span class="line">a b c d</span><br><span class="line">e f g h</span><br><span class="line">i j k l</span><br><span class="line">m n o p</span><br><span class="line">q r s t</span><br><span class="line">u v w x</span><br><span class="line">y z</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-d 指定分隔符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'testAtestAtestAtest'</span>|xargs <span class="operator">-d</span>A</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span> <span class="built_in">test</span> <span class="built_in">test</span></span><br><span class="line"><span class="comment"># -d 与-n 一起使用</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'testAtestAtestAtest'</span>|xargs <span class="operator">-d</span>A -n2</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4"><a href="#u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4" class="headerlink" title="读取stdin,将格式化后的参数传递给某些命令"></a>读取stdin,将格式化后的参数传递给某些命令</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span> 未完待续</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name <span class="built_in">test</span>1 -type f -print |xargs /bin/rm <span class="operator">-f</span>  </span><br><span class="line">查找当前目录下，名字为<span class="built_in">test</span>1的文件，并且将它删除</span><br></pre></td></tr></table></figure>
+<p><code>find ./ -name test1 -type f</code> 就是查找当前目录下是文件类型并且名称是test1的文件<br><code>-print</code>是find命令的一个选项，它的作用就是find命令的查找结果打印出来。(要注意与-print0的区别)</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>In general xargs is used like this<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prog | xargs utility</span><br></pre></td></tr></table></figure></p>
+<p>where prog is expected to output one or more newline/space separated results. The trick is that xargs does not! nessarly call utility once for each result, instead it splits the result list into sublists and calls utility for every sublist. If you want to force xargs to call utility for every single result you will need to invoke it with xargs -L1.</p>
+<p>Note that xargs promises you that the sublist sent to utility is shorter than <em>ARG_MAX</em> (this is how it avoids those dreaded Argument list to long errors). You can get the current value of <em>ARG_MAX</em> using getconf ARG_MAX</p>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://man.linuxde.net/xargs" target="_blank" rel="external">http://man.linuxde.net/xargs</a></li>
+<li><a href="http://unix.stackexchange.com/questions/24954/when-is-xargs-needed" target="_blank" rel="external">http://unix.stackexchange.com/questions/24954/when-is-xargs-needed</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Xargs" target="_blank" rel="external">https://en.wikipedia.org/wiki/Xargs</a></li>
+<li><a href="http://stackoverflow.com/questions/1898044/understanding-the-unix-command-xargs" target="_blank" rel="external">http://stackoverflow.com/questions/1898044/understanding-the-unix-command-xargs</a></li>
+</ol>
 
       
     </div>
@@ -291,6 +314,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/data-catch-and-https/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          流量劫持与HTTPS阅读笔记
+        
+      </div>
+    </a>
   
   
     <a href="/differences-between-301-302/" id="article-nav-older" class="article-nav-link-wrap">
@@ -305,7 +337,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528"><span class="toc-number">1.</span> <span class="toc-text">xargs命令的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs_u4F7F_u7528_u4E3E_u4F8B"><span class="toc-number">2.</span> <span class="toc-text">xargs使用举例</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs_u547D_u4EE4_u7684_u4F5C_u7528"><span class="toc-number">1.</span> <span class="toc-text">xargs命令的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs_u4F7F_u7528_u4E3E_u4F8B"><span class="toc-number">2.</span> <span class="toc-text">xargs使用举例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BFB_u53D6_u8F93_u5165_u6570_u636E_uFF0C_u91CD_u65B0_u683C_u5F0F_u5316_u540E_u8F93_u51FA"><span class="toc-number">2.1.</span> <span class="toc-text">读取输入数据，重新格式化后输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4"><span class="toc-number">2.2.</span> <span class="toc-text">读取stdin,将格式化后的参数传递给某些命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u8D44_u6599"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -380,7 +412,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/data-catch-and-https/" title="上一篇: 流量劫持与HTTPS阅读笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -392,7 +426,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/xargs-in-linux/">[Linux]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/differences-between-301-302/">HTTP响应码301和302的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/queue-and-stack-implements/">队列与栈的互相实现</a></li><li class="post-list-item"><a class="post-list-link" href="/how-is-null-differs-from-equals-null-in-sql/">SQL中= null与is null的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-xargs-command/">[Linux命令]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/data-catch-and-https/">流量劫持与HTTPS阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/xargs-in-linux/">[Linux]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/differences-between-301-302/">HTTP响应码301和302的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/queue-and-stack-implements/">队列与栈的互相实现</a></li><li class="post-list-item"><a class="post-list-link" href="/how-is-null-differs-from-equals-null-in-sql/">SQL中= null与is null的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-xargs-command/">[Linux命令]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
