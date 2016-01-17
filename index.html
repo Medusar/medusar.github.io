@@ -242,10 +242,10 @@
 
       <div class="body-wrap">
   
-    <article id="post-data-catch-and-https" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-traffic-hijack" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/data-catch-and-https/" class="article-date">
+      <a href="/traffic-hijack/" class="article-date">
   	<time datetime="2016-01-16T15:23:33.000Z" itemprop="datePublished">2016-01-16</time>
 </a>
     </div>
@@ -259,7 +259,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/data-catch-and-https/">流量劫持与HTTPS阅读笔记</a>
+      <a class="article-title" href="/traffic-hijack/">流量劫持</a>
     </h1>
   
 
@@ -269,8 +269,53 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              什么是流量劫持，有哪些危害？Https能否避免流量劫持？
-          
+        <h2 id="u6D41_u91CF_u52AB_u6301"><a href="#u6D41_u91CF_u52AB_u6301" class="headerlink" title="流量劫持"></a>流量劫持</h2><h3 id="u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F"><a href="#u4EC0_u4E48_u662F_u6D41_u91CF_u52AB_u6301_uFF1F" class="headerlink" title="什么是流量劫持？"></a>什么是流量劫持？</h3><p>流量劫持，就是通过某种手段得到我们上网的时候传输的数据，然后对这些数据进行篡改或者窥探，以达到劫持者的目的。在我们生活中最常见的应该就属运营商流量劫持了，比如我们流量一个网页的时候，如果我们输错了网址，可能就会跳到一个运营商的提示页面，提示网址错误，同时这个页面里会有运营商的一些广告等信息。<br>由于网络分为很多层，典型的OSI模型，网络分为七层：物理层，数据链路层，网络层，传输层，会话层，表示层，应用层。每一层都有发生流量劫持的可能。下面是常见的一些流量劫持：</p>
+<ul>
+<li>Hub 嗅探</li>
+<li>MAC 欺骗</li>
+<li>MAC 冲刷</li>
+<li>ARP 攻击</li>
+<li>DHCP 钓鱼</li>
+<li>DNS 劫持</li>
+<li>CDN 入侵</li>
+<li>路由器 弱口令</li>
+<li>路由器 CSRF</li>
+<li>PPPoE 钓鱼</li>
+<li>蜜罐代理</li>
+<li>WiFi 弱口令</li>
+<li>WiFi 伪热点</li>
+<li>WiFi 强制断线</li>
+<li>WLAN 基站钓鱼</li>
+</ul>
+<p>根据手段的不同，基本可以分为两类：</p>
+<ol>
+<li>DNS劫持：通过将通过劫持掉域名的DNS解析结果，将HTTP请求劫持到特定IP上，使得客户端和攻击者的服务器建立TCP连接，而非和目标服务器直接连接，这样攻击者就可以对内容进行窃取或篡改。在极端的情况下甚至攻击者可能伪造目标网站页面进行钓鱼攻击。</li>
+<li>直接流量修改：在数据通路上对页面进行固定的内容插入，比如广告弹窗等。在这种情况下，虽然客户端和服务器是直接建立的连接，但是数据内容依然可能遭到野蛮破坏。</li>
+</ol>
+<h2 id="u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3"><a href="#u6D41_u91CF_u52AB_u6301_u7684_u5371_u5BB3" class="headerlink" title="流量劫持的危害"></a>流量劫持的危害</h2><p>不同网络层次上发生的劫持造成的危害可能不太一样，但是都会造成用户信息泄露，隐私被窥探。<br>不同的劫持方式，获得的流量也有所差异。DNS劫持，只能截获通过域名发起的流量，直接使用 IP 地址的通信则不受影响；CDN入侵，只有浏览网页或下载时才有风险，其他场合则毫无问题；而网关被劫持，用户所有流量都难逃魔掌。<br>但流量劫持也有有用的一面，比如我们现在经常用的CDN，就可以算作一种流量劫持，它通过DNS解析，把域名解析到距离用户近的服务器上，减少了资源文件的响应时间。</p>
+<h2 id="u5404_u79CD_u6D41_u91CF_u52AB_u6301_u7684_u539F_u7406"><a href="#u5404_u79CD_u6D41_u91CF_u52AB_u6301_u7684_u539F_u7406" class="headerlink" title="各种流量劫持的原理"></a>各种流量劫持的原理</h2><h3 id="Hub_u55C5_u63A2"><a href="#Hub_u55C5_u63A2" class="headerlink" title="Hub嗅探"></a>Hub嗅探</h3><p>Hub的工作原理是通过广播将一个接口收到的数据包群发到所有的接口上，这样任意接口都能获取到所有数据，用户隐私也就无从谈起。<br>这种设备目前唯一可用之处就是旁路嗅探。利用广播的特性，可以非常方便分析其他设备的通信，例如抓取机顶盒的数据包而不影响正常通信。</p>
+<h3 id="MAC_u6B3A_u9A97_uFF08_u4EA4_u6362_u673A_uFF09"><a href="#MAC_u6B3A_u9A97_uFF08_u4EA4_u6362_u673A_uFF09" class="headerlink" title="MAC欺骗（交换机）"></a>MAC欺骗（交换机）</h3><p>交换机的工作原理与Hub不同，交换机可以绑定MAC地址和接口，数据包只发送到一个终端。但是如果没有事先配置好MAC地址和接口，而是采用自动学习的方式，即根据某个接口发出的包，自动关联该包的源地址到此接口。那么就可以被黑客通过伪造某个用户的MAC地址，而导致交换机将该用户的所有数据都发到黑客机器上。同时，被劫持的用户将无法上网。</p>
+<h3 id="MAC_u51B2_u5237_uFF08_u4EA4_u6362_u673A_uFF09"><a href="#MAC_u51B2_u5237_uFF08_u4EA4_u6362_u673A_uFF09" class="headerlink" title="MAC冲刷（交换机）"></a>MAC冲刷（交换机）</h3><p>如果交换机发现了一个之前没有遇到过的MAC地址，那么就会将数据包广播到所有的接口。由于交换机的硬件配置有限，显然不可能无限多的记录地址对应条目。我们不停伪造不重复的源地址，交换机里的记录表很快就会填满，甚至覆盖原有的学习记录，用户的数据包无法正常转发，只能广播到所有接口上了。</p>
+<h3 id="ARP_u653B_u51FB"><a href="#ARP_u653B_u51FB" class="headerlink" title="ARP攻击"></a>ARP攻击</h3><p>ARP：地址解析协议，即根据IP地址，解析出对应的MAC地址。主机A为了获取主机B的对应的MAC地址，需要广播ARP数据包，包中包含了主机B的IP地址，ARP数据包会被同一链路上的所有主机和路由器接收，主机B收到数据包之后发现自己的IP地址与ARP数据包中的IP地址一致，就将自己的MAC地址响应给主机A。<br>ARP攻击就是通过冒充主机B，将自己的MAC地址抢在主机B之前发送给主机A，这样，发送到主机B的IP地址的数据就会被错误的发送给冒充方。</p>
+<h3 id="DHCP_u9493_u9C7C"><a href="#DHCP_u9493_u9C7C" class="headerlink" title="DHCP钓鱼"></a>DHCP钓鱼</h3><p>DHCP（Dynamic Host Configuration Protocol):动态主机配置协议。作用是为主机动态分配IP地址。DHCP的工作机制简单来说就是需要分配IP地址的主机向DHCP服务器广播发送报文（目的地址是255.255.255.255，由于自己还没有IP地址，所以将源地址设置为0.0.0.0），在本网络上的所有主机都能收到这个广播的数据包，但是只有DHCP服务器才对此广播报文进行回答，然后该机器分配一个IP地址。如果存在多个DHCP服务器，则分别予以回复；用户则选择最先收到的。<br>DHCP钓鱼就是利用这个机制，如果一个黑客自己也启动了DHCP服务器，那么就可以收到客户主机的DHCP请求报文，如果黑客在真正的DHCP服务器返回数据之前返回一个IP地址，那么客户主机的所有数据就可以被黑客控制。</p>
+<h3 id="DNS_u52AB_u6301"><a href="#DNS_u52AB_u6301" class="headerlink" title="DNS劫持"></a>DNS劫持</h3><p>DNS的作用就是将域名转换成IP地址。DNS劫持就是将某个域名解析到黑客指定的IP地址，而如果黑客在此IP地址所在机器上设置了HTTP代理，那么用户将几乎看不出任何破绽，但是黑客就可以获取所有数据流量。</p>
+<h3 id="CDN_u5165_u4FB5"><a href="#CDN_u5165_u4FB5" class="headerlink" title="CDN入侵"></a>CDN入侵</h3><p>CDN主要用来缓存网站的静态数据文件，以提高网站加载速度，分担网站压力。如果CDN服务器被入侵，那么落到CDN服务器上的请求响应内容就可以被篡改。有些CDN厂商不太靠谱，为了省流量不按套路出牌，超过了缓存时间也不更新，甚至还有忽略URL问号后面的参数，导致程序猿们在资源更新的问题上头疼不已。</p>
+<h2 id="HTTPS_u4E0E_u6D41_u91CF_u52AB_u6301"><a href="#HTTPS_u4E0E_u6D41_u91CF_u52AB_u6301" class="headerlink" title="HTTPS与流量劫持"></a>HTTPS与流量劫持</h2><p>对于通过HTTP协议通讯的应用来说，发生流量劫持的根本原因是<strong>HTTP协议没有办法对通信对方的身份进行校验以及对数据完整性进行校验</strong>。没有办法校验通信对方的身份，所以DNS劫持就大行其道。而无法对数据完整性进行校验旧导致了直接数据内容的篡改。而HTTPS却能解决这两个问题。</p>
+<h3 id="HTTPS_u539F_u7406_u7B80_u4ECB"><a href="#HTTPS_u539F_u7406_u7B80_u4ECB" class="headerlink" title="HTTPS原理简介"></a>HTTPS原理简介</h3><p>HTTPS是在HTTP与TCP层之间增加了安全层，安全层是通过SSL以及其现代替代协议TLS来实现的。<br>HTTPS在请求开始之前客户端和服务器端有一个握手机制。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span>未完待续</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>流量劫持可能发生在网络通讯中的多个层次。</li>
+<li>流量劫持大致可以分为DNS劫持和直接内容修改两种，虽然实施的手段不同，但本质都是一样的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span>未完待续</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://yq.aliyun.com/articles/2666" target="_blank" rel="external">http://yq.aliyun.com/articles/2666</a> （非常推荐）</li>
+<li><a href="http://div.io/topic/907" target="_blank" rel="external">http://div.io/topic/907</a></li>
+<li><a href="http://www.huxiu.com/article/135293/1.html" target="_blank" rel="external">http://www.huxiu.com/article/135293/1.html</a></li>
+<li><a href="https://www.wosign.cn/News/Https_SSLStrip.htm" target="_blank" rel="external">https://www.wosign.cn/News/Https_SSLStrip.htm</a></li>
+<li><a href="http://fex.baidu.com/blog/2014/04/traffic-hijack/(非常推荐" target="_blank" rel="external">http://fex.baidu.com/blog/2014/04/traffic-hijack/(非常推荐</a>)</li>
+<li><a href="http://fex.baidu.com/blog/2014/04/traffic-hijack-2/(非常推荐" target="_blank" rel="external">http://fex.baidu.com/blog/2014/04/traffic-hijack-2/(非常推荐</a>)</li>
+</ol>
+
       
     </div>
     
@@ -287,10 +332,6 @@
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li></ul>
 	</div>
 
-      
-        <p class="article-more-link">
-          <a  href="/data-catch-and-https/#more">read more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

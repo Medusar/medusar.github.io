@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://blog.onlycatch.com/xargs-in-linux/index.html">
 <meta property="og:site_name" content="Medusar's playground">
 <meta property="og:description" content="linux中，xargs命令的应用">
-<meta property="og:updated_time" content="2016-01-16T15:20:02.000Z">
+<meta property="og:updated_time" content="2016-01-17T14:29:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Linux]xargs命令">
 <meta name="twitter:description" content="linux中，xargs命令的应用">
@@ -294,9 +294,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'testAtestAtestAtest'</span>|xargs <span class="operator">-d</span>A</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span> <span class="built_in">test</span> <span class="built_in">test</span></span><br><span class="line"><span class="comment"># -d 与-n 一起使用</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'testAtestAtestAtest'</span>|xargs <span class="operator">-d</span>A -n2</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">test</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4"><a href="#u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4" class="headerlink" title="读取stdin,将格式化后的参数传递给某些命令"></a>读取stdin,将格式化后的参数传递给某些命令</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span> 未完待续</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name <span class="built_in">test</span>1 -type f -print |xargs /bin/rm <span class="operator">-f</span>  </span><br><span class="line">查找当前目录下，名字为<span class="built_in">test</span>1的文件，并且将它删除</span><br></pre></td></tr></table></figure>
-<p><code>find ./ -name test1 -type f</code> 就是查找当前目录下是文件类型并且名称是test1的文件<br><code>-print</code>是find命令的一个选项，它的作用就是find命令的查找结果打印出来。(要注意与-print0的区别)</p>
+<h3 id="u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4"><a href="#u8BFB_u53D6stdin_2C_u5C06_u683C_u5F0F_u5316_u540E_u7684_u53C2_u6570_u4F20_u9012_u7ED9_u67D0_u4E9B_u547D_u4EE4" class="headerlink" title="读取stdin,将格式化后的参数传递给某些命令"></a>读取stdin,将格式化后的参数传递给某些命令</h3><ol>
+<li><p>当你尝试用rm 删除太多的文件，你可能得到一个错误信息：/bin/rm Argument list too long. 用xargs 去避免这个问题<br><code>find ~ -name ‘*.log’ -print0 | xargs -0 rm -f</code></p>
+</li>
+<li><p>获得/etc/ 下所有<em>.conf 结尾的文件列表，有几种不同的方法能得到相同的结果，下面的例子仅仅是示范怎么实用xargs ，在这个例子中实用 xargs将find 命令的输出传递给ls -l<br>`find /etc -name “</em>.conf” | xargs ls –l`</p>
+</li>
+<li><p>假如你有一个文件包含了很多你希望下载的URL, 你能够使用xargs 下载所有链接<br><code>cat url-list.txt | xargs wget –c</code></p>
+</li>
+<li><p>查找所有的jpg 文件，并且压缩它<br><code>find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz</code></p>
+</li>
+<li><p>拷贝所有的图片文件到一个外部的硬盘驱动<br><code>ls *.jpg | xargs -n1 -i cp {} /external-hard-drive/directory</code></p>
+</li>
+</ol>
 <h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>In general xargs is used like this<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prog | xargs utility</span><br></pre></td></tr></table></figure></p>
 <p>where prog is expected to output one or more newline/space separated results. The trick is that xargs does not! nessarly call utility once for each result, instead it splits the result list into sublists and calls utility for every sublist. If you want to force xargs to call utility for every single result you will need to invoke it with xargs -L1.</p>
 <p>Note that xargs promises you that the sublist sent to utility is shorter than <em>ARG_MAX</em> (this is how it avoids those dreaded Argument list to long errors). You can get the current value of <em>ARG_MAX</em> using getconf ARG_MAX</p>
@@ -315,11 +324,11 @@
     
 <nav id="article-nav">
   
-    <a href="/data-catch-and-https/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/traffic-hijack/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          流量劫持与HTTPS阅读笔记
+          流量劫持
         
       </div>
     </a>
@@ -412,7 +421,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/data-catch-and-https/" title="上一篇: 流量劫持与HTTPS阅读笔记">
+            <a href="/traffic-hijack/" title="上一篇: 流量劫持">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -426,7 +435,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/data-catch-and-https/">流量劫持与HTTPS阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/xargs-in-linux/">[Linux]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/differences-between-301-302/">HTTP响应码301和302的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/queue-and-stack-implements/">队列与栈的互相实现</a></li><li class="post-list-item"><a class="post-list-link" href="/how-is-null-differs-from-equals-null-in-sql/">SQL中= null与is null的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-xargs-command/">[Linux命令]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/traffic-hijack/">流量劫持</a></li><li class="post-list-item"><a class="post-list-link" href="/xargs-in-linux/">[Linux]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/differences-between-301-302/">HTTP响应码301和302的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/queue-and-stack-implements/">队列与栈的互相实现</a></li><li class="post-list-item"><a class="post-list-link" href="/how-is-null-differs-from-equals-null-in-sql/">SQL中= null与is null的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-xargs-command/">[Linux命令]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

@@ -3,13 +3,12 @@
 
 
     
-    
   <url>
-    <loc>http://blog.onlycatch.com/data-catch-and-https/</loc>
-    <lastmod>2016-01-16T15:33:32.000Z</lastmod>
+    <loc>http://blog.onlycatch.com/traffic-hijack/</loc>
+    <lastmod>2016-01-17T15:58:01.000Z</lastmod>
     <data>
         <display>
-        <title>流量劫持与HTTPS阅读笔记</title>
+        <title>流量劫持</title>
         <pubTime>2016-01-16T15:23:33.000Z</pubTime>
         
         <tag>http</tag>
@@ -28,7 +27,7 @@
     
   <url>
     <loc>http://blog.onlycatch.com/xargs-in-linux/</loc>
-    <lastmod>2016-01-16T15:20:02.000Z</lastmod>
+    <lastmod>2016-01-17T14:29:57.000Z</lastmod>
     <data>
         <display>
         <title>[Linux]xargs命令</title>
@@ -47,6 +46,7 @@
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
