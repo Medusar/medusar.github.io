@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.onlycatch.com/tcp-handshakes/</loc>
+    <lastmod>2016-01-23T14:55:43.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.onlycatch.com/hello-world/</loc>
     <lastmod>2016-01-19T09:34:37.000Z</lastmod>
   </url>
@@ -9,11 +14,6 @@
   <url>
     <loc>http://blog.onlycatch.com/traffic-hijack/</loc>
     <lastmod>2016-01-19T09:32:54.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.onlycatch.com/tcp-handshakes/</loc>
-    <lastmod>2016-01-19T08:36:43.000Z</lastmod>
   </url>
   
   <url>
