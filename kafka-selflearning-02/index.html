@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kafka学习笔记之高性能设计 | Medusar&#39;s playground</title>
+  <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Kafka在设计过程中的为了追求高性能而做的一些处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka学习笔记之高性能设计">
+<meta property="og:url" content="http://blog.onlycatch.com/kafka-selflearning-02/index.html">
+<meta property="og:site_name" content="Medusar's playground">
+<meta property="og:description" content="Kafka在设计过程中的为了追求高性能而做的一些处理">
+<meta property="og:updated_time" content="2016-01-25T12:04:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka学习笔记之高性能设计">
+<meta name="twitter:description" content="Kafka在设计过程中的为了追求高性能而做的一些处理">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Medusar</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">首页</a></li>
+				        
+							<li><a href="/archives">文章</a></li>
+				        
+							<li><a href="/others">其他</a></li>
+				        
+							<li><a href="/booklist">书单</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+					        
+								<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+					        
+								<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+					        
+								<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Dubbo/" style="font-size: 10px;">Dubbo</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/IP/" style="font-size: 13.33px;">IP</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 16.67px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/MySQl/" style="font-size: 10px;">MySQl</a> <a href="/tags/Netty/" style="font-size: 13.33px;">Netty</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/Troubleshooting-Tools/" style="font-size: 10px;">Troubleshooting Tools</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jstack/" style="font-size: 10px;">jstack</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/maven/" style="font-size: 13.33px;">maven</a> <a href="/tags/分区/" style="font-size: 10px;">分区</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/哈希算法/" style="font-size: 10px;">哈希算法</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/大数据/" style="font-size: 16.67px;">大数据</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/密码学/" style="font-size: 10px;">密码学</a> <a href="/tags/并发/" style="font-size: 13.33px;">并发</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 20px;">网络</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/锁/" style="font-size: 16.67px;">锁</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://java.jr-jr.com/">Java面试指南</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hollischuang.com/">Hollis</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://happypeter.github.io/">Peter</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dengo.org/">dengo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://litten.github.io/">Litten</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yueyuxing.github.io/">岳宇星</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wuchenglong.com/">JackieWu</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zippera.github.io/">zipperary</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.osmn00.com/translation/221.html">堂主</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://jikeytang.github.io/">豪情</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ibruce.info/">不如</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ruanyifeng.com/home.html">阮一峰</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">真心不想自我介绍</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Medusar</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/spfk.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Medusar</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">首页</a></li>
+		        
+					<li><a href="/archives">文章</a></li>
+		        
+					<li><a href="/others">其他</a></li>
+		        
+					<li><a href="/booklist">书单</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/2301198285" title="weibo">weibo</a>
+			        
+						<a class="github" target="_blank" href="https://github.com/Medusar" title="github">github</a>
+			        
+						<a class="google" target="_blank" href="http://my.oschina.net/jasonultimate/blog" title="google">google</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="twitter" target="_blank" href="https://www.zybuluo.com/939958749/note" title="twitter">twitter</a>
+			        
+						<a class="facebook" target="_blank" href="/#" title="facebook">facebook</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-kafka-selflearning-02" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/kafka-selflearning-02/" class="article-date">
+  	<time datetime="2016-01-25T12:03:52.000Z" itemprop="datePublished">2016-01-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kafka学习笔记之高性能设计
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/coding/">编程</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="u6301_u4E45_u5316"><a href="#u6301_u4E45_u5316" class="headerlink" title="持久化"></a>持久化</h2><p>kafka非常依赖文件系统进行消息存储和缓存。大部分人会认为“磁盘很慢”，所以很多人会怀疑持久化是否能够提供很好的性能。实际上磁盘速度的快慢与磁盘的使用方式有着很大关系，设计好的磁盘结构通常会很快。</p>
+<p>对于磁盘的线性读写操作在很多系统中都进行了大量优化，在某些情况下，对于磁盘的顺序访问甚至比对于内存的随机访问还要快！</p>
+<p>很多现代操作系统都大量使用主存做磁盘缓存，一个现代操作系统可以将内存中的所有剩余空间用作磁盘缓存，而当内存回收的时候几乎没有性能损失。所有的磁盘读写都会经过这个统一的缓存。哪怕使用directI/O，这个特性也很难被关闭，所以如果某个进程维护了一份进程内缓存，那么这部分数据很可能也在操作系统的页面缓存中存在。</p>
+<p>由于kafka是基于JVM的，并且任何与java内存使用打过交道的人都知道两件事：</p>
+<ol>
+<li>对象的内存开销非常高，通常是实际要存储数据大小的两倍</li>
+<li>随着数据的增加，java的垃圾收集也会越来越频繁并且缓慢<br>基于此，使用文件系统，同时依赖页面缓存就比使用其他数据结构和维护内存缓存更有吸引力：</li>
+<li>不使用进程内缓存，就腾出了内存空间，可以用来存放页面缓存的空间几乎可以翻倍。</li>
+<li>如果kafka重启，进行内缓存就会丢失，但是使用操作系统的页面缓存依然可以继续使用。</li>
+</ol>
+<p>kafka如此频繁利用页面缓存，如果内存大小不够了怎么办？没关系，kafka会将所有的数据立即写入文件系统而无需写入磁盘。</p>
+<h2 id="u6570_u636E_u7ED3_u6784"><a href="#u6570_u636E_u7ED3_u6784" class="headerlink" title="数据结构"></a>数据结构</h2><p><a href="http://kafka.apache.org/documentation.html#design_constanttime" target="_blank" rel="external">http://kafka.apache.org/documentation.html#design_constanttime</a></p>
+<h2 id="u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><a href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D" class="headerlink" title="大量的小IO操作和大量的字节拷贝"></a>大量的小IO操作和大量的字节拷贝</h2><p>除了上面说的磁盘读写影响性能之外，另外两个影响性能的就是：</p>
+<ol>
+<li>大量的IO操作</li>
+<li>大量的字节拷贝</li>
+</ol>
+<h3 id="u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C"><a href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C" class="headerlink" title="大量的小IO操作"></a>大量的小IO操作</h3><p>对于消息服务端来说，写操作是很频繁的，为了避免这个问题，kafka的协议是基于一种“消息集合”的抽象，它允许网络请求将消息集中发送而不是每次发送一条消息。服务端同样，也是一次性将一组消息写入日志，消费者也是每次取一大块。</p>
+<p>这样做能够产生更大的网络数据包，更大的连续磁盘操作以及连续的内存块，这些都使得kafka更容易将大量随机消息编程线性的写操作。</p>
+<h3 id="u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><a href="#u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D" class="headerlink" title="大量的字节拷贝"></a>大量的字节拷贝</h3><p>kafka消费者，生产者还有服务端使用的日志格式都是一样的。这样做的好处就是能够为网络传输数据块提供最大的优化。</p>
+<p>一般来讲，将文件中的数据转移到Socket需要经过以下几步：</p>
+<ol>
+<li>操作系统将数据从磁盘读到内核空间的页面缓存中</li>
+<li>应用程序从内核空间将数据读取到用户空间</li>
+<li>应用程序将数据重新写入到内核空间中的socket缓存中</li>
+<li>操作系统将数据从socket缓存中拷贝到网卡缓存中（网卡缓存中的数据将被发送到网络中）</li>
+</ol>
+<p>上面的过程经过了四次拷贝和两次系统调用，明显这是不高效的。<br>通过使用sendfile API,允许操作系统直接从页面缓存将数据发送到网络，就减少了不必要的拷贝，只有最后一步：将数据拷贝到网卡缓存是必须的。</p>
+<p>假设某个Topic有多个消费者，使用上面的零拷贝技术，数据只会被拷贝一次进入页面缓存，每次消费都可以被重复使用。这样就避免了每次读的时候都将数据存到内存中然后拷贝到内核空间。</p>
+<h2 id="u7AEF_u5230_u7AEF_u6279_u91CF_u538B_u7F29"><a href="#u7AEF_u5230_u7AEF_u6279_u91CF_u538B_u7F29" class="headerlink" title="端到端批量压缩"></a>端到端批量压缩</h2><p>在很多情况下，系统的瓶颈不是CPU而是带宽。所以数据压缩就很重要。<br>可以每个消息都压缩，但是压缩率相对很低。所以kafka使用了批量压缩，即将多个消息一起压缩而不是单个消息压缩。<br>kafka允许使用递归的消息集合，批量的消息可以通过压缩的形式传输并且在日志中也可以保持压缩格式，直到被消费者解压缩。<br>kafka支持Gzip和Snappy压缩协议。</p>
+<h2 id="u751F_u4EA7_u8005"><a href="#u751F_u4EA7_u8005" class="headerlink" title="生产者"></a>生产者</h2><h3 id="u8D1F_u8F7D_u5747_u8861"><a href="#u8D1F_u8F7D_u5747_u8861" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>生产者直接将数据发送到broker中，中间不会经过任何路由层。<br>为了达到这个目的，所有的kafka节点都能在任何时候回答是否服务器可以用以及主题分区的leader机器在哪里等问题，以便于生产者正确的发送数据。</p>
+<p>生产者客户端控制着消息发往哪个分区。可以通过随机负载均衡或者其他分区语义功能来实现。kafka提供了分区语义接口允许用户指定一个用户哈希分析的字段。</p>
+<h3 id="u5F02_u6B65_u53D1_u9001"><a href="#u5F02_u6B65_u53D1_u9001" class="headerlink" title="异步发送"></a>异步发送</h3><p>为了实现批量发送，kafka需要在内存中积累数据，以便于在单次请求中发送足够大的数据。可以通过配置消息数量不超过某个值或者等待时间不超过某个值来进行控制。</p>
+<h2 id="u6D88_u8D39_u8005"><a href="#u6D88_u8D39_u8005" class="headerlink" title="消费者"></a>消费者</h2><p>消费者通过指定log的offset来获取消息，每次取回一块以指定的offset开始的消息块。</p>
+<h3 id="u63A8_vs-__u62C9"><a href="#u63A8_vs-__u62C9" class="headerlink" title="推 vs. 拉"></a>推 vs. 拉</h3><p>在kafka中，消息是被消费者推到broker的，然后被生产者拉过来。<br>一些以日志为中心的系统，比如Scibe和Flume则允许将数据推向下游。</p>
+<p>推和拉各有利弊，推模式中，由于是broker控制数据传输速度，目标是以尽可能提高消费者的消息消费率，push模式中，如果消费者消费速度跟不上推的速度，消费者就处于过载状态。而使用拉模式，消费者可以根据自己的处理能力控制拉取消息的速度。</p>
+<p>传统拉模式的缺点是：如果服务端没有消息，消费者将会进入循环等待，直到新的数据到达。为了避免这个问题，kafka提供了配置参数，允许消费者请求进入long poll 等待，直到有数据到达。（。。。表示不太懂）</p>
+<h3 id="u6D88_u8D39_u8005_u4F4D_u7F6E"><a href="#u6D88_u8D39_u8005_u4F4D_u7F6E" class="headerlink" title="消费者位置"></a>消费者位置</h3><p>在很多消息系统中，服务端是需要维护消息的消费状态的，即当消息投递给消费者之后，服务端要么立即记录下来，要么等待消费端的确认。</p>
+<p>如果broker每次将消息投递出去就将消息状态置为“已消费”，那么如果消费者没有成功消费该消息（可能消费者宕机了或者请求超时了等），那消息就相当于丢失了。为了避免这个问题，很多系统增加了确认机制，当消息发送出去的时候，被置为“已发送”状态而不是“已消费”，当收到消费者的确认信息之后，才将消息状态置为“已消费”。</p>
+<p>但这会有新的问题，首先，如果消费者消费了消息但是在发送确认信息之前出错了，那么消息将会被消费两次。其次是性能问题，这样一来broker就必须维护很多状态（每条信息一组状态）。另外还需要处理很多其他问题，例如:消息发送出去了但是没有收到确认该怎么办？</p>
+<p>kafka的做法是这样的：<br>Topic被分成多个完全有序的分区，任何时候，任意一个分区都只有一个消费者消费。这意味着在每个分区中的消费者位置都是一个整数：下一个即将消费的offset值。这样就使得消息确认变得很容易。<br>另外还有一个好处：消费者可以故意将offset置为一个很老的值，然后重新消费数据。</p>
+<h3 id="u79BB_u7EBF_u6570_u636E_u52A0_u8F7D"><a href="#u79BB_u7EBF_u6570_u636E_u52A0_u8F7D" class="headerlink" title="离线数据加载"></a>离线数据加载</h3><h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>kafka使用文件系统作为持久化介质，为了提高速度采用了顺序读写磁盘的方式。</li>
+<li>kafka使用了页面缓存而不是进程内缓存，即可以提高缓存空间又能保证重启的时候缓存不是小。</li>
+<li>kafka的写操作使用了sendfile API，它允许在文件描述符之间传输数据，从而减少了不必要的拷贝，提高了效率。</li>
+<li>kafka支持批量消息压缩，从而降低对网络带宽的占用。</li>
+<li>生产者负载均衡是在客户端实现，生产者直接将数据发送到broker中</li>
+<li>kafka中，生产者推数据到broker中，消费者从broker中拉取数据</li>
+<li>kafka分区和offset降低了消息状态维护的成本</li>
+</ol>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><p>1.<a href="http://kafka.apache.org/documentation.html#design" target="_blank" rel="external">kafka设计</a><br>2.<a href="http://umeng.baijia.baidu.com/article/227913" target="_blank" rel="external">kafka高性能吞吐揭秘</a></p>
+<ol>
+<li><a href="https://www.varnish-cache.org/trac/wiki/ArchitectNotes" target="_blank" rel="external">Vanish的以页面缓存为中心的设计</a></li>
+<li><a href="http://man7.org/linux/man-pages/man2/sendfile.2.html" target="_blank" rel="external">sendfile API</a></li>
+<li><a href="https://www.ibm.com/developerworks/linux/library/j-zerocopy/" target="_blank" rel="external">零拷贝</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/kafka-selflearning-00/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Kafka学习笔记之初见
+        
+      </div>
+    </a>
+  
+  
+    <a href="/kafka-selflearning-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kafka学习笔记之基础概念及原理</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6301_u4E45_u5316"><span class="toc-number">1.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6570_u636E_u7ED3_u6784"><span class="toc-number">2.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><span class="toc-number">3.</span> <span class="toc-text">大量的小IO操作和大量的字节拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C"><span class="toc-number">3.1.</span> <span class="toc-text">大量的小IO操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><span class="toc-number">3.2.</span> <span class="toc-text">大量的字节拷贝</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7AEF_u5230_u7AEF_u6279_u91CF_u538B_u7F29"><span class="toc-number">4.</span> <span class="toc-text">端到端批量压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u751F_u4EA7_u8005"><span class="toc-number">5.</span> <span class="toc-text">生产者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8D1F_u8F7D_u5747_u8861"><span class="toc-number">5.1.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F02_u6B65_u53D1_u9001"><span class="toc-number">5.2.</span> <span class="toc-text">异步发送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D88_u8D39_u8005"><span class="toc-number">6.</span> <span class="toc-text">消费者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u63A8_vs-__u62C9"><span class="toc-number">6.1.</span> <span class="toc-text">推 vs. 拉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6D88_u8D39_u8005_u4F4D_u7F6E"><span class="toc-number">6.2.</span> <span class="toc-text">消费者位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u79BB_u7EBF_u6570_u636E_u52A0_u8F7D"><span class="toc-number">6.3.</span> <span class="toc-text">离线数据加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">8.</span> <span class="toc-text">参考文档</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var toc_button = document.getElementById("tocButton");
+    var toc_div = document.getElementById("toc");
+    toc_button.onclick=function() {
+        if (toc_div.style.display == "none") {
+            toc_div.style.display = "block";
+            toc_button.value = "隐藏目录";
+            document.getElementById("switch-btn").style.display = "none";
+            document.getElementById("switch-area").style.display = "none";
+        }
+        else {
+            toc_div.style.display = "none";
+            toc_button.value = "显示目录";
+            document.getElementById("switch-btn").style.display = "block";
+            document.getElementById("switch-area").style.display = "block";
+        }
+    }
+
+    if ($(".toc").length < 1) {
+        $("#toc").css("display","none");
+        $("#tocButton").css("display","none");
+        $(".switch-btn").css("display","block");
+        $(".switch-area").css("display","block");
+    }
+</script>
+
+
+
+
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a><a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+    <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="kafka-selflearning-02/" data-title="Kafka学习笔记之高性能设计" data-url="http://blog.onlycatch.com/kafka-selflearning-02/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"medusar"};
+    	(function() {
+    		var ds = document.createElement('script');
+    		ds.type = 'text/javascript';ds.async = true;
+    		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    		ds.charset = 'UTF-8';
+    		(document.getElementsByTagName('head')[0]
+    		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+    	})();
+    	</script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/kafka-selflearning-00/" title="上一篇: Kafka学习笔记之初见">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/kafka-selflearning-01/" title="下一篇: Kafka学习笔记之基础概念及原理">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/kafka-selflearning-00/">Kafka学习笔记之初见</a></li><li class="post-list-item"><a class="post-list-link" href="/kafka-selflearning-02/">Kafka学习笔记之高性能设计</a></li><li class="post-list-item"><a class="post-list-link" href="/kafka-selflearning-01/">Kafka学习笔记之基础概念及原理</a></li><li class="post-list-item"><a class="post-list-link" href="/how-linux-commands-used-in-dubbo/">Dubbo启动脚本学习</a></li><li class="post-list-item"><a class="post-list-link" href="/murmurhash/">Murmur哈希算法</a></li><li class="post-list-item"><a class="post-list-link" href="/cryptology/">密码学综述</a></li><li class="post-list-item"><a class="post-list-link" href="/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/tcp-handshakes/">TCP三次握手和四次握手</a></li><li class="post-list-item"><a class="post-list-link" href="/traffic-hijack/">流量劫持</a></li><li class="post-list-item"><a class="post-list-link" href="/xargs-in-linux/">[Linux]xargs命令</a></li><li class="post-list-item"><a class="post-list-link" href="/differences-between-301-302/">HTTP响应码301和302的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/queue-and-stack-implements/">队列与栈的互相实现</a></li><li class="post-list-item"><a class="post-list-link" href="/how-is-null-differs-from-equals-null-in-sql/">SQL中= null与is null的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/java-thread-communication/">java线程间通信</a></li><li class="post-list-item"><a class="post-list-link" href="/thread-state-and-analysis/">java中线程的状态以及线程栈分析</a></li><li class="post-list-item"><a class="post-list-link" href="/what-if-exception-occurs-in-threadpool/">Java线程池异常处理最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/linux-rsync/">[Linux工具] rsync数据同步工具</a></li><li class="post-list-item"><a class="post-list-link" href="/broadcast-multicast-unicast/">广播（broadcast)，组播(multicast)，单播(unicast)的Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/spinlock/">自旋锁</a></li><li class="post-list-item"><a class="post-list-link" href="/Reentrant-lock/">Java中的可重入(Reentrant)锁</a></li><li class="post-list-item"><a class="post-list-link" href="/how-127-0-0-1and0-0-0-0-differs-from-each-other/">127.0.0.1和0.0.0.0地址的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/maven-hidden-variables/">maven内置隐式变量</a></li><li class="post-list-item"><a class="post-list-link" href="/useful-maven-plugin/">常用Maven插件</a></li><li class="post-list-item"><a class="post-list-link" href="/timeout-or-notify/">如何区分一个类是wait timeout 还是notify唤醒的?</a></li><li class="post-list-item"><a class="post-list-link" href="/ajax-cross-domain/">Ajax跨域请求原理及解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-partition/">MySQL分区表</a></li><li class="post-list-item"><a class="post-list-link" href="/buffer-in-netty/">Netty中的Buffer</a></li><li class="post-list-item"><a class="post-list-link" href="/key-concepts-netty/">Netty中的几个关键概念</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200);
+            }
+            else {
+                $(".switch-btn, .switch-area").toggle(200);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: false,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+    
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Medusar
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        <!-- <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >Unique Visitor:
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, Page View:
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div> -->
+    </div>
+    <!-- <script async src="/js/busuanzi.pure.mini.js"></script> -->
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var spfkConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?4600374f3aa3683027e8116eaf768887";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71945534-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+  </div>
+</body>
+</html>

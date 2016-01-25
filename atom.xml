@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
-  <updated>2016-01-19T09:34:37.000Z</updated>
+  <updated>2016-01-25T12:08:30.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
   
   <author>
@@ -13,6 +13,324 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Kafka学习笔记之初见]]></title>
+    <link href="http://blog.onlycatch.com/kafka-selflearning-00/"/>
+    <id>http://blog.onlycatch.com/kafka-selflearning-00/</id>
+    <published>2016-01-25T12:07:48.000Z</published>
+    <updated>2016-01-25T12:08:30.000Z</updated>
+    <content type="html"><![CDATA[<p>kafka是一个高性能的分布式消息系统。高水平扩展和高吞吐量。支持动态扩容，由LinkedIn用Scala编写而成。</p>
+<h2 id="kafka_u4E0E_u5176_u4ED6_u6D88_u606F_u7CFB_u7EDF_u5BF9_u6BD4"><a href="#kafka_u4E0E_u5176_u4ED6_u6D88_u606F_u7CFB_u7EDF_u5BF9_u6BD4" class="headerlink" title="kafka与其他消息系统对比"></a>kafka与其他消息系统对比</h2><p>flume,storm,spark,elesticsearch都能与kafka集成。<br><img src="http://7xo4v8.com1.z0.glb.clouddn.com/kafka.png" alt="kafka与其他消息系统的对比"></p>
+<ol>
+<li>kafka使用的协议为仿AMQP协议。</li>
+<li>kafka不支持事务，activeMQ支持</li>
+<li>kafka支持动态扩容，集群，负载均衡。</li>
+</ol>
+<p><a href="https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol" target="_blank" rel="external">AMQP协议</a>:<a href="http://langyu.iteye.com/blog/759663" target="_blank" rel="external">http://langyu.iteye.com/blog/759663</a></p>
+<h2 id="kafka_u7684_u6D88_u8D39_u8005_u7F16_u7A0B_u6A21_u578B"><a href="#kafka_u7684_u6D88_u8D39_u8005_u7F16_u7A0B_u6A21_u578B" class="headerlink" title="kafka的消费者编程模型"></a>kafka的消费者编程模型</h2><ol>
+<li>分区消费模型</li>
+<li>组消费模型<h3 id="u5206_u533A_u6D88_u8D39_u6A21_u578B"><a href="#u5206_u533A_u6D88_u8D39_u6A21_u578B" class="headerlink" title="分区消费模型"></a>分区消费模型</h3>缺点：</li>
+<li>需要自己处理各种异常情况</li>
+<li>需要自己管理消息偏移量以实现消息传递的各种语义</li>
+</ol>
+<h3 id="u6D88_u606F_u4F20_u9012_u7684_u8BED_u4E49"><a href="#u6D88_u606F_u4F20_u9012_u7684_u8BED_u4E49" class="headerlink" title="消息传递的语义"></a>消息传递的语义</h3><ol>
+<li>至少一次：发送者向消费者至少发送一次（可能会重复）</li>
+<li>至多一次：发送者向消费者至多发送一次（可能会丢）</li>
+<li>有且仅有一次：发送者与消费者的关系一对一。<h3 id="u7EC4_u6D88_u8D39_u6A21_u578B"><a href="#u7EC4_u6D88_u8D39_u6A21_u578B" class="headerlink" title="组消费模型"></a>组消费模型</h3></li>
+<li>不需要自己处理异常情况，不需要自己管理offset</li>
+<li>只能实现默认的kafka至少一次的消息传递语义</li>
+</ol>
+<h2 id="kafka_u7684_u751F_u4EA7_u8005_u7F16_u7A0B_u6A21_u578B"><a href="#kafka_u7684_u751F_u4EA7_u8005_u7F16_u7A0B_u6A21_u578B" class="headerlink" title="kafka的生产者编程模型"></a>kafka的生产者编程模型</h2><h3 id="u540C_u6B65_u751F_u4EA7_u6A21_u578B"><a href="#u540C_u6B65_u751F_u4EA7_u6A21_u578B" class="headerlink" title="同步生产模型"></a>同步生产模型</h3><p>生产者发送消息后需要等待kafka集群的确认消息，直到收到确认消息或者超过最大投递次数。</p>
+<p>特点：</p>
+<ol>
+<li>低消息丢失率</li>
+<li>高消息重复率（网络原因导致回复确认没收到）</li>
+<li>高延迟<h3 id="u5F02_u6B65_u751F_u4EA7_u6A21_u578B"><a href="#u5F02_u6B65_u751F_u4EA7_u6A21_u578B" class="headerlink" title="异步生产模型"></a>异步生产模型</h3>生产者先把消息发送到客户端的缓冲队列，队列中的消息会被打包一起发送到kafka服务器。<br>特点：</li>
+<li>高消息丢失率（无确认机制，发送端队列满）</li>
+<li>高发送性能</li>
+<li>低延迟</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[kafka入门简介]]>
+    
+    </summary>
+    
+      <category term="Kafka" scheme="http://blog.onlycatch.com/tags/Kafka/"/>
+    
+      <category term="大数据" scheme="http://blog.onlycatch.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Kafka学习笔记之高性能设计]]></title>
+    <link href="http://blog.onlycatch.com/kafka-selflearning-02/"/>
+    <id>http://blog.onlycatch.com/kafka-selflearning-02/</id>
+    <published>2016-01-25T12:03:52.000Z</published>
+    <updated>2016-01-25T12:04:51.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u6301_u4E45_u5316"><a href="#u6301_u4E45_u5316" class="headerlink" title="持久化"></a>持久化</h2><p>kafka非常依赖文件系统进行消息存储和缓存。大部分人会认为“磁盘很慢”，所以很多人会怀疑持久化是否能够提供很好的性能。实际上磁盘速度的快慢与磁盘的使用方式有着很大关系，设计好的磁盘结构通常会很快。</p>
+<p>对于磁盘的线性读写操作在很多系统中都进行了大量优化，在某些情况下，对于磁盘的顺序访问甚至比对于内存的随机访问还要快！</p>
+<p>很多现代操作系统都大量使用主存做磁盘缓存，一个现代操作系统可以将内存中的所有剩余空间用作磁盘缓存，而当内存回收的时候几乎没有性能损失。所有的磁盘读写都会经过这个统一的缓存。哪怕使用directI/O，这个特性也很难被关闭，所以如果某个进程维护了一份进程内缓存，那么这部分数据很可能也在操作系统的页面缓存中存在。</p>
+<p>由于kafka是基于JVM的，并且任何与java内存使用打过交道的人都知道两件事：</p>
+<ol>
+<li>对象的内存开销非常高，通常是实际要存储数据大小的两倍</li>
+<li>随着数据的增加，java的垃圾收集也会越来越频繁并且缓慢<br>基于此，使用文件系统，同时依赖页面缓存就比使用其他数据结构和维护内存缓存更有吸引力：</li>
+<li>不使用进程内缓存，就腾出了内存空间，可以用来存放页面缓存的空间几乎可以翻倍。</li>
+<li>如果kafka重启，进行内缓存就会丢失，但是使用操作系统的页面缓存依然可以继续使用。</li>
+</ol>
+<p>kafka如此频繁利用页面缓存，如果内存大小不够了怎么办？没关系，kafka会将所有的数据立即写入文件系统而无需写入磁盘。</p>
+<h2 id="u6570_u636E_u7ED3_u6784"><a href="#u6570_u636E_u7ED3_u6784" class="headerlink" title="数据结构"></a>数据结构</h2><p><a href="http://kafka.apache.org/documentation.html#design_constanttime" target="_blank" rel="external">http://kafka.apache.org/documentation.html#design_constanttime</a></p>
+<h2 id="u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><a href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D" class="headerlink" title="大量的小IO操作和大量的字节拷贝"></a>大量的小IO操作和大量的字节拷贝</h2><p>除了上面说的磁盘读写影响性能之外，另外两个影响性能的就是：</p>
+<ol>
+<li>大量的IO操作</li>
+<li>大量的字节拷贝</li>
+</ol>
+<h3 id="u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C"><a href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C" class="headerlink" title="大量的小IO操作"></a>大量的小IO操作</h3><p>对于消息服务端来说，写操作是很频繁的，为了避免这个问题，kafka的协议是基于一种“消息集合”的抽象，它允许网络请求将消息集中发送而不是每次发送一条消息。服务端同样，也是一次性将一组消息写入日志，消费者也是每次取一大块。</p>
+<p>这样做能够产生更大的网络数据包，更大的连续磁盘操作以及连续的内存块，这些都使得kafka更容易将大量随机消息编程线性的写操作。</p>
+<h3 id="u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><a href="#u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D" class="headerlink" title="大量的字节拷贝"></a>大量的字节拷贝</h3><p>kafka消费者，生产者还有服务端使用的日志格式都是一样的。这样做的好处就是能够为网络传输数据块提供最大的优化。</p>
+<p>一般来讲，将文件中的数据转移到Socket需要经过以下几步：</p>
+<ol>
+<li>操作系统将数据从磁盘读到内核空间的页面缓存中</li>
+<li>应用程序从内核空间将数据读取到用户空间</li>
+<li>应用程序将数据重新写入到内核空间中的socket缓存中</li>
+<li>操作系统将数据从socket缓存中拷贝到网卡缓存中（网卡缓存中的数据将被发送到网络中）</li>
+</ol>
+<p>上面的过程经过了四次拷贝和两次系统调用，明显这是不高效的。<br>通过使用sendfile API,允许操作系统直接从页面缓存将数据发送到网络，就减少了不必要的拷贝，只有最后一步：将数据拷贝到网卡缓存是必须的。</p>
+<p>假设某个Topic有多个消费者，使用上面的零拷贝技术，数据只会被拷贝一次进入页面缓存，每次消费都可以被重复使用。这样就避免了每次读的时候都将数据存到内存中然后拷贝到内核空间。</p>
+<h2 id="u7AEF_u5230_u7AEF_u6279_u91CF_u538B_u7F29"><a href="#u7AEF_u5230_u7AEF_u6279_u91CF_u538B_u7F29" class="headerlink" title="端到端批量压缩"></a>端到端批量压缩</h2><p>在很多情况下，系统的瓶颈不是CPU而是带宽。所以数据压缩就很重要。<br>可以每个消息都压缩，但是压缩率相对很低。所以kafka使用了批量压缩，即将多个消息一起压缩而不是单个消息压缩。<br>kafka允许使用递归的消息集合，批量的消息可以通过压缩的形式传输并且在日志中也可以保持压缩格式，直到被消费者解压缩。<br>kafka支持Gzip和Snappy压缩协议。</p>
+<h2 id="u751F_u4EA7_u8005"><a href="#u751F_u4EA7_u8005" class="headerlink" title="生产者"></a>生产者</h2><h3 id="u8D1F_u8F7D_u5747_u8861"><a href="#u8D1F_u8F7D_u5747_u8861" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>生产者直接将数据发送到broker中，中间不会经过任何路由层。<br>为了达到这个目的，所有的kafka节点都能在任何时候回答是否服务器可以用以及主题分区的leader机器在哪里等问题，以便于生产者正确的发送数据。</p>
+<p>生产者客户端控制着消息发往哪个分区。可以通过随机负载均衡或者其他分区语义功能来实现。kafka提供了分区语义接口允许用户指定一个用户哈希分析的字段。</p>
+<h3 id="u5F02_u6B65_u53D1_u9001"><a href="#u5F02_u6B65_u53D1_u9001" class="headerlink" title="异步发送"></a>异步发送</h3><p>为了实现批量发送，kafka需要在内存中积累数据，以便于在单次请求中发送足够大的数据。可以通过配置消息数量不超过某个值或者等待时间不超过某个值来进行控制。</p>
+<h2 id="u6D88_u8D39_u8005"><a href="#u6D88_u8D39_u8005" class="headerlink" title="消费者"></a>消费者</h2><p>消费者通过指定log的offset来获取消息，每次取回一块以指定的offset开始的消息块。</p>
+<h3 id="u63A8_vs-__u62C9"><a href="#u63A8_vs-__u62C9" class="headerlink" title="推 vs. 拉"></a>推 vs. 拉</h3><p>在kafka中，消息是被消费者推到broker的，然后被生产者拉过来。<br>一些以日志为中心的系统，比如Scibe和Flume则允许将数据推向下游。</p>
+<p>推和拉各有利弊，推模式中，由于是broker控制数据传输速度，目标是以尽可能提高消费者的消息消费率，push模式中，如果消费者消费速度跟不上推的速度，消费者就处于过载状态。而使用拉模式，消费者可以根据自己的处理能力控制拉取消息的速度。</p>
+<p>传统拉模式的缺点是：如果服务端没有消息，消费者将会进入循环等待，直到新的数据到达。为了避免这个问题，kafka提供了配置参数，允许消费者请求进入long poll 等待，直到有数据到达。（。。。表示不太懂）</p>
+<h3 id="u6D88_u8D39_u8005_u4F4D_u7F6E"><a href="#u6D88_u8D39_u8005_u4F4D_u7F6E" class="headerlink" title="消费者位置"></a>消费者位置</h3><p>在很多消息系统中，服务端是需要维护消息的消费状态的，即当消息投递给消费者之后，服务端要么立即记录下来，要么等待消费端的确认。</p>
+<p>如果broker每次将消息投递出去就将消息状态置为“已消费”，那么如果消费者没有成功消费该消息（可能消费者宕机了或者请求超时了等），那消息就相当于丢失了。为了避免这个问题，很多系统增加了确认机制，当消息发送出去的时候，被置为“已发送”状态而不是“已消费”，当收到消费者的确认信息之后，才将消息状态置为“已消费”。</p>
+<p>但这会有新的问题，首先，如果消费者消费了消息但是在发送确认信息之前出错了，那么消息将会被消费两次。其次是性能问题，这样一来broker就必须维护很多状态（每条信息一组状态）。另外还需要处理很多其他问题，例如:消息发送出去了但是没有收到确认该怎么办？</p>
+<p>kafka的做法是这样的：<br>Topic被分成多个完全有序的分区，任何时候，任意一个分区都只有一个消费者消费。这意味着在每个分区中的消费者位置都是一个整数：下一个即将消费的offset值。这样就使得消息确认变得很容易。<br>另外还有一个好处：消费者可以故意将offset置为一个很老的值，然后重新消费数据。</p>
+<h3 id="u79BB_u7EBF_u6570_u636E_u52A0_u8F7D"><a href="#u79BB_u7EBF_u6570_u636E_u52A0_u8F7D" class="headerlink" title="离线数据加载"></a>离线数据加载</h3><h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>kafka使用文件系统作为持久化介质，为了提高速度采用了顺序读写磁盘的方式。</li>
+<li>kafka使用了页面缓存而不是进程内缓存，即可以提高缓存空间又能保证重启的时候缓存不是小。</li>
+<li>kafka的写操作使用了sendfile API，它允许在文件描述符之间传输数据，从而减少了不必要的拷贝，提高了效率。</li>
+<li>kafka支持批量消息压缩，从而降低对网络带宽的占用。</li>
+<li>生产者负载均衡是在客户端实现，生产者直接将数据发送到broker中</li>
+<li>kafka中，生产者推数据到broker中，消费者从broker中拉取数据</li>
+<li>kafka分区和offset降低了消息状态维护的成本</li>
+</ol>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><p>1.<a href="http://kafka.apache.org/documentation.html#design" target="_blank" rel="external">kafka设计</a><br>2.<a href="http://umeng.baijia.baidu.com/article/227913" target="_blank" rel="external">kafka高性能吞吐揭秘</a></p>
+<ol>
+<li><a href="https://www.varnish-cache.org/trac/wiki/ArchitectNotes" target="_blank" rel="external">Vanish的以页面缓存为中心的设计</a></li>
+<li><a href="http://man7.org/linux/man-pages/man2/sendfile.2.html" target="_blank" rel="external">sendfile API</a></li>
+<li><a href="https://www.ibm.com/developerworks/linux/library/j-zerocopy/" target="_blank" rel="external">零拷贝</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[Kafka在设计过程中的为了追求高性能而做的一些处理]]>
+    
+    </summary>
+    
+      <category term="Kafka" scheme="http://blog.onlycatch.com/tags/Kafka/"/>
+    
+      <category term="大数据" scheme="http://blog.onlycatch.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Kafka学习笔记之基础概念及原理]]></title>
+    <link href="http://blog.onlycatch.com/kafka-selflearning-01/"/>
+    <id>http://blog.onlycatch.com/kafka-selflearning-01/</id>
+    <published>2016-01-25T12:02:11.000Z</published>
+    <updated>2016-01-25T12:03:19.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="u7EC4_u4EF6_u6982_u5FF5"><a href="#u7EC4_u4EF6_u6982_u5FF5" class="headerlink" title="组件概念"></a>组件概念</h3><p>Topic:消息分类<br>Producer:发布消息到kafka集群<br>consumer:订阅Topic并且处理消息<br>broker:组成kafka集群的服务器</p>
+<p>kafka客户端与服务端通信是通过TCP协议实现的。</p>
+<h3 id="u6570_u636E_u5B58_u50A8"><a href="#u6570_u636E_u5B58_u50A8" class="headerlink" title="数据存储"></a>数据存储</h3><p>一个kafka集群通常包含多个代理（broker)，为了负载均衡，将话题分为多个分区，每个代理存储一个或多个分区。多个producer和comsumer可以同时生产和获取消息。</p>
+<p><img src="http://kafka.apache.org/images/log_anatomy.png" alt="kafka分区"><br>如上图：每个Topic对应多个分区，每个分区是一个有序的消息序列，新提交的消息被添加在序列尾部。</p>
+<p>每个分区对应一个逻辑日志，物理上，一个日志为相同大小的一组分段文件。每次生产者发布消息到一个分区，代理就将消息追加到最后一个段文件中。当发布的消息数量达到设定值或者经过一段时间之后，段文件真正写入磁盘。写入完成后，消息公开给消费者（只有同步到磁盘之后才会通知消费者？？）。</p>
+<p>kafka中的消息没有消息id，而是通过offset(偏移量)来确定消息的位置。这样就避免了维护消息ID到实际消息地址的开销。消费者向代理异步发出拉请求，每个拉请求都包含要消费的消息偏移量。</p>
+<p>如图：<br><img src="http://7xo4v8.com1.z0.glb.clouddn.com/%40%2Fima%2F0609012.png" alt="kafka存储结构"></p>
+<h3 id="u4F7F_u7528_u5206_u533A_u5B58_u50A8_u6709_u4EC0_u4E48_u597D_u5904_uFF1F"><a href="#u4F7F_u7528_u5206_u533A_u5B58_u50A8_u6709_u4EC0_u4E48_u597D_u5904_uFF1F" class="headerlink" title="使用分区存储有什么好处？"></a>使用分区存储有什么好处？</h3><ol>
+<li>允许超过单机允许大小的日志文件存在</li>
+<li>多个分区可以提高并行度</li>
+</ol>
+<h3 id="u5206_u5E03_u5F0F"><a href="#u5206_u5E03_u5F0F" class="headerlink" title="分布式"></a>分布式</h3><p>分区日志分布在kafka集群中的多台机器上，每台机器处理一部分分区。每个分区在多台机器上进行备份以增加容错性。</p>
+<p>每个分区只有一个leader机器，0台或者多台follower机器。leader机器处理对该分区的所有读写请求，follower机器负责同步leader机器的数据。如果leader挂掉了，剩下的followers将自动选一台leader。</p>
+<p>一台机器作为A分区的follower可以作为B分区的leader，这样就实现了集群内负载均衡。</p>
+<h3 id="u6570_u636E_u4F20_u8F93"><a href="#u6570_u636E_u4F20_u8F93" class="headerlink" title="数据传输"></a>数据传输</h3><p>kafka利用sendfile API从代理的日志段文件中分发字节给消费者。<br>sendfile API:<a href="http://man7.org/linux/man-pages/man2/sendfile.2.html" target="_blank" rel="external">http://man7.org/linux/man-pages/man2/sendfile.2.html</a><br>它可以直接在两个文件的描述符之间传输数据，sendfile(）可以将一个文件描述符表示的文件中的数据拷贝到另外的文件描述符中，由于拷贝是在内核中进行的，所以比组合使用read()和write()要快很多，因为后者read和write数据需要经过用户空间。</p>
+<h3 id="kafka_u4EE3_u7406_uFF08broker_uFF09"><a href="#kafka_u4EE3_u7406_uFF08broker_uFF09" class="headerlink" title="kafka代理（broker）"></a>kafka代理（broker）</h3><p>kafka代理是无状态的，消费者需要自己维护已消费的状态信息。<br>代理删除消息：代理由于无状态，故它不知道消费者是否已经使用了该消息。Kafka使用基于时间的SLA应用于保留策略。当消息在代理中超过一定时间后，将会被自动删除。</p>
+<p>kafka集群会维护所有发布的消息，无论是否被消费过，直到消息过期。过期时间是可以配置的。比如：某个日志被设置为两天，那么消息发布之后两天之内，它都是可以被消费的，但是两天之后，kafka将把消息丢弃以腾出空间。<br>kafka的性能是不受存储数据大小的影响的，所以维护大量数据并不是问题。</p>
+<h3 id="zookeeper_u4E0Ekafka"><a href="#zookeeper_u4E0Ekafka" class="headerlink" title="zookeeper与kafka"></a>zookeeper与kafka</h3><p>ZooKeeper在kafka中被用于管理、协调Kafka代理。每个Kafka代理都通过ZooKeeper协调其它Kafka代理。当Kafka系统中新增了代理或者某个代理故障失效时，ZooKeeper服务将通知生产者和消费者。生产者和消费者据此开始与其它代理协调工作。<br><img src="http://7xo4v8.com1.z0.glb.clouddn.com/%40%2Fima%2Fkafka_zk.png" alt="zk在kafka中的应用"></p>
+<h3 id="u6D88_u8D39_u8005_u7EC4"><a href="#u6D88_u8D39_u8005_u7EC4" class="headerlink" title="消费者组"></a>消费者组</h3><p>传统消息系统有两种模型：队列模型和发布-订阅模型。<br>队列模型：队列中的每条消息只会发到众多消费者中的一个。<br>发布订阅模型：消息会被广播到所有的消费者。</p>
+<p>kafka将消费者抽象出来了“消费者组”的概念，这个概念能够同时实现上述两种模型的功能。</p>
+<p>每个消费者属于一个组，消息会被发送到每个组中的某一个消费者实例。<br>注意：每个组中的某一个消费者实例。意思就是，假如我有2个组，A和B，然后有一条消息，这条消息会被发往A和B两个组，但是每个组中只有一个消费者实例能够收到该条消息。所以就有了如下变种：</p>
+<p>如果所有的消费者都属于一个组，那么就相当于实现了队列模型。<br>如果每个消费者都属于不同的组，那么就相当于实现了发布-订阅模型。</p>
+<h3 id="u6D88_u606F_u987A_u5E8F_u4FDD_u8BC1"><a href="#u6D88_u606F_u987A_u5E8F_u4FDD_u8BC1" class="headerlink" title="消息顺序保证"></a>消息顺序保证</h3><p>kafka提供了很高的消息顺序保证。</p>
+<p>传统的消息系统服务器，在服务端按存储顺序维护消息，但是消息发送给消费者是通过异步发送的，所以消息实际到达消费者的顺序就可能与服务端维护的顺序不一致。很多消息系统对此采用的办法就是只允许一个进程消费消息，这样虽然能够保证消息的顺序性，但是却丢失了并发性。</p>
+<p>kafka通过将Topic进行分区，很好的提高了并发性，它既能提供顺序保证又能在多个消费者之间做到负载均衡。它是通过绑定主题分区与消费者组中的消费者，从而保证每个分区只能被分区中的一个消费者所消费。这样就能够保证被指定的消费者是唯一一个读取指定分区的消费者，并且该消费者按顺序消费数据。由于存在多个分区，所以仍然不必担心负载均衡的问题。</p>
+<p>简单来说就是：kafka是通过保证某一个分区是只被每个组中的一个消费者消费，控制的只是单个分区中消息的顺序。如果你要保证整个Topic的消息顺序，那只需要将分区数设置为1就可以了。</p>
+<h3 id="kafka_u63D0_u4F9B_u7684_u4FDD_u8BC1"><a href="#kafka_u63D0_u4F9B_u7684_u4FDD_u8BC1" class="headerlink" title="kafka提供的保证"></a>kafka提供的保证</h3><ul>
+<li>生产者发送到某个特定Topic分区的消息将会按照它们的发送顺序依次追加。就是说，如果M1和M2是由同一个生产者发送的消息，M1是先发送的，那么M1在日志中的offset就会比M2低很多。</li>
+<li>消费者实例看到消息的顺序与它们在日志中的存储顺序一致。</li>
+<li>对于备份因子为N的一个消息主题，可以允许N-1台服务器宕机而不会丢失任何已经提交到日志中的消息。</li>
+</ul>
+<h3 id="kafka_u7684_u5E94_u7528_u573A_u666F"><a href="#kafka_u7684_u5E94_u7528_u573A_u666F" class="headerlink" title="kafka的应用场景"></a>kafka的应用场景</h3><ol>
+<li>消息系统</li>
+<li>网站活动追踪</li>
+<li>日志收集</li>
+<li>流处理（与Storm配合使用）</li>
+<li>事件源</li>
+<li>日志提交（Bookeeper)</li>
+</ol>
+<h3 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="http://www.infoq.com/cn/articles/apache-kafka" target="_blank" rel="external">Apache Kafka：下一代分布式消息系统</a></li>
+<li><a href="http://kafka.apache.org/documentation.html#uses" target="_blank" rel="external">Kafka官方文档</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[kafka的基本概念以及原理解释，学习记录，有点乱。]]>
+    
+    </summary>
+    
+      <category term="Kafka" scheme="http://blog.onlycatch.com/tags/Kafka/"/>
+    
+      <category term="大数据" scheme="http://blog.onlycatch.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Dubbo启动脚本学习]]></title>
+    <link href="http://blog.onlycatch.com/how-linux-commands-used-in-dubbo/"/>
+    <id>http://blog.onlycatch.com/how-linux-commands-used-in-dubbo/</id>
+    <published>2016-01-25T11:59:07.000Z</published>
+    <updated>2016-01-25T12:00:10.000Z</updated>
+    <content type="html"><![CDATA[<p>Dubbod启动的脚本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> `dirname <span class="variable">$0</span>`</span><br><span class="line">BIN_DIR=`<span class="built_in">pwd</span>`</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">DEPLOY_DIR=`<span class="built_in">pwd</span>`</span><br><span class="line">CONF_DIR=<span class="variable">$DEPLOY_DIR</span>/conf</span><br><span class="line"></span><br><span class="line">SERVER_NAME=`sed <span class="string">'/dubbo.application.name/!d;s/.*=//'</span> conf/dubbo.properties | tr <span class="operator">-d</span> <span class="string">'\r'</span>`</span><br><span class="line">SERVER_PROTOCOL=`sed <span class="string">'/dubbo.protocol.name/!d;s/.*=//'</span> conf/dubbo.properties | tr <span class="operator">-d</span> <span class="string">'\r'</span>`</span><br><span class="line">SERVER_PORT=`sed <span class="string">'/dubbo.protocol.port/!d;s/.*=//'</span> conf/dubbo.properties | tr <span class="operator">-d</span> <span class="string">'\r'</span>`</span><br><span class="line">LOGS_FILE=`sed <span class="string">'/dubbo.log4j.file/!d;s/.*=//'</span> conf/dubbo.properties | tr <span class="operator">-d</span> <span class="string">'\r'</span>`</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$SERVER_NAME</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    SERVER_NAME=`hostname`</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">PIDS=`ps <span class="operator">-f</span> | grep java | grep <span class="string">"<span class="variable">$CONF_DIR</span>"</span> |awk <span class="string">'&#123;print $2&#125;'</span>`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$PIDS</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"ERROR: The <span class="variable">$SERVER_NAME</span> already started!"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"PID: <span class="variable">$PIDS</span>"</span></span><br><span class="line">    <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$SERVER_PORT</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    SERVER_PORT_COUNT=`netstat -tln | grep <span class="variable">$SERVER_PORT</span> | wc <span class="operator">-l</span>`</span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$SERVER_PORT_COUNT</span> <span class="operator">-gt</span> <span class="number">0</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"ERROR: The <span class="variable">$SERVER_NAME</span> port <span class="variable">$SERVER_PORT</span> already used!"</span></span><br><span class="line">        <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">LOGS_DIR=<span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$LOGS_FILE</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    LOGS_DIR=`dirname <span class="variable">$LOGS_FILE</span>`</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    LOGS_DIR=<span class="variable">$DEPLOY_DIR</span>/logs</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-d</span> <span class="variable">$LOGS_DIR</span> ]; <span class="keyword">then</span></span><br><span class="line">    mkdir <span class="variable">$LOGS_DIR</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">STDOUT_FILE=<span class="variable">$LOGS_DIR</span>/stdout.log</span><br><span class="line"></span><br><span class="line">LIB_DIR=<span class="variable">$DEPLOY_DIR</span>/lib</span><br><span class="line">LIB_JARS=`ls <span class="variable">$LIB_DIR</span>|grep .jar|awk <span class="string">'&#123;print "'</span><span class="variable">$LIB_DIR</span><span class="string">'/"$0&#125;'</span>|tr <span class="string">"\n"</span> <span class="string">":"</span>`</span><br><span class="line"></span><br><span class="line">JAVA_OPTS=<span class="string">" -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true "</span></span><br><span class="line">JAVA_DEBUG_OPTS=<span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">"debug"</span> ]; <span class="keyword">then</span></span><br><span class="line">    JAVA_DEBUG_OPTS=<span class="string">" -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n "</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">JAVA_JMX_OPTS=<span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">"jmx"</span> ]; <span class="keyword">then</span></span><br><span class="line">    JAVA_JMX_OPTS=<span class="string">" -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false "</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">JAVA_MEM_OPTS=<span class="string">""</span></span><br><span class="line">BITS=`java -version <span class="number">2</span>&gt;&amp;<span class="number">1</span> | grep -i <span class="number">64</span>-bit`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$BITS</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    JAVA_MEM_OPTS=<span class="string">" -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=128m -Xss256k -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70 "</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    JAVA_MEM_OPTS=<span class="string">" -server -Xms1g -Xmx1g -XX:PermSize=128m -XX:SurvivorRatio=2 -XX:+UseParallelGC "</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"Starting the <span class="variable">$SERVER_NAME</span> ...\c"</span></span><br><span class="line">nohup java <span class="variable">$JAVA_OPTS</span> <span class="variable">$JAVA_MEM_OPTS</span> <span class="variable">$JAVA_DEBUG_OPTS</span> <span class="variable">$JAVA_JMX_OPTS</span> -classpath <span class="variable">$CONF_DIR</span>:<span class="variable">$LIB_JARS</span> com.alibaba.dubbo.container.Main &gt; <span class="variable">$STDOUT_FILE</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"></span><br><span class="line">COUNT=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$COUNT</span> <span class="operator">-lt</span> <span class="number">1</span> ]; <span class="keyword">do</span>    </span><br><span class="line">    <span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">".\c"</span></span><br><span class="line">    sleep <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$SERVER_PORT</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$SERVER_PROTOCOL</span>"</span> == <span class="string">"dubbo"</span> ]; <span class="keyword">then</span></span><br><span class="line">    	    COUNT=`<span class="built_in">echo</span> status | nc -i <span class="number">1</span> <span class="number">127.0</span>.<span class="number">0.1</span> <span class="variable">$SERVER_PORT</span> | grep -c OK`</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            COUNT=`netstat -an | grep <span class="variable">$SERVER_PORT</span> | wc <span class="operator">-l</span>`</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    	COUNT=`ps <span class="operator">-f</span> | grep java | grep <span class="string">"<span class="variable">$DEPLOY_DIR</span>"</span> | awk <span class="string">'&#123;print $2&#125;'</span> | wc <span class="operator">-l</span>`</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$COUNT</span> <span class="operator">-gt</span> <span class="number">0</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"OK!"</span></span><br><span class="line">PIDS=`ps <span class="operator">-f</span> | grep java | grep <span class="string">"<span class="variable">$DEPLOY_DIR</span>"</span> | awk <span class="string">'&#123;print $2&#125;'</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"PID: <span class="variable">$PIDS</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"STDOUT: <span class="variable">$STDOUT_FILE</span>"</span></span><br></pre></td></tr></table></figure></p>
+<p>下面是简单的解释：</p>
+<p>startserver.sh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> `dirname <span class="variable">$0</span>`</span><br></pre></td></tr></table></figure></p>
+<p>$0当前Shell程序的文件名<br>dirname $0，获取当前Shell程序的路径<br>cd <code>dirname $0</code>，进入当前Shell程序的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SERVER_NAME=`sed <span class="string">'/dubbo.application.name/!d;s/.*=//'</span> conf/dubbo.properties | tr <span class="operator">-d</span> <span class="string">'\r'</span>`</span><br></pre></td></tr></table></figure>
+<p><code>sed &#39;/dubbo.application.name/!d;s/.*=//&#39; ../conf/dubbo.properties</code> 从conf/dubbo.properties文件中截取dubbo.application.name对应的值</p>
+<p><code>sed &#39;/dubbo.application.name/!d&#39; dubbo.properties</code> 从dubbo.properties文件中查找包含dubbo.application.name的行，<code>!d</code>表示不删除，这样执行完的结果是：<br><code>ubbo.application.name=my-server</code></p>
+<p>后面的：<code>;s/.*=//</code> 表示替换，即将所得数据中的 ‘.*=’部分，替换成掉。<br>结果：<br><code>my-server</code> 即，只有我的服务名称了</p>
+<p><code>tr -d &#39;\r&#39;</code> 将回车符号删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$SERVER_NAME</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    SERVER_NAME=`hostname`</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>if  [ -z $string  ]             如果string 为空</p>
+<p><code>hostname</code> 显示当前系统的hostname</p>
+<blockquote>
+<p>hostname - show or set the system’s host name<br>       domainname - show or set the system’s NIS/YP domain name<br>       dnsdomainname - show the system’s DNS domain name<br>       nisdomainname - show or set system’s NIS/YP domain name<br>       ypdomainname - show or set the system’s NIS/YP domain name</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PIDS=`ps <span class="operator">-f</span> | grep java | grep <span class="string">"<span class="variable">$CONF_DIR</span>"</span> |awk <span class="string">'&#123;print $2&#125;'</span>`</span><br></pre></td></tr></table></figure>
+<p><code>ps -f | grep java | grep &quot;$CONF_DIR&quot;</code> 根据配置文件路径定位到当前服务的进程id。格式如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root     <span class="number">25867</span>     <span class="number">1</span>  <span class="number">0</span> Jan04 ?        <span class="number">00</span>:<span class="number">37</span>:<span class="number">35</span> java -Djava.awt.headless=<span class="literal">true</span> -Djava.net.preferIPv4Stack=<span class="literal">true</span> -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=<span class="number">128</span>m -Xss256k -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompa...</span><br></pre></td></tr></table></figure></p>
+<p>此时调用<code>awk &#39;{print $2}&#39;</code>，则将第二列打印出来，正好是当前进行的进程id。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$PIDS</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"ERROR: The <span class="variable">$SERVER_NAME</span> already started!"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"PID: <span class="variable">$PIDS</span>"</span></span><br><span class="line">    <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>if  [ -n $string  ]             如果string 非空(非0），返回0(true)<br>若果当前进程存在，则输出：已经启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$SERVER_PORT</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    SERVER_PORT_COUNT=`netstat -tln | grep <span class="variable">$SERVER_PORT</span> | wc <span class="operator">-l</span>`</span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$SERVER_PORT_COUNT</span> <span class="operator">-gt</span> <span class="number">0</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"ERROR: The <span class="variable">$SERVER_NAME</span> port <span class="variable">$SERVER_PORT</span> already used!"</span></span><br><span class="line">        <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>如果端口号不为空，则通过<br><code>netstat -tln | grep $SERVER_PORT | wc -l</code> 来统计当前已经占用该端口的数量<br>如果数量大于0.则提示端口被占用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LOGS_DIR=<span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$LOGS_FILE</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    LOGS_DIR=`dirname <span class="variable">$LOGS_FILE</span>`</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    LOGS_DIR=<span class="variable">$DEPLOY_DIR</span>/logs</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-d</span> <span class="variable">$LOGS_DIR</span> ]; <span class="keyword">then</span></span><br><span class="line">    mkdir <span class="variable">$LOGS_DIR</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>if [ ! -d $LOGS_DIR ] 如果日志目录不存在，就创建该目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LIB_DIR=<span class="variable">$DEPLOY_DIR</span>/lib</span><br><span class="line">LIB_JARS=`ls <span class="variable">$LIB_DIR</span>|grep .jar|awk <span class="string">'&#123;print "'</span><span class="variable">$LIB_DIR</span><span class="string">'/"$0&#125;'</span>|tr <span class="string">"\n"</span> <span class="string">":"</span>`</span><br></pre></td></tr></table></figure>
+<p>获取lib目录下的jar包。</p>
+<p><code>ls $LIB_DIR|grep .jar|</code> 获取lib目录下的所有.jar文件名称。<br><code>awk &#39;{print &quot;&#39;$LIB_DIR&#39;/&quot;$0}</code> 将上面的jar文件名称，拼接上lib的路径然后输出。</p>
+<p><code>tr &quot;\n&quot; &quot;:&quot;</code> 将换行符替换成冒号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=<span class="string">" -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true "</span></span><br><span class="line">JAVA_DEBUG_OPTS=<span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">"debug"</span> ]; <span class="keyword">then</span></span><br><span class="line">    JAVA_DEBUG_OPTS=<span class="string">" -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n "</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">JAVA_JMX_OPTS=<span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">"jmx"</span> ]; <span class="keyword">then</span></span><br><span class="line">    JAVA_JMX_OPTS=<span class="string">" -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false "</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">JAVA_MEM_OPTS=<span class="string">""</span></span><br><span class="line">BITS=`java -version <span class="number">2</span>&gt;&amp;<span class="number">1</span> | grep -i <span class="number">64</span>-bit`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$BITS</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    JAVA_MEM_OPTS=<span class="string">" -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=128m -Xss256k -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70 "</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    JAVA_MEM_OPTS=<span class="string">" -server -Xms1g -Xmx1g -XX:PermSize=128m -XX:SurvivorRatio=2 -XX:+UseParallelGC "</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"Starting the <span class="variable">$SERVER_NAME</span> ...\c"</span></span><br><span class="line">nohup java <span class="variable">$JAVA_OPTS</span> <span class="variable">$JAVA_MEM_OPTS</span> <span class="variable">$JAVA_DEBUG_OPTS</span> <span class="variable">$JAVA_JMX_OPTS</span> -classpath <span class="variable">$CONF_DIR</span>:<span class="variable">$LIB_JARS</span> com.alibaba.dubbo.container.Main &gt; <span class="variable">$STDOUT_FILE</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br></pre></td></tr></table></figure>
+<p><code>java -version 2&gt;&amp;1 | grep -i 64-bit</code>这里，首先将java版本号信息输出到标准输出，然后查找’64-bit’信息，目的就是判断jdk版本是否为64位。</p>
+<p><code>nohup java $JAVA_OPTS $JAVA_MEM_OPTS $JAVA_DEBUG_OPTS $JAVA_JMX_OPTS -classpath $CONF_DIR:$LIB_JARS com.alibaba.dubbo.container.Main &gt; $STDOUT_FILE 2&gt;&amp;1 &amp;</code> 通过java命令启动服务，同时将其作为后台任务执行。</p>
+<p>关于 <code>2&gt;&amp;1</code> 可以看：<a href="http://blog.sina.com.cn/s/blog_4aae007d010192qc.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4aae007d010192qc.html</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">COUNT=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$COUNT</span> <span class="operator">-lt</span> <span class="number">1</span> ]; <span class="keyword">do</span>   </span><br><span class="line">    <span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">".\c"</span></span><br><span class="line">    sleep <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$SERVER_PORT</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$SERVER_PROTOCOL</span>"</span> == <span class="string">"dubbo"</span> ]; <span class="keyword">then</span></span><br><span class="line">            COUNT=`<span class="built_in">echo</span> status | nc -i <span class="number">1</span> <span class="number">127.0</span>.<span class="number">0.1</span> <span class="variable">$SERVER_PORT</span> | grep -c OK`</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            COUNT=`netstat -an | grep <span class="variable">$SERVER_PORT</span> | wc <span class="operator">-l</span>`</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        COUNT=`ps <span class="operator">-f</span> | grep java | grep <span class="string">"<span class="variable">$DEPLOY_DIR</span>"</span> | awk <span class="string">'&#123;print $2&#125;'</span> | wc <span class="operator">-l</span>`</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$COUNT</span> <span class="operator">-gt</span> <span class="number">0</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p><code>echo -e &quot;.\c&quot;</code><br><code>echo status | nc -i 1 127.0.0.1 $SERVER_PORT | grep -c OK</code></p>
+<p>grep -c 阻止正常的结果输出，转而输出匹配的结果数量，这里就是输出OK的个数。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[Dubbo启动脚本中的一些比较复杂的linux命令的使用介绍]]>
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="http://blog.onlycatch.com/tags/Dubbo/"/>
+    
+      <category term="linux" scheme="http://blog.onlycatch.com/tags/linux/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Murmur哈希算法]]></title>
+    <link href="http://blog.onlycatch.com/murmurhash/"/>
+    <id>http://blog.onlycatch.com/murmurhash/</id>
+    <published>2016-01-25T11:51:27.000Z</published>
+    <updated>2016-01-25T11:56:37.000Z</updated>
+    <content type="html"><![CDATA[<p>在看<a href="http://redisbook.com/preview/dict/hash_algorithm.html" target="_blank" rel="external">redis哈希</a>的时候发现了这个算法。</p>
+<h2 id="u4F5C_u7528"><a href="#u4F5C_u7528" class="headerlink" title="作用"></a>作用</h2><p>MurmurHash是一种非加密型哈希函数。与其他流行的哈希函数相比，对于规律性较强的key，MurmurHash的随机分布特征表现更良好。</p>
+<p>最早发明与2008年，目前的版本是MurmurHash3,可以产生32位或者128位的哈希值。其名字来自于MUltiply and Rotate,因为要经过多次MUltiply and Rotate，所以叫Murmur.</p>
+<h2 id="u5B9E_u73B0"><a href="#u5B9E_u73B0" class="headerlink" title="实现"></a>实现</h2><p>在java中，Guava的Hashing类中提供了多个版本的实现。<br><a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/hash/Murmur3_32HashFunction.java" target="_blank" rel="external">32位版本</a><br><a href="https://github.com/google/guava/blob/master/guava%2Fsrc%2Fcom%2Fgoogle%2Fcommon%2Fhash%2FMurmur3_128HashFunction.java" target="_blank" rel="external">128位版本</a></p>
+<p>另外，很多应用广泛的开源产品也使用了MurmurHash<br><a href="https://github.com/xetorthio/jedis/blob/master/src/main/java/redis/clients/util/MurmurHash.java" target="_blank" rel="external">jedis的MurmurHash</a><br><a href="https://github.com/xetorthio/jedis/blob/master/src/main/java/redis/clients/util/MurmurHash.java" target="_blank" rel="external">cassandra的MurmurHash实现</a><br><a href="https://github.com/apache/hbase/blob/a545d71295e582398b2689ed09d2167d7f118cec/hbase-common/src/main/java/org/apache/hadoop/hbase/util/MurmurHash3.java" target="_blank" rel="external">Hbase中的Murmurhash</a><br><a href="https://lucene.apache.org/core/4_8_0/codecs/org/apache/lucene/codecs/bloom/MurmurHash2.html" target="_blank" rel="external">Lucene中的murmurhsah</a></p>
+<h2 id="u76F8_u5173_u6587_u6863"><a href="#u76F8_u5173_u6587_u6863" class="headerlink" title="相关文档"></a>相关文档</h2><ol>
+<li><a href="http://redisbook.com/preview/dict/hash_algorithm.html" target="_blank" rel="external">redis hash</a></li>
+<li><a href="https://zh.wikipedia.org/zh-cn/Murmur%E5%93%88%E5%B8%8C" target="_blank" rel="external">murmur哈希wiki</a></li>
+<li><a href="http://calvin1978.blogcn.com/articles/murmur.html" target="_blank" rel="external">陌生但默默一统江湖的MurmurHash</a></li>
+<li><a href="http://openwares.net/misc/murmurhash%E7%AE%97%E6%B3%95.html" target="_blank" rel="external">murmurhash算法</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[一种非加密哈希算法，2008年发明，一杯应用于Redis，HBase，Cassandra等项目]]>
+    
+    </summary>
+    
+      <category term="哈希算法" scheme="http://blog.onlycatch.com/tags/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="算法" scheme="http://blog.onlycatch.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[密码学综述]]></title>
+    <link href="http://blog.onlycatch.com/cryptology/"/>
+    <id>http://blog.onlycatch.com/cryptology/</id>
+    <published>2016-01-25T11:49:15.000Z</published>
+    <updated>2016-01-25T11:55:56.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u5BC6_u7801_u5B66_u7B97_u6CD5_u7684_u5206_u7C7B"><a href="#u5BC6_u7801_u5B66_u7B97_u6CD5_u7684_u5206_u7C7B" class="headerlink" title="密码学算法的分类"></a>密码学算法的分类</h2><ul>
+<li>消息编码：base64</li>
+<li>消息摘要：MD类，SHA类，MAC</li>
+<li>对称密码: DES,3DES,AES</li>
+<li>非对称密码：RSA，DH秘钥交换</li>
+<li>数字签名：RSASignature，DSASignature</li>
+</ul>
+<h2 id="u5BC6_u7801_u5B665_u5143_u7956"><a href="#u5BC6_u7801_u5B665_u5143_u7956" class="headerlink" title="密码学5元祖"></a>密码学5元祖</h2><p>（明文，密文，加密算法，解密算法，密钥）<br>加密算法和解密算法都是公开的。使用保密的加密算法和解密算法是不够安全的，而且也很难做到保密工作）</p>
+<p>安全性完全依赖于秘钥。</p>
+<p>密码与密钥<br>密码=秘钥+规则<br>秘钥才是需要保证绝密的。</p>
+<h2 id="u5BF9_u79F0_u5BC6_u7801_u4E0E_u975E_u5BF9_u79F0_u5BC6_u7801"><a href="#u5BF9_u79F0_u5BC6_u7801_u4E0E_u975E_u5BF9_u79F0_u5BC6_u7801" class="headerlink" title="对称密码与非对称密码"></a>对称密码与非对称密码</h2><p>对称密码：加密和解密使用相同的秘钥<br>非对称：加密和解密是用不同的秘钥。</p>
+<p>两者不能相互取代，也无法区分哪个更安全。是否更安全主要取决于秘钥的长度以及破译密文所需要的计算量。</p>
+<h2 id="java_u4E2D_u7684_u7C7B"><a href="#java_u4E2D_u7684_u7C7B" class="headerlink" title="java中的类"></a>java中的类</h2><ol>
+<li>消息编码：BASE64Encoder,BASE64Decoder</li>
+<li>消息摘要：MessageDigest</li>
+<li>对称密码：KeyGenerator，SecretKey，Cipher</li>
+<li>非对称密码：KeyPairGenerator,KeyFactory,KeyPair,PublicKey,PrivateKey,Cipher</li>
+<li>数字签名：Signature</li>
+</ol>
+<h2 id="Base64_u7684_u7F16_u7A0B_u4F7F_u7528"><a href="#Base64_u7684_u7F16_u7A0B_u4F7F_u7528" class="headerlink" title="Base64的编程使用"></a>Base64的编程使用</h2><h3 id="Base64_u7B97_u6CD5_u5B9A_u4E49"><a href="#Base64_u7B97_u6CD5_u5B9A_u4E49" class="headerlink" title="Base64算法定义"></a>Base64算法定义</h3><p>是一种基于64个字符的编码算法，以任意8位字节序列组合的描述形式，这种形式不容易直接识别。<br>Base64秘钥：就是Base64字符映射表。</p>
+<h3 id="Base64_u7F16_u7A0B_u4F7F_u7528"><a href="#Base64_u7F16_u7A0B_u4F7F_u7528" class="headerlink" title="Base64编程使用"></a>Base64编程使用</h3><p><img src="http://7xo4v8.com1.z0.glb.clouddn.com/base64.png" alt="Base64编程使用"></p>
+<p>jdk本身没有自带，需要导入sun提供的BASE64相关jar包。</p>
+<h3 id="Base64_u7B97_u6CD5_u7684_u5B9E_u9645_u5E94_u7528"><a href="#Base64_u7B97_u6CD5_u7684_u5B9E_u9645_u5E94_u7528" class="headerlink" title="Base64算法的实际应用"></a>Base64算法的实际应用</h3><p>最早被用在电子邮件中，由于邮件只允许传输ASCII码，所以需要用Base64编码。通过telnet远程登录邮箱可以看到使用Base64编码的账号和密码等信息。</p>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><p>极客学院课程</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[密码学相关信息]]>
+    
+    </summary>
+    
+      <category term="密码学" scheme="http://blog.onlycatch.com/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
@@ -312,8 +630,9 @@
     <link href="http://blog.onlycatch.com/java-thread-communication/"/>
     <id>http://blog.onlycatch.com/java-thread-communication/</id>
     <published>2016-01-10T07:16:25.000Z</published>
-    <updated>2016-01-14T14:36:59.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">TODO:</span>女朋友身体不适，先不写了。希望她赶快好起来！</span></span><br></pre></td></tr></table></figure>
+    <updated>2016-01-23T15:17:25.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="u5171_u4EAB_u5185_u5B58"><a href="#u5171_u4EAB_u5185_u5B58" class="headerlink" title="共享内存"></a>共享内存</h2><p>共享内存在java多线程中的应用是很频繁的，最简单的例子就是共享变量，即多个线程都读或者写一个变量的值。</p>
+<h3 id="volatile_u548Csynchronized_u5173_u952E_u5B57"><a href="#volatile_u548Csynchronized_u5173_u952E_u5B57" class="headerlink" title="volatile和synchronized关键字"></a>volatile和synchronized关键字</h3><p>volatile关键字：保证了内存可见性，能够保证多个线程在读取volatile修饰的变量时，读取到的数据都是最新的。<br>volatile的写：当写一个volatile变量时，JMM会把该线程对应的本地内存中的共享变量值刷新到主存。<br>volatile的读：当读一个volatile变量时，JMM会把线程对应的本地内存置为无效，然后从主存中读取共享变量。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[曾经面试的时候被问过这样一个问题，当时我的答案是：共享内存，信号量，消息队列。如今已经距离那次面试过去半年多了，我也成长了很多，现在让我再回过头来看看这个问题。]]>
@@ -757,299 +1076,6 @@
       <category term="并发" scheme="http://blog.onlycatch.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
       <category term="锁" scheme="http://blog.onlycatch.com/tags/%E9%94%81/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[127.0.0.1和0.0.0.0地址的区别]]></title>
-    <link href="http://blog.onlycatch.com/how-127-0-0-1and0-0-0-0-differs-from-each-other/"/>
-    <id>http://blog.onlycatch.com/how-127-0-0-1and0-0-0-0-differs-from-each-other/</id>
-    <published>2016-01-03T04:00:45.000Z</published>
-    <updated>2016-01-10T14:21:48.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="1-__u95EE_u9898_u5F15_u5165"><a href="#1-__u95EE_u9898_u5F15_u5165" class="headerlink" title="1. 问题引入"></a>1. 问题引入</h2><p>之前在使用tomcat的时候，启动tomcat默认都会绑定到127.0.0.1这个地址，最近在使用hexo写博客的时候发现通过 <code>hexo server</code>命令启动服务的时候绑定的ip地址是0.0.0.0。那么这两个IP地址到底有什么不同呢?<br>在讲解两个地址的不同之前，我们先回顾一下IP地址的基础知识。</p>
-<h2 id="2-_IP_u5730_u5740_u5206_u7C7B"><a href="#2-_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2. IP地址分类"></a>2. IP地址分类</h2><h3 id="2-1_IP_u5730_u5740_u8868_u793A"><a href="#2-1_IP_u5730_u5740_u8868_u793A" class="headerlink" title="2.1 IP地址表示"></a>2.1 IP地址表示</h3><p>IP地址由两个部分组成，net-id和host-id，即网络号和主机号。<br>net-id:表示ip地址所在的网络号。<br>host-id：表示ip地址所在网络中的某个主机号码。<br>即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP-address ::=  &#123; &#60;Network-number&#62;, &#60;Host-number&#62; &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-2_IP_u5730_u5740_u5206_u7C7B"><a href="#2-2_IP_u5730_u5740_u5206_u7C7B" class="headerlink" title="2.2 IP地址分类"></a>2.2 IP地址分类</h3><p>IP地址一共分为5类，即A～E，它们分类的依据是其net-id所占的字节长度以及网络号前几位。</p>
-<ul>
-<li>A类地址:网络号占1个字节。网络号的第一位固定为0。   </li>
-<li>B类地址：网络号占2个字节。网络号的前两位固定为10。</li>
-<li>C类地址：网络号占3个字节。网络号的前三位固定位110。</li>
-<li>D类地址：前四位是1110，用于多播(multicast)，即一对多通信。</li>
-<li>E类地址：前四位是1111，保留为以后使用。<br>其中，ABC三类地址为单播地址（unicast),用于一对一通信，是最常用的。  </li>
-</ul>
-<h3 id="2-3__u7279_u6B8AIP_u5730_u5740"><a href="#2-3__u7279_u6B8AIP_u5730_u5740" class="headerlink" title="2.3 特殊IP地址"></a>2.3 特殊IP地址</h3><p>特殊IP地址就是用来做一些特殊的事情。RFC1700中定义了以下特殊IP地址。   </p>
-<ol>
-<li>{0,0}:网络号和主机号都全部为0，表示“本网络上的本主机”，只能用作源地址。</li>
-<li>{0，host-id}:本网络上的某台主机。只能用作源地址。</li>
-<li>{-1,-1}：表示网络号和主机号的所有位上都是1（二进制），用于本网络上的广播，只能用作目的地址，发到该地址的数据包不能转发到源地址所在网络之外。</li>
-<li>{net-id,-1}:直接广播到指定的网络上。只能用作目的地址。</li>
-<li>{net-id,subnet-id,-1}:直接广播到指定网络的指定子网络上。只用作目的地址。</li>
-<li>{net-id,-1,-1}:直接广播到指定网络的所有子网络上。只能用作目的地址。</li>
-<li>{127，<any>}:即网络号为127的任意ip地址。都是内部主机回环地址(loopback),永远都不能出现在主机外部的网络中。</any></li>
-</ol>
-<h2 id="3-__u95EE_u9898_u89E3_u7B54"><a href="#3-__u95EE_u9898_u89E3_u7B54" class="headerlink" title="3. 问题解答"></a>3. 问题解答</h2><p>接下来我们来看之前问过的问题：127.0.0.1和0.0.0.0地址的区别是什么？<br>我们先来看下共同点：   </p>
-<ol>
-<li>都属于特殊地址。</li>
-<li>都属于A类地址。</li>
-<li>都是IPV4地址。   </li>
-</ol>
-<p>接下来我们分别看下这两个地址：</p>
-<h3 id="3-1_0-0-0-0"><a href="#3-1_0-0-0-0" class="headerlink" title="3.1 0.0.0.0"></a>3.1 0.0.0.0</h3><p>IPV4中，0.0.0.0地址被用于表示一个无效的，未知的或者不可用的目标。   </p>
-<ul>
-<li>在服务器中，0.0.0.0指的是本机上的所有IPV4地址，如果一个主机有两个IP地址，192.168.1.1 和 10.1.2.1，并且该主机上的一个服务监听的地址是0.0.0.0,那么通过两个ip地址都能够访问该服务。</li>
-<li>在路由中，0.0.0.0表示的是默认路由，即当路由表中没有找到完全匹配的路由的时候所对应的路由。   </li>
-</ul>
-<p>用途总结：</p>
-<ul>
-<li>当一台主机还没有被分配一个IP地址的时候，用于表示主机本身。（DHCP分配IP地址的时候）</li>
-<li>用作默认路由，表示”任意IPV4主机”。</li>
-<li>用来表示目标机器不可用。</li>
-<li>用作服务端，表示本机上的任意IPV4地址。</li>
-</ul>
-<h3 id="3-2_127-0-0-1"><a href="#3-2_127-0-0-1" class="headerlink" title="3.2 127.0.0.1"></a>3.2 127.0.0.1</h3><p>127.0.0.1属于{127,<any>}集合中的一个，而所有网络号为127的地址都被称之为回环地址，所以<code>回环地址！=127.0.0.1</code>,它们是包含关系，即<code>回环地址包含127.0.0.1</code>。<br>回环地址：所有发往该类地址的数据包都应该被loop back。<br>用途:   </any></p>
-<ul>
-<li>回环测试,通过使用ping 127.0.0.1 测试某台机器上的网络设备，操作系统或者TCP/IP实现是否工作正常。</li>
-<li>DDos攻击防御：网站收到DDos攻击之后，将域名A记录到127.0.0.1，即让攻击者自己攻击自己。   </li>
-<li>大部分Web容器测试的时候绑定的本机地址。</li>
-</ul>
-<h3 id="3-3_localhost"><a href="#3-3_localhost" class="headerlink" title="3.3 localhost"></a>3.3 localhost</h3><p>相比127.0.0.1，localhost具有更多的意义。localhost是个域名，而不是一个ip地址。之所以我们经常把localhost与127.0.0.1认为是同一个是因为我们使用的大多数电脑上都讲localhost指向了127.0.0.1这个地址。<br>在ubuntu系统中，/ets/hosts文件中都会有如下内容：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>	localhost</span><br><span class="line"><span class="number">127.0</span><span class="number">.1</span><span class="number">.1</span>	jason-Lenovo-V3000</span><br><span class="line"></span><br><span class="line"><span class="comment"># The following lines are desirable for IPv6 capable hosts</span></span><br><span class="line">::<span class="number">1</span>     ip6-localhost ip6-loopback</span><br><span class="line">fe00::<span class="number">0</span> ip6-localnet</span><br><span class="line">ff00::<span class="number">0</span> ip6-mcastprefix</span><br><span class="line">ff02::<span class="number">1</span> ip6-allnodes</span><br><span class="line">ff02::<span class="number">2</span> ip6-allrouters</span><br></pre></td></tr></table></figure></p>
-<p>上面第一行是几乎每台电脑上都会有的默认配置。<br>但是localhost的意义并不局限于127.0.0.1。</p>
-<p>localhost是一个域名，用于指代this computer或者this host,可以用它来获取运行在本机上的网络服务。<br>在大多数系统中，localhost被指向了IPV4的127.0.0.1和IPV6的::1。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>    localhost</span><br><span class="line">::<span class="number">1</span>          localhost</span><br></pre></td></tr></table></figure></p>
-<p>所以，在使用的时候要注意确认IPV4还是IPV6</p>
-<h2 id="4-__u603B_u7ED3"><a href="#4-__u603B_u7ED3" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>127.0.0.1 是一个环回地址。并不表示“本机”。0.0.0.0才是真正表示“本网络中的本机”。<br>在实际应用中，一般我们在服务端绑定端口的时候可以选择绑定到0.0.0.0，这样我的服务访问方就可以通过我的多个ip地址访问我的服务。<br>比如我有一台服务器，一个外放地址A,一个内网地址B，如果我绑定的端口指定了0.0.0.0，那么通过内网地址或外网地址都可以访问我的应用。但是如果我之绑定了内网地址，那么通过外网地址就不能访问。 所以如果绑定0.0.0.0,也有一定安全隐患，对于只需要内网访问的服务，可以只绑定内网地址。</p>
-<p>[参考资料]   </p>
-<ol>
-<li><a href="https://en.wikipedia.org/wiki/0.0.0.0" target="_blank" rel="external">https://en.wikipedia.org/wiki/0.0.0.0</a></li>
-<li><a href="http://www.howtogeek.com/225487/what-is-the-difference-between-127.0.0.1-and-0.0.0.0/" target="_blank" rel="external">http://www.howtogeek.com/225487/what-is-the-difference-between-127.0.0.1-and-0.0.0.0/</a></li>
-<li><a href="http://www.tech-faq.com/127-0-0-1.html" target="_blank" rel="external">http://www.tech-faq.com/127-0-0-1.html</a></li>
-<li><a href="http://tools.ietf.org/html/rfc3330" target="_blank" rel="external">http://tools.ietf.org/html/rfc3330</a></li>
-<li><a href="http://tools.ietf.org/html/rfc1700" target="_blank" rel="external">http://tools.ietf.org/html/rfc1700</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Localhost" target="_blank" rel="external">https://en.wikipedia.org/wiki/Localhost</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[127.0.0.1和0.0.0.0这两个IPV4地址是我们开发人员经常碰到的，但是仿佛有时候用的是127.0.0.1，有时候是0.0.0.0，那么这两个地址之间有什么区别和联系呢？]]>
-    
-    </summary>
-    
-      <category term="IP" scheme="http://blog.onlycatch.com/tags/IP/"/>
-    
-      <category term="网络" scheme="http://blog.onlycatch.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[maven内置隐式变量]]></title>
-    <link href="http://blog.onlycatch.com/maven-hidden-variables/"/>
-    <id>http://blog.onlycatch.com/maven-hidden-variables/</id>
-    <published>2016-01-01T14:24:14.000Z</published>
-    <updated>2016-01-10T14:22:29.000Z</updated>
-    <content type="html"><![CDATA[<p>Maven提供了三个隐式的变量可以用来访环境变量，POM信息，和Maven Settings</p>
-<h3 id="1-_env"><a href="#1-_env" class="headerlink" title="1. env"></a>1. env</h3><p>env变量，暴露了你操作系统或者shell的环境变量。便 如在Maven POM中一个对<code>${env.PATH}</code>的引用将会被<code>${PATH}</code>环境变量替换，在Windows中为%PATH%.</p>
-<h3 id="2-_projet"><a href="#2-_projet" class="headerlink" title="2. projet"></a>2. projet</h3><p>project变量暴露了POM。可以使用点标记(.)的路径来引用POM元素的值。例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 项目根目录</span><br><span class="line">$&#123;project.build.directory&#125; 构建目录，缺省为target</span><br><span class="line">$&#123;project.build.outputDirectory&#125; 构建过程输出目录，缺省为target/classes</span><br><span class="line">$&#123;project.build.finalName&#125; 产出物名称，缺省为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br><span class="line">$&#123;project.packaging&#125; 打包类型，缺省为jar</span><br><span class="line">$&#123;project.xxx&#125; 当前pom文件的任意节点的内容</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-_settings"><a href="#3-_settings" class="headerlink" title="3. settings"></a>3. settings</h3><p>settings变量暴露了Maven settings信息。可以使用点标记(.)的路径来引用settings.xml文件中元素的值。例如${settings.offline}会引用~/.m2/settings.xml文件中offline元素的值。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[我们在使用maven的时候，经常会看到一些我们并没有人为定义的变量，这些变量就是maven内置的隐式变量，本文简单介绍了几个常见的maven隐式变量。]]>
-    
-    </summary>
-    
-      <category term="maven" scheme="http://blog.onlycatch.com/tags/maven/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[常用Maven插件]]></title>
-    <link href="http://blog.onlycatch.com/useful-maven-plugin/"/>
-    <id>http://blog.onlycatch.com/useful-maven-plugin/</id>
-    <published>2016-01-01T14:22:02.000Z</published>
-    <updated>2016-01-10T14:21:53.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="1-maven-compiler-plugin"><a href="#1-maven-compiler-plugin" class="headerlink" title="1.maven-compiler-plugin"></a>1.maven-compiler-plugin</h3><p>作用：编译项目源码<br>使用举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">source</span>&gt;</span>1.6<span class="tag">&lt;/<span class="title">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">target</span>&gt;</span>1.6<span class="tag">&lt;/<span class="title">target</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">encoding</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>官方文档：<a href="http://maven.apache.org/plugins/maven-compiler-plugin/" target="_blank" rel="external">点击这里</a></p>
-<h3 id="2-maven-resources-plugin"><a href="#2-maven-resources-plugin" class="headerlink" title="2.maven-resources-plugin"></a>2.maven-resources-plugin</h3><p>作用:用于将项目的资源拷贝到输出目录中。有两种资源：main resources 和 test resources,区别在于main资源是和程序主代码相关的，而test资源是与测试代码相关的。<br>使用举例：<br>Step 1. 声明该资源<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">         <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">encoding</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>Setp2.指定拷贝资源信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">resource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="title">directory</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">resource</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">resource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">directory</span>&gt;</span>$&#123;profile.dir&#125;<span class="tag">&lt;/<span class="title">directory</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="title">filtering</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">targetPath</span>&gt;</span>$&#123;project.build.directory&#125;/conf<span class="tag">&lt;/<span class="title">targetPath</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">resource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">resources</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>官方文档：<a href="http://maven.apache.org/plugins/maven-resources-plugin/" target="_blank" rel="external">点击这里</a></p>
-<h3 id="3-maven-assembly-plugin"><a href="#3-maven-assembly-plugin" class="headerlink" title="3.maven-assembly-plugin"></a>3.maven-assembly-plugin</h3><p>作用：主要用来将项目的输出文件与项目依赖的jar包，模块，网站文档以及其他文件集中到一个单独的压缩文件中，比如tar.gz,zip等。<br>使用举例：</p>
-<ol>
-<li><p>首先需要在pom文件中添加配置</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">descriptor</span>&gt;</span>src/main/assembly/assembly.xml<span class="tag">&lt;/<span class="title">descriptor</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">executions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">execution</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">id</span>&gt;</span>make-assembly<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="title">phase</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">goals</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">goal</span>&gt;</span>single<span class="tag">&lt;/<span class="title">goal</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">goals</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">execution</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>需要提供一个assembly.xml配置文件，到上面配置的路径:src/main/assembly/下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">assembly</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">formats</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">format</span>&gt;</span>tar.gz<span class="tag">&lt;/<span class="title">format</span>&gt;</span><span class="comment">&lt;!-- 项目打包成tar.gz格式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">format</span>&gt;</span>dir<span class="tag">&lt;/<span class="title">format</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">formats</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">includeBaseDirectory</span>&gt;</span>false<span class="tag">&lt;/<span class="title">includeBaseDirectory</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">fileSets</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">fileSet</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">directory</span>&gt;</span>$&#123;profile.dir&#125;<span class="tag">&lt;/<span class="title">directory</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">outputDirectory</span>&gt;</span>conf<span class="tag">&lt;/<span class="title">outputDirectory</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">fileMode</span>&gt;</span>0644<span class="tag">&lt;/<span class="title">fileMode</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">fileSet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">fileSet</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">directory</span>&gt;</span>src/main/assembly/bin<span class="tag">&lt;/<span class="title">directory</span>&gt;</span> <span class="comment">&lt;!-- bin目录下存放start.sh等启动脚本 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">outputDirectory</span>&gt;</span>bin<span class="tag">&lt;/<span class="title">outputDirectory</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">fileMode</span>&gt;</span>0755<span class="tag">&lt;/<span class="title">fileMode</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">fileSet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">fileSets</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencySets</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependencySet</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">outputDirectory</span>&gt;</span>lib<span class="tag">&lt;/<span class="title">outputDirectory</span>&gt;</span>  <span class="comment">&lt;!-- 项目本身jar包以及依赖的jar包打包到bin目录下 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependencySet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencySets</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">assembly</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>配置上面的信息之后，通过maven package命令打包，打成的tar.gz包解压出来的目录格式就是：<br>bin: 存放启动，关闭脚本（start.sh,shutdown.sh)<br>conf:存放配置文件<br>lib:存放项目本身jar包以及依赖的其他jar包</p>
-<p>官方文档：<a href="http://maven.apache.org/plugins/maven-assembly-plugin/index.html" target="_blank" rel="external">点击这里</a></p>
-<h3 id="4-_tomcat_maven_u63D2_u4EF6"><a href="#4-_tomcat_maven_u63D2_u4EF6" class="headerlink" title="4. tomcat maven插件"></a>4. tomcat maven插件</h3><p>作用：web项目使用<br>说明：目前存在两个版本，tomcat6和tomcat7两个版本的插件。<br>使用举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">url</span>&gt;</span>http://www.mydomain.com:1234/mymanager<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>tomcat-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">path</span>&gt;</span>/<span class="tag">&lt;/<span class="title">path</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">port</span>&gt;</span>80<span class="tag">&lt;/<span class="title">port</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">uriEncoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">url</span>&gt;</span>http://localhost/manager/text<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">server</span>&gt;</span>tomcat6<span class="tag">&lt;/<span class="title">server</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>这里一般会将两个版本都配置上。<br>官方文档:<a href="http://tomcat.apache.org/maven-plugin-2.0-beta-1/index.html" target="_blank" rel="external">点击这里</a>，<a href="http://tomcat.apache.org/maven-plugin-2.0/" target="_blank" rel="external">这里</a></p>
-<h3 id="5-_u8BF4_u660E_uFF1A"><a href="#5-_u8BF4_u660E_uFF1A" class="headerlink" title="5.说明："></a>5.说明：</h3><p>可以看到，上面的例子中用到了好多变量，这里面好多都是maven的内置变量。<br>关于内置变量，请参考<a href="https://www.zybuluo.com/939958749/note/239028" target="_blank" rel="external">maven内置隐世变量</a>.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[常用的maven插件，这里主要介绍maven-compiler-plugin，maven-resources-plugin，maven-assembly-plugin和Tomcat maven plugin的作用以及简单的使用介绍。]]>
-    
-    </summary>
-    
-      <category term="maven" scheme="http://blog.onlycatch.com/tags/maven/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何区分一个类是wait timeout 还是notify唤醒的?]]></title>
-    <link href="http://blog.onlycatch.com/timeout-or-notify/"/>
-    <id>http://blog.onlycatch.com/timeout-or-notify/</id>
-    <published>2016-01-01T14:19:32.000Z</published>
-    <updated>2016-01-10T14:22:02.000Z</updated>
-    <content type="html"><![CDATA[<p><strong>问题</strong> 怎么判断wait是超时返回还是其他线程通知返回的呢？<br><a href="http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify" target="_blank" rel="external">http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify</a></p>
-<p>两种方式：<br>1.记录一个时间，当唤醒之后，比较一下唤醒时间与开始时间，判断是否大于设置的timeout时间<br>2.使用java 提供的 Condition.await(timeout,TimeUnit),该方法返回true表示是超时唤醒</p>
-<p>需求:与服务端进行连接，返回连接结果，如果在指定时间内连接成功，返回true，否则，返回false<br>场景：org.I0Itec.ckclient.ZkClient中有个waitForKeeperState方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">waitForKeeperState</span><span class="params">(KeeperState keeperState, <span class="keyword">long</span> time, TimeUnit timeUnit)</span> <span class="keyword">throws</span> ZkInterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_zookeeperEventThread != <span class="keyword">null</span> &amp;&amp; Thread.currentThread() == _zookeeperEventThread) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Must not be done in the zookeeper event thread."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//设置超时时间</span></span><br><span class="line">        Date timeout = <span class="keyword">new</span> Date(System.currentTimeMillis() + timeUnit.toMillis(time));</span><br><span class="line"></span><br><span class="line">        LOG.debug(<span class="string">"Waiting for keeper state "</span> + keeperState);</span><br><span class="line">        acquireEventLock(); <span class="comment">//这里要首先获取都锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//设置是否继续等待标志</span></span><br><span class="line">			<span class="keyword">boolean</span> stillWaiting = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">			<span class="comment">//如果当前zk状态不是想要的状态，则继续等待</span></span><br><span class="line">            <span class="keyword">while</span> (_currentState != keeperState) &#123;</span><br><span class="line">				<span class="comment">//如果stillWaiting为false，则表示到达超时时间，而不是连接成功，返回false</span></span><br><span class="line">                <span class="keyword">if</span> (!stillWaiting) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">				<span class="comment">//否则，继续等待</span></span><br><span class="line">				<span class="comment">//这里的getEventLock().getStateChangedCondition()会返回一个ReentrantLock,</span></span><br><span class="line">				<span class="comment">//所以这里用的是ReentrantLock中实现的Condition接口的awaitUntil方法</span></span><br><span class="line">                stillWaiting = getEventLock().getStateChangedCondition().awaitUntil(timeout);</span><br><span class="line">				<span class="comment">//awaitUntil方法如果是由于超时而返回的，false，如果是其他原因返回的，返回true，所以，stillWaiting标志位如果是true就继续等待，直到_currentState等于参数中的state</span></span><br><span class="line">            &#125;</span><br><span class="line">            LOG.debug(<span class="string">"State is "</span> + _currentState);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ZkInterruptedException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            getEventLock().unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>该方法的作用就是，判断当前zk状态是否与参数传过来的keeperState状态一致，如果不一致就一直等待，直到状态一致。</p>
-<p>[参考资料]   </p>
-<ol>
-<li><a href="http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify" target="_blank" rel="external">http://stackoverflow.com/questions/6114320/java-monitors-how-to-know-if-waitlong-timeout-ended-by-timeout-or-by-notify</a></li>
-<li><a href="http://stackoverflow.com/questions/3397722/how-to-differentiate-when-waitlong-timeout-exit-for-notify-or-timeout" target="_blank" rel="external">http://stackoverflow.com/questions/3397722/how-to-differentiate-when-waitlong-timeout-exit-for-notify-or-timeout</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[我们知道java中Object的wait方法的作用是让线程进入等待状态，而它的唤醒是有两种方式的：一种就是wait设置的超时时间到了，另一种就是由其他线程调用了改线程的notiy或者notifyAll方法，但是，如果我们想判断线程是如何返回的，该如何判断呢？]]>
-    
-    </summary>
-    
-      <category term="多线程" scheme="http://blog.onlycatch.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-      <category term="锁" scheme="http://blog.onlycatch.com/tags/%E9%94%81/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Ajax跨域请求原理及解决办法]]></title>
-    <link href="http://blog.onlycatch.com/ajax-cross-domain/"/>
-    <id>http://blog.onlycatch.com/ajax-cross-domain/</id>
-    <published>2016-01-01T07:03:08.000Z</published>
-    <updated>2016-01-10T14:22:08.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F"><a href="#1-__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF08Cross-site_29_uFF1F" class="headerlink" title="1. 什么是跨域（Cross-site)？"></a>1. 什么是跨域（Cross-site)？</h2><p>想了解跨域，必须先了解一下“同源策略(same origin policy)”。</p>
-<h3 id="1-1__u540C_u6E90_u7B56_u7565"><a href="#1-1__u540C_u6E90_u7B56_u7565" class="headerlink" title="1.1 同源策略"></a>1.1 同源策略</h3><p>它限制了某个域下的文档或者js与另一个域中的资源交互的方式，它提供了一种安全机制，这种安全机制可以避免来自恶意网站的攻击。<br>同源策略要求浏览器允许来自某个网页上的js请求来自另一个网页的数据，当且仅当两个页面来自相同的域。</p>
-<h3 id="1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F"><a href="#1-2__u4EC0_u4E48_u662F_u57DF_28origin_29_uFF1F" class="headerlink" title="1.2 什么是域(origin)？"></a>1.2 什么是域(origin)？</h3><p>域是由三部分组合而成：URI Schema（协议类型），host name（域名）,port number（端口号）<br>举个例子：<br>1） <a href="http://www.domain.com" target="_blank" rel="external">http://www.domain.com</a> 这个页面，URI Schema是http,host name是www.domain.com,port number是默认的80<br>2） <a href="https://www.xxx.com:8080/xxx/yyy" target="_blank" rel="external">https://www.xxx.com:8080/xxx/yyy</a> URI Schema是https，hostname是www.xxx.com，port number是8080<br>由于1）和2）中的三部分都不相同，所以它们就是不同的域。<br>下面的图更好的解释了什么是同域：<br><img src="http://static.zybuluo.com/939958749/11z1efgco1p38598zd9z5g4s/QQ%E5%9B%BE%E7%89%8720151224163925.png" alt="QQ图片20151224163925.png-15.9kB"><br>PS:IE浏览器里可能不太一样，它不会把端口号作为判断依据。   </p>
-<h3 id="1-3__u4E3A_u4EC0_u4E48_u8981_u6709_u540C_u6E90_u7B56_u7565_uFF1F"><a href="#1-3__u4E3A_u4EC0_u4E48_u8981_u6709_u540C_u6E90_u7B56_u7565_uFF1F" class="headerlink" title="1.3 为什么要有同源策略？"></a>1.3 为什么要有同源策略？</h3><p>提出同源策略的目的是出于安全性考虑，它能够阻止来自恶意网站的脚本通过其他网站的DOM获取其他网站的信息。可以避免CSRF[^footnote1]和XSS[^footnote2]攻击。   </p>
-<h3 id="1-4__u540C_u6E90_u7B56_u7565_u662F_u9650_u5236_u8C01_u7684_uFF1F"><a href="#1-4__u540C_u6E90_u7B56_u7565_u662F_u9650_u5236_u8C01_u7684_uFF1F" class="headerlink" title="1.4 同源策略是限制谁的？"></a>1.4 同源策略是限制谁的？</h3><p>1） 很多人可能搞不清楚这个问题，同源策略限制的是浏览器或者其他提供类似浏览器服务的软件，而且这仅仅是个规范，所以浏览器是否遵守这个规范也不一定，所以就会有上面的IE浏览器判断是否同源的时候并没有考虑端口号的问题。<br>2） 同源策略限制的是js，而图片，css这些是不存在同源策略限制的。   </p>
-<h3 id="1-5__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF1F"><a href="#1-5__u4EC0_u4E48_u662F_u8DE8_u57DF_uFF1F" class="headerlink" title="1.5 什么是跨域？"></a>1.5 什么是跨域？</h3><p>在某个网站的页面上通过js请求另外一个网站的数据，如果两个网站不满足同源策略，那么就存在跨域问题。   </p>
-<h2 id="2-__u4E3A_u4EC0_u4E48_u4F1A_u6709_u8DE8_u57DF_u95EE_u9898_uFF1F"><a href="#2-__u4E3A_u4EC0_u4E48_u4F1A_u6709_u8DE8_u57DF_u95EE_u9898_uFF1F" class="headerlink" title="2. 为什么会有跨域问题？"></a>2. 为什么会有跨域问题？</h2><p>由于在实际环境中，经常需要通过js获取一些数据，特别是ajax的流行，通过ajax加载某个网站的数据的场景就会经常遇到，而一旦有这样的需求，就可能会出现跨域的问题。   </p>
-<h2 id="3-__u5982_u4F55_u5224_u65AD_u6211_u662F_u5426_u9047_u5230_u4E86_u8DE8_u57DF_u95EE_u9898_uFF1F"><a href="#3-__u5982_u4F55_u5224_u65AD_u6211_u662F_u5426_u9047_u5230_u4E86_u8DE8_u57DF_u95EE_u9898_uFF1F" class="headerlink" title="3. 如何判断我是否遇到了跨域问题？"></a>3. 如何判断我是否遇到了跨域问题？</h2><p>一般来讲，如果你的请求被同源策略限制，浏览器的开发工具都会给出错误提示，在Chrome浏览器的console中，可能会有类似下面的提示：<br><img src="http://static.zybuluo.com/939958749/52t678l8q0qe2adct67etjbt/QQ%E6%88%AA%E5%9B%BE20151224171533.png" alt="QQ截图20151224171533.png-110.1kB">   </p>
-<h2 id="4-_u5982_u4F55_u89E3_u51B3_u8DE8_u57DF_u95EE_u9898_uFF1F"><a href="#4-_u5982_u4F55_u89E3_u51B3_u8DE8_u57DF_u95EE_u9898_uFF1F" class="headerlink" title="4.如何解决跨域问题？"></a>4.如何解决跨域问题？</h2><p>一般的思路是：通过一些妥协调整，绕过同源策略的限制。下面是我最近了解的一些方法。<br>为方便讲解，这里先举一个例子：<br>客户端采用H5开发，所有的数据都通过ajax请求从服务端获取。<br>客户端的页面都存放在静态文件服务器中，域名是<a href="http://static.demo.com" target="_blank" rel="external">http://static.demo.com</a><br>服务端提供接口供客户端调用，接口的参数和返回值都是JSON格式，服务端的域名是:<a href="http://server.demo.com。" target="_blank" rel="external">http://server.demo.com。</a><br>如果不考虑跨域的问题，客户端与服务端的交互方式如下：<br>1.客户端post请求服务端，参数：｛”key”:”value”｝<br>2.服务端返回结果：{“code”：1，”data”:”success”}   </p>
-<h3 id="4-1_Jsonp_u65B9_u5F0F"><a href="#4-1_Jsonp_u65B9_u5F0F" class="headerlink" title="4.1 Jsonp方式"></a>4.1 Jsonp方式</h3><p>原理： 通过在页面中新增一个<code>&lt;script&gt;</code>标签，标签的src指向的是另外一个域的能够提供数据的url，同时将一个本地的callback方法传给服务端，服务端返回的时候将会自动执行callback方法。<br>实现举例：<br>1)服务端修改返回的数据类型为js，同时在请求参数中增加一个callback字段，这个字段用于客户端传递要执行的js方法名称。<br>2）客户端传递的参数中增加callback，同时将普通的ajax方法改成在页面中新增一个<code>&lt;script&gt;</code>节点的方式。<br>具体实现：<br>1.通过js在页面中append如下标签<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"application/javascript"</span></span><br><span class="line">        src=<span class="string">"http://server.demo.com/Users/1234?callback=parseResponse"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>增加该标签之后，浏览器就会立即去请求这个url，由于<code>&lt;script src=&quot;&quot;&gt;</code>方式的是不受同源策略限制的，所以可以避免跨域限制。<br>2.服务端收到callback参数之后，将它拼接在返回的数据中，返回的数据如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseResponse(&#123;<span class="string">"Name"</span>: <span class="string">"Foo"</span>, <span class="string">"Id"</span>: <span class="number">1234</span>, <span class="string">"Rank"</span>: <span class="number">7</span>&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>3.这样返回之后，就调用页面上的parseResponse js方法，就达到了数据处理的目的。<br>4.最后将刚刚新增加到页面中的<code>&lt;script&gt;</code>元素删掉。   </p>
-<h3 id="4-2__u8BBE_u7F6Edocument-domain_u5C5E_u6027"><a href="#4-2__u8BBE_u7F6Edocument-domain_u5C5E_u6027" class="headerlink" title="4.2 设置document.domain属性"></a>4.2 设置document.domain属性</h3><p>如果两个页面或者frame可以将document.domain属性设置成相同的值，那么也可以绕过同源策略限制。<br>假设两个页面分别是static.demo.com和server.demo.com，两个页面加载之后都通过js将document.domain设置成demo.com，这样接下来的ajax请求就可以绕过同源策略限制了。<br>但是：如果两个页面存在端口，比如static.demo.com:8080 和 server.demo.com:8090，由于document.domain只能设置域名，所以就不起作用。<br>举例：<br>上面的例子，由于服务端返回的是json,而不是一个页面，所以没法将自己的域名设置成demo.com,但是可以通过另外一种方式，即在服务端增加一个静态页面，页面中放如下js代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain=demo.com</span><br></pre></td></tr></table></figure></p>
-<p>然后客户端页面加载的时候先去调用一下这个静态页面就好了。   </p>
-<h3 id="4-3_CORS_28Cross-Origin_Resource_Sharing_29"><a href="#4-3_CORS_28Cross-Origin_Resource_Sharing_29" class="headerlink" title="4.3 CORS(Cross-Origin Resource Sharing)"></a>4.3 CORS(Cross-Origin Resource Sharing)</h3><p>原理MDN上讲的更清楚一些，<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">点击这里</a>。<br>其实简单来说就是服务端在响应头中添加一个Access-Control-Allow-Origin头部，头部的值为客户端的域名，比如:<a href="http://static.demo.com，这样就可以了。" target="_blank" rel="external">http://static.demo.com，这样就可以了。</a><br>但是需要注意的是:CROS分为两种，一种是简单请求，一种是复杂请求，简单请求按照上面的方式是可以的，如果是复杂请求，浏览器会进行两步，先发一个options请求，这个请求称之为“预请求”，预请求实际上是个OPTIONS请求，类似于一个探测作用，如果服务端返回的头部通过了预请求的内容，则浏览器才会发起第二个真实请求。</p>
-<h3 id="4-4__u5BA2_u6237_u7AEF_u8BF7_u6C42_u901A_u8FC7Nginx_u8F6C_u53D1"><a href="#4-4__u5BA2_u6237_u7AEF_u8BF7_u6C42_u901A_u8FC7Nginx_u8F6C_u53D1" class="headerlink" title="4.4 客户端请求通过Nginx转发"></a>4.4 客户端请求通过Nginx转发</h3><p>原理：客户端的所有请求都直接发到客户端所在域名下，但是在客户端服务器增加一台nginx服务器，作为代理，如果是后端的url，直接代理转发到服务端，这样就不存在前端的跨域问题了。<br>举例:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="title">server_name</span>  static.demo.com;    <span class="comment">#可配置多个主机头</span></span><br><span class="line">    <span class="title">charset</span> utf-<span class="number">8</span>,gbk,gb2312,gb18030; <span class="comment">#可以实现多种编码识别</span></span><br><span class="line"></span><br><span class="line">    <span class="title">location</span> / &#123;</span><br><span class="line">        <span class="title">root</span>   /home/wy/www/static.demo.com/ROOT;  <span class="comment">#网站文件路径</span></span><br><span class="line"></span><br><span class="line">        <span class="title">autoindex</span> <span class="built_in">on</span>;</span><br><span class="line">        <span class="title">autoindex_exact_size</span> <span class="built_in">off</span>;</span><br><span class="line">        <span class="title">autoindex_localtime</span> <span class="built_in">on</span>;</span><br><span class="line">        <span class="title">index</span>  default.html;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">##所有/server/开头的请求都会走这里</span></span><br><span class="line">    <span class="title">location</span> /server/ &#123;</span><br><span class="line">            <span class="title">proxy_pass</span> <span class="url">http://server.demo.com:8080</span>;  <span class="comment">##转发到server</span></span><br><span class="line">            <span class="title">proxy_set_header</span>    Host             <span class="variable">$host</span>;</span><br><span class="line">            <span class="title">proxy_set_header</span>    X-Real-IP        <span class="variable">$remote_addr</span>;</span><br><span class="line">            <span class="title">proxy_set_header</span>    X-Forwarded-For  <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-5__u5176_u4ED6_u65B9_u5F0F"><a href="#4-5__u5176_u4ED6_u65B9_u5F0F" class="headerlink" title="4.5 其他方式"></a>4.5 其他方式</h3><p>1）WebSocket<br>2）Cross-document messaging</p>
-<p>[参考资料]</p>
-<ol>
-<li><a href="https://en.wikipedia.org/wiki/Same-origin_policy" target="_blank" rel="external">https://en.wikipedia.org/wiki/Same-origin_policy</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cross-site_scripting</a></li>
-<li><a href="https://en.wikipedia.org/wiki/JSONP" target="_blank" rel="external">https://en.wikipedia.org/wiki/JSONP</a></li>
-<li><a href="http://www.w3.org/TR/cors/" target="_blank" rel="external">http://www.w3.org/TR/cors/</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[ajax请求在我们如今的开发中越来越普及，大多数人在使用ajax的时候都会遇到过跨域的问题，由于浏览器”同源策略”限制，让我们通过ajax获取其他域下的资源带来了不便，那么什么是跨域，又该如何解决跨域问题呢？]]>
-    
-    </summary>
-    
-      <category term="ajax" scheme="http://blog.onlycatch.com/tags/ajax/"/>
-    
-      <category term="前端" scheme="http://blog.onlycatch.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="安全" scheme="http://blog.onlycatch.com/tags/%E5%AE%89%E5%85%A8/"/>
-    
-      <category term="跨域" scheme="http://blog.onlycatch.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[MySQL分区表]]></title>
-    <link href="http://blog.onlycatch.com/mysql-partition/"/>
-    <id>http://blog.onlycatch.com/mysql-partition/</id>
-    <published>2016-01-01T06:43:08.000Z</published>
-    <updated>2016-01-10T14:22:32.000Z</updated>
-    <content type="html"><![CDATA[<p>今天统计数据的时候发现一张表使用了表分区，借此机会记录一下。</p>
-<h3 id="1-__u4EC0_u4E48_u662F_u8868_u5206_u533A_uFF1F"><a href="#1-__u4EC0_u4E48_u662F_u8868_u5206_u533A_uFF1F" class="headerlink" title="1. 什么是表分区？"></a>1. 什么是表分区？</h3><p>表分区，是指根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。</p>
-<h3 id="2-__u8868_u5206_u533A_u4E0E_u5206_u8868_u7684_u533A_u522B"><a href="#2-__u8868_u5206_u533A_u4E0E_u5206_u8868_u7684_u533A_u522B" class="headerlink" title="2. 表分区与分表的区别"></a>2. 表分区与分表的区别</h3><p>分表：指的是通过一定规则，将一张表分解成多张不同的表。比如将用户订单记录根据时间成多个表。<br>分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表分解成多张表。</p>
-<h3 id="3-__u8868_u5206_u533A_u6709_u4EC0_u4E48_u597D_u5904_uFF1F"><a href="#3-__u8868_u5206_u533A_u6709_u4EC0_u4E48_u597D_u5904_uFF1F" class="headerlink" title="3. 表分区有什么好处？"></a>3. 表分区有什么好处？</h3><p>1）分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备。<br>2）和单个磁盘或者文件系统相比，可以存储更多数据<br>3）优化查询。在where语句中包含分区条件时，可以只扫描一个或多个分区表来提高查询效率；涉及sum和count语句时，也可以在多个分区上并行处理，最后汇总结果。<br>4）分区表更容易维护。例如：想批量删除大量数据可以清除整个分区。<br>5）可以使用分区表来避免某些特殊的瓶颈，例如InnoDB的单个索引的互斥访问，ext3问价你系统的inode锁竞争等。</p>
-<h3 id="4-__u5206_u533A_u8868_u7684_u9650_u5236_u56E0_u7D20"><a href="#4-__u5206_u533A_u8868_u7684_u9650_u5236_u56E0_u7D20" class="headerlink" title="4. 分区表的限制因素"></a>4. 分区表的限制因素</h3><p>1）一个表最多只能有1024个分区<br>2） MySQL5.1中，分区表达式必须是整数，或者返回整数的表达式。在MySQL5.5中提供了非整数表达式分区的支持。<br>3）如果分区字段中有主键或者唯一索引的列，那么多有主键列和唯一索引列都必须包含进来。即：分区字段要么不包含主键或者索引列，要么包含全部主键和索引列。<br>4）分区表中无法使用外键约束<br>5）MySQL的分区适用于一个表的所有数据和索引，不能只对表数据分区而不对索引分区，也不能只对索引分区而不对表分区，也不能只对表的一部分数据分区。</p>
-<h3 id="5-__u5982_u4F55_u5224_u65AD_u5F53_u524DMySQL_u662F_u5426_u652F_u6301_u5206_u533A_uFF1F"><a href="#5-__u5982_u4F55_u5224_u65AD_u5F53_u524DMySQL_u662F_u5426_u652F_u6301_u5206_u533A_uFF1F" class="headerlink" title="5. 如何判断当前MySQL是否支持分区？"></a>5. 如何判断当前MySQL是否支持分区？</h3><p>命令：<code>show variables like &#39;%partition%&#39;</code>   </p>
-<p>运行结果:   </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; show variables like &#39;%partition%&#39;;&#10;+-------------------+-------+&#10;| Variable_name     | Value |&#10;+-------------------+-------+&#10;| have_partitioning | YES   |&#10;+-------------------+-------+&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>have_partintioning 的值为YES，表示支持分区。</p>
-<h3 id="6-_MySQL_u652F_u6301_u7684_u5206_u533A_u7C7B_u578B_u6709_u54EA_u4E9B_uFF1F"><a href="#6-_MySQL_u652F_u6301_u7684_u5206_u533A_u7C7B_u578B_u6709_u54EA_u4E9B_uFF1F" class="headerlink" title="6. MySQL支持的分区类型有哪些？"></a>6. MySQL支持的分区类型有哪些？</h3><p>1）RANGE分区：按照数据的区间范围分区<br>2）LIST分区：按照List中的值分区，与RANGE的区别是，range分区的区间范围值是连续的。<br>3）HASH分区<br>4）KEY分区<br><strong>说明</strong><br>在MySQL5.1版本中，RANGE,LIST,HASH分区要求分区键必须是INT类型，或者通过表达式返回INT类型。但KEY分区的时候，可以使用其他类型的列（BLOB，TEXT类型除外）作为分区键。</p>
-<h3 id="7-_Range_u5206_u533A"><a href="#7-_Range_u5206_u533A" class="headerlink" title="7. Range分区"></a>7. Range分区</h3><p>利用取值范围进行分区，区间要连续并且不能互相重叠。<br>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partition by range(exp)( //exp&#21487;&#20197;&#20026;&#21015;&#21517;&#25110;&#32773;&#34920;&#36798;&#24335;&#65292;&#27604;&#22914;to_date(created_date)&#10;    partition p0 values less than(num)&#10;)</span><br></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; create table emp(&#10;    -&#62; id INT NOT null,&#10;    -&#62; store_id int not null&#10;    -&#62; )&#10;    -&#62; partition by range(store_id)(&#10;    -&#62;   partition p0 values less than(10),&#10;    -&#62;   partition p1 values less than(20)&#10;    -&#62; );</span><br></pre></td></tr></table></figure></p>
-<p>上面的语句创建了emp表，并根据store_id字段进行分区，小于10的值存在分区p0中，大于等于10，小于20的值存在分区p1中。<br><strong>注意</strong><br>每个分区都是按顺序定义的，从最低到最高。上面的语句，如果将less than(10) 和less than (20)的顺序颠倒过来，那么将报错，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each partition</span><br></pre></td></tr></table></figure></p>
-<p><strong>RANGE分区存在的问题</strong></p>
-<ol>
-<li>range范围覆盖问题：当插入的记录中对应的分区键的值不在分区定义的范围中的时候，插入语句会失败。<br>上面的例子，如果我插入一条store_id = 30的记录会怎么样呢？<br>我们上面分区的时候，最大值是20，如果插入一条超过20的记录，会报错:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; insert into emp(id,store_id) values(2,30);&#10;ERROR 1526 (HY000): Table has no partition for value 30</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>提示30这个值没有对应的分区。<br><strong>解决办法</strong><br>A. 预估分区键的值，及时新增分区。<br>B. 设置分区的时候，使用<code>values less than maxvalue</code> 子句,MAXVALUE表示最大的可能的整数值。<br>C. 尽量选择能够全部覆盖的字段作为分区键，比如一年的十二个月等。</p>
-<ol>
-<li>Range分区中，分区键的值如果是NULL，将被作为一个最小值来处理。</li>
-</ol>
-<h3 id="8-_LIST_u5206_u533A"><a href="#8-_LIST_u5206_u533A" class="headerlink" title="8. LIST分区"></a>8. LIST分区</h3><p>List分区是建立离散的值列表告诉数据库特定的值属于哪个分区。<br>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partition by list(exp)( //exp&#20026;&#21015;&#21517;&#25110;&#32773;&#34920;&#36798;&#24335;&#10;    partition p0 values in (3,5)  //&#20540;&#20026;3&#21644;5&#30340;&#22312;p0&#20998;&#21306;&#10;)</span><br></pre></td></tr></table></figure></p>
-<p>与Range不同的是，list分区不必生命任何特定的顺序。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; create table emp1(&#10;    -&#62; id int not null,&#10;    -&#62; store_id int not null&#10;    -&#62; )&#10;    -&#62; partition by list(store_id)(&#10;    -&#62;   partition p0 values in (3,5),&#10;    -&#62;   partition p1 values in (2,6,7,9)&#10;    -&#62; );</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意</strong><br>如果插入的记录对应的分区键的值不在list分区指定的值中，将会插入失败。并且，list不能像range分区那样提供maxvalue。</p>
-<h3 id="9-_Columns_u5206_u533A"><a href="#9-_Columns_u5206_u533A" class="headerlink" title="9. Columns分区"></a>9. Columns分区</h3><p>MySQL5.5中引入的分区类型，解决了5.5版本之前range分区和list分区只支持整数分区的问题。<br>Columns分区可以细分为 range columns分区和 list columns分区，他们都支持整数，日期时间，字符串三大数据类型。（不支持text和blob类型作为分区键）<br>columns分区还支持多列分区（这里不详细展开）。</p>
-<h3 id="10-_Hash_u5206_u533A"><a href="#10-_Hash_u5206_u533A" class="headerlink" title="10. Hash分区"></a>10. Hash分区</h3><p>Hash分区主要用来分散热点读，确保数据在预先确定个数的分区中尽可能平均分布。<br>MySQL支持两种Hash分区:常规Hash分区和线性Hash分区。<br>A. 常规Hash分区:使用取模算法<br>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partition by hash(store_id) partitions 4;</span><br></pre></td></tr></table></figure></p>
-<p>上面的语句，根据store_id对4取模，决定记录存储位置。<br>比如store_id = 234的记录，MOD(234,4)=2,所以会被存储在第二个分区。</p>
-<p><strong>常规Hash分区的优点和不足</strong><br>优点：能够使数据尽可能的均匀分布。<br>缺点：不适合分区经常变动的需求。假如我要新增加两个分区，现在有6个分区，那么MOD(234,6)的结果与之前MOD(234,4)的结果就会出现不一致，这样大部分数据就需要重新计算分区。为解决此问题，MySQL提供了线性Hash分区。</p>
-<p>B. 线性Hash分区：分区函数是一个线性的2的幂的运算法则。<br>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partition by LINER hash(store_id) partitions 4;</span><br></pre></td></tr></table></figure></p>
-<p>与常规Hash的不同在于，“Liner”关键字。<br>算法介绍:<br>假设要保存记录的分区编号为N,num为一个非负整数,表示分割成的分区的数量，那么N可以通过以下步骤得到：<br>Step 1. 找到一个大于等于num的2的幂，这个值为V，V可以通过下面公式得到：<br>V = Power(2,Ceiling(Log(2,num)))<br>例如：刚才设置了4个分区，num=4，Log(2,4)=2,Ceiling(2)=2,power(2,2)=4,即V=4<br>Step 2. 设置N=F(column_list)&amp;(V-1)<br>例如：刚才V=4，store_id=234对应的N值，N = 234&amp;（4-1） =2<br>Step 3. 当N&gt;=num,设置V=Ceiling(V/2),N=N&amp;(V-1)<br>例如：store_id=234,N=2&lt;4,所以N就取值2，即可。<br>假设上面算出来的N=5，那么V=Ceiling(2.5)=3,N=234&amp;(3-1)=1,即在第一个分区。</p>
-<p><strong>线性Hash的优点和不足</strong><br>优点：在分区维护（增加，删除，合并，拆分分区）时，MySQL能够处理得更加迅速。<br>缺点：与常规Hash分区相比，线性Hash各个分区之间的数据分布不太均衡。</p>
-<h3 id="11-_Key_u5206_u533A"><a href="#11-_Key_u5206_u533A" class="headerlink" title="11. Key分区"></a>11. Key分区</h3><p>类似Hash分区，Hash分区允许使用用户自定义的表达式，但Key分区不允许使用用户自定义的表达式。Hash仅支持整数分区，而Key分区支持除了Blob和text的其他类型的列作为分区键。<br>语法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partition by key(exp) partitions 4;//exp&#26159;&#38646;&#20010;&#25110;&#22810;&#20010;&#23383;&#27573;&#21517;&#30340;&#21015;&#34920;</span><br></pre></td></tr></table></figure></p>
-<p>key分区的时候，exp可以为空，如果为空，则默认使用主键作为分区键，没有主键的时候，会选择非空惟一键作为分区键。</p>
-<h3 id="12-__u5B50_u5206_u533A"><a href="#12-__u5B50_u5206_u533A" class="headerlink" title="12. 子分区"></a>12. 子分区</h3><p>分区表中对每个分区再次分割，又成为复合分区。</p>
-<h3 id="13-__u5206_u533A_u5BF9_u4E8ENULL_u503C_u7684_u5904_u7406"><a href="#13-__u5206_u533A_u5BF9_u4E8ENULL_u503C_u7684_u5904_u7406" class="headerlink" title="13. 分区对于NULL值的处理"></a>13. 分区对于NULL值的处理</h3><p>MySQ允许分区键值为NULL，分区键可能是一个字段或者一个用户定义的表达式。一般情况下，MySQL在分区的时候会把NULL值当作零值或者一个最小值进行处理。<br><strong>注意</strong><br>Range分区中：NULL值被当作最小值来处理<br>List分区中：NULL值必须出现在列表中，否则不被接受<br>Hash/Key分区中：NULL值会被当作零值来处理   </p>
-<h3 id="14-__u5206_u533A_u7BA1_u7406"><a href="#14-__u5206_u533A_u7BA1_u7406" class="headerlink" title="14. 分区管理"></a>14. 分区管理</h3><p>分区管理包括对于分区的增加，删除，以及查询。   </p>
-<ol>
-<li>增加分区：<br>对于Range分区和LIst分区来说：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add partition (partition p0 values ...(exp))</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>values后面的内容根据分区的类型不同而不同。<br>对于Hash分区和Key分区来说：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add partition partitions 8;</span><br></pre></td></tr></table></figure></p>
-<p>上面的语句，指的是新增8个分区 。   </p>
-<ol>
-<li>删除分区<br>对于Range分区和List分区：   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name drop partition p0; //p0&#20026;&#35201;&#21024;&#38500;&#30340;&#20998;&#21306;&#21517;&#31216;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>删除了分区，同时也将删除该分区中的所有数据。同时，如果删除了分区导致分区不能覆盖所有值，那么插入数据的时候会报错。<br>对于Hash和Key分区：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name coalesce partition 2; //&#23558;&#20998;&#21306;&#32553;&#20943;&#21040;2&#20010;</span><br></pre></td></tr></table></figure></p>
-<p>coalesce [ˌkəʊəˈles] vi. 联合，合并   </p>
-<ol>
-<li>分区查询<br>1）查询某张表一共有多少个分区   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; select&#10;    -&#62;   partition_name,&#10;    -&#62;   partition_expression,&#10;    -&#62;   partition_description,&#10;    -&#62;   table_rows&#10;    -&#62; from&#10;    -&#62;   INFORMATION_SCHEMA.partitions&#10;    -&#62; where&#10;    -&#62;   table_schema=&#39;test&#39;&#10;    -&#62;   and table_name = &#39;emp&#39;;&#10;+----------------+----------------------+-----------------------+------------+&#10;| partition_name | partition_expression | partition_description | table_rows |&#10;+----------------+----------------------+-----------------------+------------+&#10;| p0             | store_id             | 10                    |          0 |&#10;| p1             | store_id             | 20                    |          1 |&#10;+----------------+----------------------+-----------------------+------------+</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>即，可以从information_schema.partitions表中查询。<br>2）查看执行计划，判断查询数据是否进行了分区过滤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; explain partitions select * from emp where store_id=10 \G;&#10;*************************** 1. row ***************************&#10;           id: 1&#10;  select_type: SIMPLE&#10;        table: emp&#10;   partitions: p1&#10;         type: system&#10;possible_keys: NULL&#10;          key: NULL&#10;      key_len: NULL&#10;          ref: NULL&#10;         rows: 1&#10;        Extra:&#10;1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>上面的结果：partitions:p1 表示数据在p1分区进行检索。   </p>
-<p>[参考资料]<br>《深入MySQL数据库开发、优化与管理维护（第2版）》<br>《高性能MySQL》   </p>
-]]></content>
-    <summary type="html">
-    <![CDATA[MySQL分表分库是大家都知道的事情，分区可能是另外一种解决单表数据量多大的办法，本文介绍了MySQL中的分区表的概念以及如何创建和管理分区表。]]>
-    
-    </summary>
-    
-      <category term="MySQL" scheme="http://blog.onlycatch.com/tags/MySQL/"/>
-    
-      <category term="分区" scheme="http://blog.onlycatch.com/tags/%E5%88%86%E5%8C%BA/"/>
     
       <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     

@@ -4,6 +4,184 @@
 
     
   <url>
+    <loc>http://blog.onlycatch.com/kafka-selflearning-00/</loc>
+    <lastmod>2016-01-25T12:08:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Kafka学习笔记之初见</title>
+        <pubTime>2016-01-25T12:07:48.000Z</pubTime>
+        
+        <tag>Kafka</tag>
+         
+        <tag>大数据</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/kafka-selflearning-02/</loc>
+    <lastmod>2016-01-25T12:04:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>Kafka学习笔记之高性能设计</title>
+        <pubTime>2016-01-25T12:03:52.000Z</pubTime>
+        
+        <tag>Kafka</tag>
+         
+        <tag>大数据</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/kafka-selflearning-01/</loc>
+    <lastmod>2016-01-25T12:03:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>Kafka学习笔记之基础概念及原理</title>
+        <pubTime>2016-01-25T12:02:11.000Z</pubTime>
+        
+        <tag>Kafka</tag>
+         
+        <tag>大数据</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/how-linux-commands-used-in-dubbo/</loc>
+    <lastmod>2016-01-25T12:00:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Dubbo启动脚本学习</title>
+        <pubTime>2016-01-25T11:59:07.000Z</pubTime>
+        
+        <tag>Dubbo</tag>
+         
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/murmurhash/</loc>
+    <lastmod>2016-01-25T11:56:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>Murmur哈希算法</title>
+        <pubTime>2016-01-25T11:51:27.000Z</pubTime>
+        
+        <tag>哈希算法</tag>
+         
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/cryptology/</loc>
+    <lastmod>2016-01-25T11:55:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>密码学综述</title>
+        <pubTime>2016-01-25T11:49:15.000Z</pubTime>
+        
+        <tag>密码学</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/ajax-cross-domain/</loc>
+    <lastmod>2016-01-25T11:54:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ajax跨域请求原理及解决办法</title>
+        <pubTime>2016-01-01T07:03:08.000Z</pubTime>
+        
+        <tag>ajax</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>安全</tag>
+         
+        <tag>跨域</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
+    <lastmod>2016-01-23T15:17:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>java线程间通信</title>
+        <pubTime>2016-01-10T07:16:25.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.onlycatch.com/tcp-handshakes/</loc>
     <lastmod>2016-01-23T14:55:43.000Z</lastmod>
     <data>
@@ -89,28 +267,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
-    <lastmod>2016-01-14T14:36:59.000Z</lastmod>
-    <data>
-        <display>
-        <title>java线程间通信</title>
-        <pubTime>2016-01-10T07:16:25.000Z</pubTime>
-        
-        <tag>java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://blog.onlycatch.com/how-is-null-differs-from-equals-null-in-sql/</loc>
@@ -316,32 +472,6 @@
         <tag>并发</tag>
          
         <tag>锁</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.onlycatch.com/ajax-cross-domain/</loc>
-    <lastmod>2016-01-10T14:22:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ajax跨域请求原理及解决办法</title>
-        <pubTime>2016-01-01T07:03:08.000Z</pubTime>
-        
-        <tag>ajax</tag>
-         
-        <tag>前端</tag>
-         
-        <tag>安全</tag>
-         
-        <tag>跨域</tag>
          
          
            

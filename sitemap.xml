@@ -2,6 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.onlycatch.com/kafka-selflearning-00/</loc>
+    <lastmod>2016-01-25T12:08:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/kafka-selflearning-02/</loc>
+    <lastmod>2016-01-25T12:04:51.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/kafka-selflearning-01/</loc>
+    <lastmod>2016-01-25T12:03:19.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/how-linux-commands-used-in-dubbo/</loc>
+    <lastmod>2016-01-25T12:00:10.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/murmurhash/</loc>
+    <lastmod>2016-01-25T11:56:37.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/cryptology/</loc>
+    <lastmod>2016-01-25T11:55:56.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/ajax-cross-domain/</loc>
+    <lastmod>2016-01-25T11:54:46.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
+    <lastmod>2016-01-23T15:17:25.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.onlycatch.com/tcp-handshakes/</loc>
     <lastmod>2016-01-23T14:55:43.000Z</lastmod>
   </url>
@@ -24,11 +64,6 @@
   <url>
     <loc>http://blog.onlycatch.com/others/index.html</loc>
     <lastmod>2016-01-16T15:44:14.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.onlycatch.com/java-thread-communication/</loc>
-    <lastmod>2016-01-14T14:36:59.000Z</lastmod>
   </url>
   
   <url>
@@ -79,11 +114,6 @@
   <url>
     <loc>http://blog.onlycatch.com/Reentrant-lock/</loc>
     <lastmod>2016-01-10T14:22:18.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.onlycatch.com/ajax-cross-domain/</loc>
-    <lastmod>2016-01-10T14:22:08.000Z</lastmod>
   </url>
   
   <url>
