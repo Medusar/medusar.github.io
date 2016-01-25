@@ -70,7 +70,7 @@
     <link href="http://blog.onlycatch.com/kafka-selflearning-02/"/>
     <id>http://blog.onlycatch.com/kafka-selflearning-02/</id>
     <published>2016-01-25T12:03:52.000Z</published>
-    <updated>2016-01-25T12:04:51.000Z</updated>
+    <updated>2016-01-25T13:15:21.000Z</updated>
     <content type="html"><![CDATA[<h2 id="u6301_u4E45_u5316"><a href="#u6301_u4E45_u5316" class="headerlink" title="持久化"></a>持久化</h2><p>kafka非常依赖文件系统进行消息存储和缓存。大部分人会认为“磁盘很慢”，所以很多人会怀疑持久化是否能够提供很好的性能。实际上磁盘速度的快慢与磁盘的使用方式有着很大关系，设计好的磁盘结构通常会很快。</p>
 <p>对于磁盘的线性读写操作在很多系统中都进行了大量优化，在某些情况下，对于磁盘的顺序访问甚至比对于内存的随机访问还要快！</p>
 <p>很多现代操作系统都大量使用主存做磁盘缓存，一个现代操作系统可以将内存中的所有剩余空间用作磁盘缓存，而当内存回收的时候几乎没有性能损失。所有的磁盘读写都会经过这个统一的缓存。哪怕使用directI/O，这个特性也很难被关闭，所以如果某个进程维护了一份进程内缓存，那么这部分数据很可能也在操作系统的页面缓存中存在。</p>
@@ -81,7 +81,7 @@
 <li>不使用进程内缓存，就腾出了内存空间，可以用来存放页面缓存的空间几乎可以翻倍。</li>
 <li>如果kafka重启，进行内缓存就会丢失，但是使用操作系统的页面缓存依然可以继续使用。</li>
 </ol>
-<p>kafka如此频繁利用页面缓存，如果内存大小不够了怎么办？没关系，kafka会将所有的数据立即写入文件系统而无需写入磁盘。</p>
+<p>kafka如此频繁利用页面缓存，如果内存大小不够了怎么办？kafka会将数据写入到持久化日志中而不是刷新到磁盘。实际上它只是转移到了内核的页面缓存。</p>
 <h2 id="u6570_u636E_u7ED3_u6784"><a href="#u6570_u636E_u7ED3_u6784" class="headerlink" title="数据结构"></a>数据结构</h2><p><a href="http://kafka.apache.org/documentation.html#design_constanttime" target="_blank" rel="external">http://kafka.apache.org/documentation.html#design_constanttime</a></p>
 <h2 id="u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D"><a href="#u5927_u91CF_u7684_u5C0FIO_u64CD_u4F5C_u548C_u5927_u91CF_u7684_u5B57_u8282_u62F7_u8D1D" class="headerlink" title="大量的小IO操作和大量的字节拷贝"></a>大量的小IO操作和大量的字节拷贝</h2><p>除了上面说的磁盘读写影响性能之外，另外两个影响性能的就是：</p>
 <ol>
@@ -121,8 +121,9 @@
 <li>kafka中，生产者推数据到broker中，消费者从broker中拉取数据</li>
 <li>kafka分区和offset降低了消息状态维护的成本</li>
 </ol>
-<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><p>1.<a href="http://kafka.apache.org/documentation.html#design" target="_blank" rel="external">kafka设计</a><br>2.<a href="http://umeng.baijia.baidu.com/article/227913" target="_blank" rel="external">kafka高性能吞吐揭秘</a></p>
-<ol>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
+<li><a href="http://kafka.apache.org/documentation.html#design" target="_blank" rel="external">kafka设计</a></li>
+<li><a href="http://umeng.baijia.baidu.com/article/227913" target="_blank" rel="external">kafka高性能吞吐揭秘</a></li>
 <li><a href="https://www.varnish-cache.org/trac/wiki/ArchitectNotes" target="_blank" rel="external">Vanish的以页面缓存为中心的设计</a></li>
 <li><a href="http://man7.org/linux/man-pages/man2/sendfile.2.html" target="_blank" rel="external">sendfile API</a></li>
 <li><a href="https://www.ibm.com/developerworks/linux/library/j-zerocopy/" target="_blank" rel="external">零拷贝</a></li>
