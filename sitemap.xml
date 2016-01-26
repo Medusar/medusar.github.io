@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.onlycatch.com/zero-copy/</loc>
+    <lastmod>2016-01-26T12:24:52.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/zero-copy-in-netty/</loc>
+    <lastmod>2016-01-26T12:22:13.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.onlycatch.com/database-transaction/</loc>
+    <lastmod>2016-01-26T12:18:52.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.onlycatch.com/kafka-selflearning-02/</loc>
     <lastmod>2016-01-25T13:15:21.000Z</lastmod>
   </url>

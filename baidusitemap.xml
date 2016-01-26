@@ -4,6 +4,70 @@
 
     
   <url>
+    <loc>http://blog.onlycatch.com/zero-copy/</loc>
+    <lastmod>2016-01-26T12:24:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>零拷贝</title>
+        <pubTime>2016-01-26T12:19:26.000Z</pubTime>
+        
+        <tag>网络</tag>
+         
+        <tag>计算机基础</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/zero-copy-in-netty/</loc>
+    <lastmod>2016-01-26T12:22:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Netty中的零拷贝</title>
+        <pubTime>2016-01-26T12:20:44.000Z</pubTime>
+        
+        <tag>netty</tag>
+         
+        <tag>零拷贝</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.onlycatch.com/database-transaction/</loc>
+    <lastmod>2016-01-26T12:18:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>数据库事务</title>
+        <pubTime>2016-01-26T12:18:10.000Z</pubTime>
+        
+        <tag>数据库</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.onlycatch.com/kafka-selflearning-02/</loc>
     <lastmod>2016-01-25T13:15:21.000Z</lastmod>
     <data>
