@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
-  <updated>2016-01-26T12:22:13.000Z</updated>
+  <updated>2016-01-27T12:24:30.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
   
   <author>
@@ -13,6 +13,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[CAP理论和BASE理论]]></title>
+    <link href="http://blog.onlycatch.com/cap-and-base/"/>
+    <id>http://blog.onlycatch.com/cap-and-base/</id>
+    <published>2016-01-27T12:23:46.000Z</published>
+    <updated>2016-01-27T12:24:30.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="CAP_u7406_u8BBA"><a href="#CAP_u7406_u8BBA" class="headerlink" title="CAP理论"></a>CAP理论</h2><p>一个分布式系统不可能同时满足CAP三个需求，最多只能同时满足其中的两项。<br>C(consistency)一致性，A(avaliability)可用性，P(Partition tolerance)分区容错性。</p>
+<h3 id="u4E00_u81F4_u6027_28consistency_29"><a href="#u4E00_u81F4_u6027_28consistency_29" class="headerlink" title="一致性(consistency)"></a>一致性(consistency)</h3><p>与数据库事务的一致性不同，分布式系统中的一致性指的是数据在多个副本之间是否能够保持一致。即某个节点的数据发生了变动，需要将数据更新同步到其他节点上。</p>
+<h3 id="u53EF_u7528_u6027_28avalibility_29"><a href="#u53EF_u7528_u6027_28avalibility_29" class="headerlink" title="可用性(avalibility)"></a>可用性(avalibility)</h3><p>系统提供的服务必须一直处于可用的状态。对于用户的每一个操作请求总是能在<strong>有限时间内返回结果</strong>。</p>
+<h3 id="u5206_u533A_u5BB9_u9519_u6027_28partition_tolerence_29"><a href="#u5206_u533A_u5BB9_u9519_u6027_28partition_tolerence_29" class="headerlink" title="分区容错性(partition tolerence)"></a>分区容错性(partition tolerence)</h3><p>分布式系统在遇到任何网络分区故障的时候，仍然需要能够保证对外提供满足一致性和可用性的服务。除非是整个网络环境都发生了故障。即网络分区出现故障不应该影响整个系统的运行。</p>
+<p>根据CAP理论，在我们设计分布式系统的时候，无法同时满足CAP三个需求，所以就需要进行取舍。<br>对于分布式系统来说，分区容错性可以说是一个最基本的要求，因为分布式中必然存在子网络。所以一般我们都会在C和A之间寻求平衡。</p>
+<h2 id="BASE_u7406_u8BBA"><a href="#BASE_u7406_u8BBA" class="headerlink" title="BASE理论"></a>BASE理论</h2><p>BA: Basically Avaliable(基本可用)<br>S:Soft State(软状态)<br>E:Eventually consistent(最终一致性)</p>
+<p>BASE是对CAP中一致性和可用性权衡的结果，核心思想是，即使无法做到强一致性，但是每个应用都可以根据自身的业务特点，采取适当的方式使系统达到最终一致性(E)。</p>
+<h3 id="u57FA_u672C_u53EF_u7528__28Basically_avaliable_29"><a href="#u57FA_u672C_u53EF_u7528__28Basically_avaliable_29" class="headerlink" title="基本可用 (Basically avaliable)"></a>基本可用 (Basically avaliable)</h3><p>分布式系统出现不可预知故障的时候，允许损失部分可用性。包括性能损失(响应时间增加）和功能损失（降级）</p>
+<h3 id="u8F6F_u72B6_u6001_uFF08soft_state_29"><a href="#u8F6F_u72B6_u6001_uFF08soft_state_29" class="headerlink" title="软状态（soft state)"></a>软状态（soft state)</h3><p>允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性。即允许系统在不同节点的数据副本之间进行数据同步的过程存在延时。</p>
+<h3 id="u6700_u7EC8_u4E00_u81F4_u6027_28eventually_consitent_29"><a href="#u6700_u7EC8_u4E00_u81F4_u6027_28eventually_consitent_29" class="headerlink" title="最终一致性(eventually consitent)"></a>最终一致性(eventually consitent)</h3><p>系统中所有的数据副本，在经过一段时间的同步之后，最终达到一个一致的状态。强调的是最终一致，而不是实时一致。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[关于CAP理论和BASE理论]]>
+    
+    </summary>
+    
+      <category term="BASE" scheme="http://blog.onlycatch.com/tags/BASE/"/>
+    
+      <category term="CAP" scheme="http://blog.onlycatch.com/tags/CAP/"/>
+    
+      <category term="分布式系统" scheme="http://blog.onlycatch.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Netty中的零拷贝]]></title>
@@ -1015,63 +1047,6 @@
       <category term="多线程" scheme="http://blog.onlycatch.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
       <category term="线程池" scheme="http://blog.onlycatch.com/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
-    
-      <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[[Linux工具] rsync数据同步工具]]></title>
-    <link href="http://blog.onlycatch.com/linux-rsync/"/>
-    <id>http://blog.onlycatch.com/linux-rsync/</id>
-    <published>2016-01-06T12:27:36.000Z</published>
-    <updated>2016-01-10T14:22:24.000Z</updated>
-    <content type="html"><![CDATA[<p>之前有个统计脚本，监控多台机器的日志，发现异常数据自动报警。由于统计脚本只存在一台机器上，所以需要将多台机器日志同步过来。这个同步日志的功能就是通过rsync实现的。</p>
-<h2 id="rsync__u662F_u4EC0_u4E48_uFF1F"><a href="#rsync__u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="rsync 是什么？"></a>rsync 是什么？</h2><p>通过man rsync命令可以看到，它是a fast, versatile, remote (and local) file-copying tool，就是一个数据同步工具。versatile:通用的，万能的，多才多艺的。可以简单理解为：一个功能强大的数据同步工具。<br>官方说明：</p>
-<blockquote>
-<p>Rsync is a fast and extraordinarily versatile file copying tool. It can copy locally, to/from another host over any remote shell, or to/from a remote rsync daemon.  It offers a large  number  of  options that control every aspect of its behavior and permit very flexible specification of the set of files to be copied.</p>
-</blockquote>
-<p>它支持本地与本地，本地到远程，远程到本地三种方式的数据传输。它提供了非常多的选项可以让你控制数据传输过程中的各个方面。</p>
-<h2 id="rsync_u7528_u6CD5"><a href="#rsync_u7528_u6CD5" class="headerlink" title="rsync用法"></a>rsync用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">本地模式:  rsync [OPTION...] SRC... [DEST]</span><br><span class="line"></span><br><span class="line">shell模式:</span><br><span class="line">        拉: rsync [OPTION...] [USER@]HOST:SRC... [DEST]</span><br><span class="line">        推: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br><span class="line"></span><br><span class="line">rsync deamon模式:</span><br><span class="line">        拉: rsync [OPTION...] [USER@]HOST::SRC... [DEST]</span><br><span class="line">            rsync [OPTION...] rsync://[USER@]HOST[:PORT]/SRC... [DEST]</span><br><span class="line">        推: rsync [OPTION...] SRC... [USER@]HOST::DEST</span><br><span class="line">            rsync [OPTION...] SRC... rsync://[USER@]HOST[:PORT]/DEST</span><br><span class="line"></span><br><span class="line">      DEST目录可以省略，如果省略，将只会列出SRC中的文件，而不进行拷贝.</span><br></pre></td></tr></table></figure>
-<p>同步远程数据有两种方式</p>
-<ol>
-<li>使用其他远程脚本程序进行传输，比如ssh或者rsh。即上面所说的shell模式。</li>
-<li>通过TCP协议直接连接到一个rsync后台进程。使用这种方式就需要在远程机器上启动一个rsync后台进程，默认该进程监听的端口是873。即上面所说的rsync deamon模式。</li>
-</ol>
-<h2 id="rsync_u4F7F_u7528_u4E3E_u4F8B"><a href="#rsync_u4F7F_u7528_u4E3E_u4F8B" class="headerlink" title="rsync使用举例"></a>rsync使用举例</h2><h3 id="u672C_u5730_u62F7_u8D1D"><a href="#u672C_u5730_u62F7_u8D1D" class="headerlink" title="本地拷贝"></a>本地拷贝</h3><p>用法： <code>rsync [OPTION...] SRC... [DEST]</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[dev@mymachaine tmp]$ mkdir src</span><br><span class="line">[dev@mymachaine tmp]$ mkdir dest</span><br><span class="line">[dev@mymachaine tmp]$ rsync <span class="number">2305.</span>txt dest/</span><br></pre></td></tr></table></figure></p>
-<p>以上命令将会把2305.txt这个文件拷贝到dest目录中。</p>
-<h3 id="u4ECE_u8FDC_u7A0B_u673A_u5668_u540C_u6B65_u6570_u636E_u5230_u672C_u5730"><a href="#u4ECE_u8FDC_u7A0B_u673A_u5668_u540C_u6B65_u6570_u636E_u5230_u672C_u5730" class="headerlink" title="从远程机器同步数据到本地"></a>从远程机器同步数据到本地</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -vz -P --bwlimit=<span class="number">8096</span> rsync://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/src/xxx.log rsync://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/src/yyy.log /local/dest/</span><br></pre></td></tr></table></figure>
-<p>上面的命令，将127.0.0.1这台机器上src目录下的xxx.log和yyy.log两个文件同步到本地的/local/dest目录下。采用的是rsync deamon模式。<br>-z:压缩<br>-v:verbose,即打印传输日志<br>-P:相当于–partial –progress 两个命令一起用。<br>–bwlimit: (–bwlimit=KBPS)限制IO带宽，KB每秒。<br>–partial:默认情况下，在传输中断的时候，rsync会将已经传输完成的部分删掉，使用该命令就告诉rsync不要删除已经传完的部分，这样就能够提高后续传输的速度。<br>–progress:告诉rsync，显示传输进度。比如:<code>782448  63%  110.64kB/s    0:00:04</code></p>
-<h2 id="rsync_u673A_u5236"><a href="#rsync_u673A_u5236" class="headerlink" title="rsync机制"></a>rsync机制</h2><h3 id="delta-transfer__u7B97_u6CD5"><a href="#delta-transfer__u7B97_u6CD5" class="headerlink" title="delta-transfer 算法"></a>delta-transfer 算法</h3><p>它只传输源文件和目标文件不同的部分数据，这样就可以减少网络传输的数据量。</p>
-<h3 id="quick_check__u7B97_u6CD5"><a href="#quick_check__u7B97_u6CD5" class="headerlink" title="quick check 算法"></a>quick check 算法</h3><p>它默认使用quick check算法来查找需要传输的文件，quick check算法是通过判断文件大小和修改时间来判断文件是否发生了改变。当它发现数据文件不需要传输的时候，可以将文件其他属性（属性可以指定）的变化直接同步到目标文件上。</p>
-<h3 id="u5176_u4ED6_u7279_u70B9"><a href="#u5176_u4ED6_u7279_u70B9" class="headerlink" title="其他特点"></a>其他特点</h3><ol>
-<li>支持拷贝连接(links)，设备(devices),所有者（owners）,所在组（groups）和权限（permissions）</li>
-<li>文件传输过程中支持pipeline，从而降低延迟</li>
-<li>不需要超级用户权限</li>
-<li>可以使用任意的远程脚本，包括ssh和rsh</li>
-<li>具有和GNU tar打包工具类似的功能参数exclude和exclude-from</li>
-<li>CVS exclude模式会忽略掉那些在.cvsignore文件中存在的文件</li>
-<li>支持匿名或者需要身份验证的rsync进程访问（特别适合镜像同步）</li>
-</ol>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>rsync是一个快速的数据同步工具</li>
-<li>支持本地之间，本地与远程之间的数据同步</li>
-<li>本地与远程的数据同步包括推和拉两种模式，同时又可以使用其他远程传输shell或者使用rsync deamon两种传输方式。</li>
-<li>参数多样</li>
-<li>支持pipeline，能够极大减少传输延时</li>
-<li>支持只传输差异部分数据，减少网络传输数据量</li>
-</ol>
-<h2 id="u6269_u5C55_u9605_u8BFB"><a href="#u6269_u5C55_u9605_u8BFB" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ol>
-<li><a href="https://github.com/renzhexigua/LUG/blob/master/mirrors/%E8%AF%91.md" target="_blank" rel="external">https://github.com/renzhexigua/LUG/blob/master/mirrors/%E8%AF%91.md</a></li>
-<li>linux系统 man rsync</li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[Linux系统中的数据同步工具rsync的简单介绍。]]>
-    
-    </summary>
-    
-      <category term="linux" scheme="http://blog.onlycatch.com/tags/linux/"/>
     
       <category term="编程" scheme="http://blog.onlycatch.com/categories/coding/"/>
     

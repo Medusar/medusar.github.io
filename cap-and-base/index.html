@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Kafka学习笔记之初见 | Medusar&#39;s playground</title>
+  <title>CAP理论和BASE理论 | Medusar&#39;s playground</title>
   <meta name="google-site-verification" content="_e5gBGJm-r8JrQ3I0fgaI4JtS3sklTv8OIV4_VY4fAo" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="kafka入门简介">
+  <meta name="description" content="关于CAP理论和BASE理论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka学习笔记之初见">
-<meta property="og:url" content="http://blog.onlycatch.com/kafka-selflearning-00/index.html">
+<meta property="og:title" content="CAP理论和BASE理论">
+<meta property="og:url" content="http://blog.onlycatch.com/cap-and-base/index.html">
 <meta property="og:site_name" content="Medusar's playground">
-<meta property="og:description" content="kafka入门简介">
-<meta property="og:image" content="http://7xo4v8.com1.z0.glb.clouddn.com/kafka.png">
-<meta property="og:updated_time" content="2016-01-25T12:08:30.000Z">
+<meta property="og:description" content="关于CAP理论和BASE理论">
+<meta property="og:updated_time" content="2016-01-27T12:24:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kafka学习笔记之初见">
-<meta name="twitter:description" content="kafka入门简介">
+<meta name="twitter:title" content="CAP理论和BASE理论">
+<meta name="twitter:description" content="关于CAP理论和BASE理论">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -239,11 +238,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-kafka-selflearning-00" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-cap-and-base" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/kafka-selflearning-00/" class="article-date">
-  	<time datetime="2016-01-25T12:07:48.000Z" itemprop="datePublished">2016-01-25</time>
+      <a href="/cap-and-base/" class="article-date">
+  	<time datetime="2016-01-27T12:23:46.000Z" itemprop="datePublished">2016-01-27</time>
 </a>
     </div>
   
@@ -256,7 +255,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Kafka学习笔记之初见
+      CAP理论和BASE理论
     </h1>
   
 
@@ -271,7 +270,7 @@
 
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BASE/">BASE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CAP/">CAP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式系统/">分布式系统</a></li></ul>
 	</div>
 
         <div class="clearfix"></div>
@@ -281,37 +280,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>kafka是一个高性能的分布式消息系统。高水平扩展和高吞吐量。支持动态扩容，由LinkedIn用Scala编写而成。</p>
-<h2 id="kafka_u4E0E_u5176_u4ED6_u6D88_u606F_u7CFB_u7EDF_u5BF9_u6BD4"><a href="#kafka_u4E0E_u5176_u4ED6_u6D88_u606F_u7CFB_u7EDF_u5BF9_u6BD4" class="headerlink" title="kafka与其他消息系统对比"></a>kafka与其他消息系统对比</h2><p>flume,storm,spark,elesticsearch都能与kafka集成。<br><img src="http://7xo4v8.com1.z0.glb.clouddn.com/kafka.png" alt="kafka与其他消息系统的对比"></p>
-<ol>
-<li>kafka使用的协议为仿AMQP协议。</li>
-<li>kafka不支持事务，activeMQ支持</li>
-<li>kafka支持动态扩容，集群，负载均衡。</li>
-</ol>
-<p><a href="https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol" target="_blank" rel="external">AMQP协议</a>:<a href="http://langyu.iteye.com/blog/759663" target="_blank" rel="external">http://langyu.iteye.com/blog/759663</a></p>
-<h2 id="kafka_u7684_u6D88_u8D39_u8005_u7F16_u7A0B_u6A21_u578B"><a href="#kafka_u7684_u6D88_u8D39_u8005_u7F16_u7A0B_u6A21_u578B" class="headerlink" title="kafka的消费者编程模型"></a>kafka的消费者编程模型</h2><ol>
-<li>分区消费模型</li>
-<li>组消费模型<h3 id="u5206_u533A_u6D88_u8D39_u6A21_u578B"><a href="#u5206_u533A_u6D88_u8D39_u6A21_u578B" class="headerlink" title="分区消费模型"></a>分区消费模型</h3>缺点：</li>
-<li>需要自己处理各种异常情况</li>
-<li>需要自己管理消息偏移量以实现消息传递的各种语义</li>
-</ol>
-<h3 id="u6D88_u606F_u4F20_u9012_u7684_u8BED_u4E49"><a href="#u6D88_u606F_u4F20_u9012_u7684_u8BED_u4E49" class="headerlink" title="消息传递的语义"></a>消息传递的语义</h3><ol>
-<li>至少一次：发送者向消费者至少发送一次（可能会重复）</li>
-<li>至多一次：发送者向消费者至多发送一次（可能会丢）</li>
-<li>有且仅有一次：发送者与消费者的关系一对一。<h3 id="u7EC4_u6D88_u8D39_u6A21_u578B"><a href="#u7EC4_u6D88_u8D39_u6A21_u578B" class="headerlink" title="组消费模型"></a>组消费模型</h3></li>
-<li>不需要自己处理异常情况，不需要自己管理offset</li>
-<li>只能实现默认的kafka至少一次的消息传递语义</li>
-</ol>
-<h2 id="kafka_u7684_u751F_u4EA7_u8005_u7F16_u7A0B_u6A21_u578B"><a href="#kafka_u7684_u751F_u4EA7_u8005_u7F16_u7A0B_u6A21_u578B" class="headerlink" title="kafka的生产者编程模型"></a>kafka的生产者编程模型</h2><h3 id="u540C_u6B65_u751F_u4EA7_u6A21_u578B"><a href="#u540C_u6B65_u751F_u4EA7_u6A21_u578B" class="headerlink" title="同步生产模型"></a>同步生产模型</h3><p>生产者发送消息后需要等待kafka集群的确认消息，直到收到确认消息或者超过最大投递次数。</p>
-<p>特点：</p>
-<ol>
-<li>低消息丢失率</li>
-<li>高消息重复率（网络原因导致回复确认没收到）</li>
-<li>高延迟<h3 id="u5F02_u6B65_u751F_u4EA7_u6A21_u578B"><a href="#u5F02_u6B65_u751F_u4EA7_u6A21_u578B" class="headerlink" title="异步生产模型"></a>异步生产模型</h3>生产者先把消息发送到客户端的缓冲队列，队列中的消息会被打包一起发送到kafka服务器。<br>特点：</li>
-<li>高消息丢失率（无确认机制，发送端队列满）</li>
-<li>高发送性能</li>
-<li>低延迟</li>
-</ol>
+        <h2 id="CAP_u7406_u8BBA"><a href="#CAP_u7406_u8BBA" class="headerlink" title="CAP理论"></a>CAP理论</h2><p>一个分布式系统不可能同时满足CAP三个需求，最多只能同时满足其中的两项。<br>C(consistency)一致性，A(avaliability)可用性，P(Partition tolerance)分区容错性。</p>
+<h3 id="u4E00_u81F4_u6027_28consistency_29"><a href="#u4E00_u81F4_u6027_28consistency_29" class="headerlink" title="一致性(consistency)"></a>一致性(consistency)</h3><p>与数据库事务的一致性不同，分布式系统中的一致性指的是数据在多个副本之间是否能够保持一致。即某个节点的数据发生了变动，需要将数据更新同步到其他节点上。</p>
+<h3 id="u53EF_u7528_u6027_28avalibility_29"><a href="#u53EF_u7528_u6027_28avalibility_29" class="headerlink" title="可用性(avalibility)"></a>可用性(avalibility)</h3><p>系统提供的服务必须一直处于可用的状态。对于用户的每一个操作请求总是能在<strong>有限时间内返回结果</strong>。</p>
+<h3 id="u5206_u533A_u5BB9_u9519_u6027_28partition_tolerence_29"><a href="#u5206_u533A_u5BB9_u9519_u6027_28partition_tolerence_29" class="headerlink" title="分区容错性(partition tolerence)"></a>分区容错性(partition tolerence)</h3><p>分布式系统在遇到任何网络分区故障的时候，仍然需要能够保证对外提供满足一致性和可用性的服务。除非是整个网络环境都发生了故障。即网络分区出现故障不应该影响整个系统的运行。</p>
+<p>根据CAP理论，在我们设计分布式系统的时候，无法同时满足CAP三个需求，所以就需要进行取舍。<br>对于分布式系统来说，分区容错性可以说是一个最基本的要求，因为分布式中必然存在子网络。所以一般我们都会在C和A之间寻求平衡。</p>
+<h2 id="BASE_u7406_u8BBA"><a href="#BASE_u7406_u8BBA" class="headerlink" title="BASE理论"></a>BASE理论</h2><p>BA: Basically Avaliable(基本可用)<br>S:Soft State(软状态)<br>E:Eventually consistent(最终一致性)</p>
+<p>BASE是对CAP中一致性和可用性权衡的结果，核心思想是，即使无法做到强一致性，但是每个应用都可以根据自身的业务特点，采取适当的方式使系统达到最终一致性(E)。</p>
+<h3 id="u57FA_u672C_u53EF_u7528__28Basically_avaliable_29"><a href="#u57FA_u672C_u53EF_u7528__28Basically_avaliable_29" class="headerlink" title="基本可用 (Basically avaliable)"></a>基本可用 (Basically avaliable)</h3><p>分布式系统出现不可预知故障的时候，允许损失部分可用性。包括性能损失(响应时间增加）和功能损失（降级）</p>
+<h3 id="u8F6F_u72B6_u6001_uFF08soft_state_29"><a href="#u8F6F_u72B6_u6001_uFF08soft_state_29" class="headerlink" title="软状态（soft state)"></a>软状态（soft state)</h3><p>允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性。即允许系统在不同节点的数据副本之间进行数据同步的过程存在延时。</p>
+<h3 id="u6700_u7EC8_u4E00_u81F4_u6027_28eventually_consitent_29"><a href="#u6700_u7EC8_u4E00_u81F4_u6027_28eventually_consitent_29" class="headerlink" title="最终一致性(eventually consitent)"></a>最终一致性(eventually consitent)</h3><p>系统中所有的数据副本，在经过一段时间的同步之后，最终达到一个一致的状态。强调的是最终一致，而不是实时一致。</p>
 
       
     </div>
@@ -321,18 +299,9 @@
     
 <nav id="article-nav">
   
-    <a href="/database-transaction/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据库事务
-        
-      </div>
-    </a>
   
-  
-    <a href="/kafka-selflearning-02/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Kafka学习笔记之高性能设计</div>
+    <a href="/zero-copy-in-netty/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Netty中的零拷贝</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -343,7 +312,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka_u4E0E_u5176_u4ED6_u6D88_u606F_u7CFB_u7EDF_u5BF9_u6BD4"><span class="toc-number">1.</span> <span class="toc-text">kafka与其他消息系统对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka_u7684_u6D88_u8D39_u8005_u7F16_u7A0B_u6A21_u578B"><span class="toc-number">2.</span> <span class="toc-text">kafka的消费者编程模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5206_u533A_u6D88_u8D39_u6A21_u578B"><span class="toc-number">2.1.</span> <span class="toc-text">分区消费模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6D88_u606F_u4F20_u9012_u7684_u8BED_u4E49"><span class="toc-number">2.2.</span> <span class="toc-text">消息传递的语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7EC4_u6D88_u8D39_u6A21_u578B"><span class="toc-number">2.3.</span> <span class="toc-text">组消费模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka_u7684_u751F_u4EA7_u8005_u7F16_u7A0B_u6A21_u578B"><span class="toc-number">3.</span> <span class="toc-text">kafka的生产者编程模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u540C_u6B65_u751F_u4EA7_u6A21_u578B"><span class="toc-number">3.1.</span> <span class="toc-text">同步生产模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F02_u6B65_u751F_u4EA7_u6A21_u578B"><span class="toc-number">3.2.</span> <span class="toc-text">异步生产模型</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP_u7406_u8BBA"><span class="toc-number">1.</span> <span class="toc-text">CAP理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E00_u81F4_u6027_28consistency_29"><span class="toc-number">1.1.</span> <span class="toc-text">一致性(consistency)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53EF_u7528_u6027_28avalibility_29"><span class="toc-number">1.2.</span> <span class="toc-text">可用性(avalibility)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5206_u533A_u5BB9_u9519_u6027_28partition_tolerence_29"><span class="toc-number">1.3.</span> <span class="toc-text">分区容错性(partition tolerence)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BASE_u7406_u8BBA"><span class="toc-number">2.</span> <span class="toc-text">BASE理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u57FA_u672C_u53EF_u7528__28Basically_avaliable_29"><span class="toc-number">2.1.</span> <span class="toc-text">基本可用 (Basically avaliable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8F6F_u72B6_u6001_uFF08soft_state_29"><span class="toc-number">2.2.</span> <span class="toc-text">软状态（soft state)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6700_u7EC8_u4E00_u81F4_u6027_28eventually_consitent_29"><span class="toc-number">2.3.</span> <span class="toc-text">最终一致性(eventually consitent)</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -393,7 +362,7 @@
 
     <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="kafka-selflearning-00/" data-title="Kafka学习笔记之初见" data-url="http://blog.onlycatch.com/kafka-selflearning-00/"></div>
+    <div class="ds-thread" data-thread-key="cap-and-base/" data-title="CAP理论和BASE理论" data-url="http://blog.onlycatch.com/cap-and-base/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -418,15 +387,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/database-transaction/" title="上一篇: 数据库事务">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/kafka-selflearning-02/" title="下一篇: Kafka学习笔记之高性能设计">
+            <a href="/zero-copy-in-netty/" title="下一篇: Netty中的零拷贝">
                 <i class="fa fa-angle-right"></i>
             </a>
         

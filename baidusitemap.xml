@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://blog.onlycatch.com/cap-and-base/</loc>
+    <lastmod>2016-01-27T12:24:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>CAP理论和BASE理论</title>
+        <pubTime>2016-01-27T12:23:46.000Z</pubTime>
+        
+        <tag>BASE</tag>
+         
+        <tag>CAP</tag>
+         
+        <tag>分布式系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程" url="http://blog.onlycatch.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.onlycatch.com/zero-copy/</loc>
     <lastmod>2016-01-26T12:24:52.000Z</lastmod>
     <data>

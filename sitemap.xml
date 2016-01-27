@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.onlycatch.com/cap-and-base/</loc>
+    <lastmod>2016-01-27T12:24:30.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.onlycatch.com/zero-copy/</loc>
     <lastmod>2016-01-26T12:24:52.000Z</lastmod>
   </url>
