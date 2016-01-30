@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[Medusar's playground]]></title>
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="/blog/atom.xml" rel="self"/>
   <link href="http://blog.onlycatch.com/"/>
   <updated>2016-01-27T12:24:30.000Z</updated>
   <id>http://blog.onlycatch.com/</id>
@@ -591,7 +591,7 @@
     <link href="http://blog.onlycatch.com/tcp-handshakes/"/>
     <id>http://blog.onlycatch.com/tcp-handshakes/</id>
     <published>2016-01-19T08:33:33.000Z</published>
-    <updated>2016-01-23T14:55:43.000Z</updated>
+    <updated>2016-01-28T13:55:02.000Z</updated>
     <content type="html"><![CDATA[<h2 id="TCP_u8FDE_u63A5_u5EFA_u7ACB_u65F6_u7684_u4E09_u6B21_u63E1_u624B"><a href="#TCP_u8FDE_u63A5_u5EFA_u7ACB_u65F6_u7684_u4E09_u6B21_u63E1_u624B" class="headerlink" title="TCP连接建立时的三次握手"></a>TCP连接建立时的三次握手</h2><p>TCP是面向连接的通信，所以在使用TCP通信之前，必须先建立连接。在连接正式建立之前，需要经过一个被称为“三次握手”（three-way handshake)的过程：</p>
 <h3 id="u4E09_u6B21_u63E1_u624B"><a href="#u4E09_u6B21_u63E1_u624B" class="headerlink" title="三次握手"></a>三次握手</h3><p>连接建立的前提是服务端需要事先启动并监听到某个端口。</p>
 <ol>
